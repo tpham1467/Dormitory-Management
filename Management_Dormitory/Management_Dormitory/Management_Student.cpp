@@ -46,14 +46,14 @@ Management_Student::Management_Student()
             // endl<<Gender<<endl<<Email<<endl<<Student_Code<<endl<<
             // Address<<endl<<_d_of_b;
             i++;
-            if(i==n)
-            {
-              break;  
-            }
+            
             Date_of_Birth dt;
+            // dt.Day=(int)_d_of_b[0]+(int)_d_of_b[1]-96;
+            // dt.Month=(int)_d_of_b[3]+(int)_d_of_b[4]-96;
+            // dt.Year=(int)_d_of_b[6]+(int)_d_of_b[7]+(int)_d_of_b[8]+(int)_d_of_b[9]-96;
             Student _Student(name,Phone_number,Room_Code,Profile_Code,Gender,Student_Code,Email,dt,Address);
             this->Database.InsertAtHead(_Student);
-            cout<<this->Database.Get_P_Head()->Get_Data().Get_Name();
+            cout<<this->Database.Get_P_Head()->Get_Data().Get_Name()<<" "<<this->Database.Get_P_Head()->Get_Data().Get_Address();
         }
         
     }

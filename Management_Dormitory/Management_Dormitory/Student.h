@@ -46,7 +46,7 @@ public:
 	const Date_of_Birth& Get_Date_of_Birth();
 	//Student
     //void Set_Student_Code(const string&);
-	//const string& Get_Student_Code();
+	///const string& Get_Student_Code();
 	//address
 	void Set_Address(const string&);
 	const string& Get_Address();
