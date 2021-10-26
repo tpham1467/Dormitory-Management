@@ -1,4 +1,5 @@
 #include "Student.h"
+#include"Date_of_Birth.h"
 Student::Student()
 {
 }
@@ -83,14 +84,15 @@ const Date_of_Birth& Student::Get_Date_of_Birth()
     return this->d_of_b;
 }
 // Student
-void Student::Set_Student_Code(const string &_Student)
+/*
+void Student::Set_Student_Code(const string& _Student_code)
 {
-    this->Student_Code = _Student;
+    this->Student_Code = _Student_code;
 }
 const string &Student::Get_Student_Code()
 {
     return this->Student_Code;
-}
+} */
 //Address
 void Student::Set_Address(const string &_Address)
 {

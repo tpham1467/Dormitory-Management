@@ -2,10 +2,11 @@
 //
 
 #include <iostream>
-
+#include"Management_Student.h"
 int main()
 {
-    std::cout << "Hello World!\n";
+    Management_Student Database;
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

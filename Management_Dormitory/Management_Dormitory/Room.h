@@ -8,7 +8,7 @@ class Room
 {
 private:
     string Room_Code;
-    Doubly_Linked_List<Student> database;
+    //Doubly_Linked_List<Student> database;
     static int Number_Students;
     bool condition_of_facilities;
 public:

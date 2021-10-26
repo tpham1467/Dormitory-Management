@@ -18,7 +18,7 @@ private:
 public:
 	Student();
 	Student(const string&,const string&, const string&,const string&,const int&,const string&,const string&,const Date_of_Birth&,const string&);
-	Student(const Student&);
+	//Student(const Student&);
 	~Student();
 	//name
 	void Set_Name(const string&);
@@ -45,8 +45,8 @@ public:
 	void Set_Date_of_Birth(const Date_of_Birth&);
 	const Date_of_Birth& Get_Date_of_Birth();
 	//Student
-    void Set_Student_Code(const string&);
-	const string& Get_Student_Code();
+    //void Set_Student_Code(const string&);
+	//const string& Get_Student_Code();
 	//address
 	void Set_Address(const string&);
 	const string& Get_Address();
