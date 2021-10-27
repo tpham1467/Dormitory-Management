@@ -65,6 +65,9 @@
     <ClInclude Include="Giao_dien.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Khoi_tao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Student.txt">

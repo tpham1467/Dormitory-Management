@@ -111,6 +111,7 @@ void Outstring(SHORT x, SHORT y, WORD color, WORD background,  string s)
 	gotoXY(x, y);
 	setBackgroundColor(background);
 	setColor(color);
+	
 	cout << s;
 
 }
@@ -119,22 +120,25 @@ void Outchar(SHORT x, SHORT y, WORD color, WORD background, char s)
 	gotoXY(x, y);
 	setBackgroundColor(background);
 	setColor(color);
+
 	cout << s;
 
 }
-void Outfloat(SHORT x, SHORT y, WORD color, WORD background,  float s)
+void Outfloat(SHORT x, SHORT y, WORD color, WORD background,  float s )
 {
 	gotoXY(x, y);
 	setBackgroundColor(background);
 	setColor(color);
+
 	cout << s;
 
 }
-void Outint(SHORT x, SHORT y, WORD color, WORD background,  int s)
+void Outint(SHORT x, SHORT y, WORD color, WORD background,  int s )
 {
 	gotoXY(x, y);
 	setBackgroundColor(background);
 	setColor(color);
+	
 	cout << s;
 
 }

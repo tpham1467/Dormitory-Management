@@ -152,6 +152,7 @@
     <ClInclude Include="Doubly_Linked_List.h" />
     <ClInclude Include="Entrance_Card.h" />
     <ClInclude Include="Giao_dien.h" />
+    <ClInclude Include="Khoi_tao.h" />
     <ClInclude Include="Management_Student.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Room.h" />

@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include"Management_Student.h"
 #include"Giao_dien.h"
