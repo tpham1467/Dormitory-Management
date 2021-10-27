@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 using namespace std;
+int Management_Student::N_S=0;
 Management_Student::Management_Student()
 {
     ifstream input;
@@ -15,8 +16,7 @@ Management_Student::Management_Student()
     else
     {
         int n;
-        input>>n;
-        int i=0;
+        input>>this->N_S;
         input.ignore();
         while (!input.eof())
         {
@@ -45,8 +45,6 @@ Management_Student::Management_Student()
             // Profile_Code<<
             // endl<<Gender<<endl<<Email<<endl<<Student_Code<<endl<<
             // Address<<endl<<_d_of_b;
-            i++;
-            
             Date_of_Birth dt;
             // dt.Day=(int)_d_of_b[0]+(int)_d_of_b[1]-96;
             // dt.Month=(int)_d_of_b[3]+(int)_d_of_b[4]-96;
@@ -62,4 +60,9 @@ Management_Student::Management_Student()
 Management_Student::~Management_Student()
 {
     this->Database.~Doubly_Linked_List();
+}
+void Management_Student::Add_Student(const Student& _Student)
+{
+    this->Database.InsertAtTail(_Student);
+    Management_Student::N_S++;
 }

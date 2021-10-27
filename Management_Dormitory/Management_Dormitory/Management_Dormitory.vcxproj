@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="console.cpp" />
     <ClCompile Include="Entrance_Card.cpp" />
     <ClCompile Include="Management_Dormitory.cpp" />
     <ClCompile Include="Management_Student.cpp" />
@@ -147,8 +148,10 @@
     <ClCompile Include="Student_Profile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="console.h" />
     <ClInclude Include="Doubly_Linked_List.h" />
     <ClInclude Include="Entrance_Card.h" />
+    <ClInclude Include="Giao_dien.h" />
     <ClInclude Include="Management_Student.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Room.h" />
@@ -156,6 +159,7 @@
     <ClInclude Include="Student_Profile.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="introduction.txt" />
     <Text Include="Student.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

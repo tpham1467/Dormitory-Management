@@ -1,12 +1,2 @@
-﻿  Entrance_Card.cpp
-  Management_Dormitory.cpp
-  Management_Student.cpp
-D:\PBL2\Management_Dormitory\Management_Dormitory\Management_Student.cpp(33,29): warning C4101: '_year': unreferenced local variable
-D:\PBL2\Management_Dormitory\Management_Dormitory\Management_Student.cpp(33,17): warning C4101: '_day': unreferenced local variable
-D:\PBL2\Management_Dormitory\Management_Dormitory\Management_Student.cpp(30,27): warning C4101: 'd_of_b': unreferenced local variable
-D:\PBL2\Management_Dormitory\Management_Dormitory\Management_Student.cpp(33,22): warning C4101: '_month': unreferenced local variable
-  Room.cpp
-  Student.cpp
-  Student_Profile.cpp
-  Generating Code...
+﻿  Management_Dormitory.cpp
   Management_Dormitory.vcxproj -> D:\PBL2\Management_Dormitory\Debug\Management_Dormitory.exe

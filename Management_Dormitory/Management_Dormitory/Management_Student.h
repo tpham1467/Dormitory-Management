@@ -9,6 +9,13 @@ private:
 public:
 	Management_Student();
 	~Management_Student();
+	void Add_Student(const Student&);
+	void Delete_Student(const Student&);
+	const Student& Find_Student(const Student&);
+	void Update_Info();
+	void Get_List_Student();
+	Node<Student> *Index_off(string);
+
 };
 
 

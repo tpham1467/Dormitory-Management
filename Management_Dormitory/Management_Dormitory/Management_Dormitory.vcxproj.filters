@@ -33,6 +33,9 @@
     <ClCompile Include="Student_Profile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Doubly_Linked_List.h">
@@ -56,10 +59,19 @@
     <ClInclude Include="Student_Profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Giao_dien.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Student.txt">
       <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="introduction.txt">
+      <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
 </Project>
