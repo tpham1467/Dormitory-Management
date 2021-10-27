@@ -6,10 +6,16 @@ using namespace std;
 #include"console.h"
 #include<windows.h>
 #include<conio.h>
+
 typedef pair<int, int > ii;
 typedef pair<ii, string > list;
+
 list arr_1[5];
 list arr_Student[5];
+list arr_Room[4];
+list arr_Profile[6];
+list arr_Card[5];
+
 int bat_su_kien(list arr[], int n);
 void Introduction();
 void Xoa_o(int x, int y, int x2, int y2);
@@ -30,7 +36,23 @@ void Khoi_tao_cac_danh_sach()
 	arr_Student[2].first.first = 17; arr_Student[2].first.second = 22; arr_Student[2].second = "Xoa Sinh Vien";
 	arr_Student[3].first.first = 9; arr_Student[3].first.second = 25; arr_Student[3].second = "Cap nhap thong Tin Sinh Vien";
 	arr_Student[4].first.first = 14; arr_Student[4].first.second = 28; arr_Student[4].second = "Hien Thi Danh Sach";
-
+	//Room
+	arr_Room[0].first.first = 11; arr_Room[0].first.second = 16; arr_Room[0].second = "Hien Thi Thong Tin Phong";
+	arr_Room[1].first.first = 11; arr_Room[1].first.second = 19; arr_Room[1].second = "Thanh Toan Tien Dien Nuoc";
+	arr_Room[2].first.first = 16; arr_Room[2].first.second = 22; arr_Room[2].second = "Tim Kiem Phong";
+	arr_Room[3].first.first = 15; arr_Room[3].first.second = 25; arr_Room[3].second = "Xac Nhan Sua Chua";
+	//Profile
+	arr_Profile[0].first.first = 12; arr_Profile[0].first.second = 16; arr_Profile[0].second = "Hien Thi Thong Tin Ho So";
+	arr_Profile[1].first.first = 16; arr_Profile[1].first.second = 19; arr_Profile[1].second = "Tim Kiem Ho So";
+	arr_Profile[2].first.first = 19; arr_Profile[2].first.second = 22; arr_Profile[2].second = "Xoa Ho So";
+	arr_Profile[3].first.first = 16; arr_Profile[3].first.second = 25; arr_Profile[3].second = "Phe Duyet Ho So";
+	arr_Profile[4].first.first = 20; arr_Profile[4].first.second = 28; arr_Profile[4].second = "Gia Han";
+	arr_Profile[5].first.first = 14; arr_Profile[5].first.second = 31; arr_Profile[5].second = "Chinh Sua Thong Tin";
+	//Card
+	arr_Card[0].first.first = 9; arr_Card[0].first.second = 16; arr_Card[0].second = "Hien Thi Thong Tin The Ra Vao";
+	arr_Card[1].first.first = 14; arr_Card[1].first.second = 19; arr_Card[1].second = "Tim Kiem The Ra Vao";
+	arr_Card[2].first.first = 16; arr_Card[2].first.second = 22; arr_Card[2].second = "Xoa The Ra Vao";
+	arr_Card[3].first.first = 9; arr_Card[3].first.second = 25; arr_Card[3].second = "Chinh Sua Thong Tin The Ra Vao";
 }
 int bat_su_kien(list arr[], int n)
 {
