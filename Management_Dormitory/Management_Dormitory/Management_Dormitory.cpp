@@ -3,8 +3,11 @@
 #include"Giao_dien.h"
 int main()
 { 
-	Menu_chinh();
-	_getch();
+	//Menu_chinh();
+	Management_Student Database;
+	Database.Find_Student("Pham Van Tien Truong");
+
+	//_getch();
     return 0;
 }
 

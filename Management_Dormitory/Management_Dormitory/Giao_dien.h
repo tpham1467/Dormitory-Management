@@ -7,6 +7,7 @@ using namespace std;
 #include"Khoi_tao.h"
 #include<windows.h>
 #include<conio.h>
+#include<stdlib.h>
 void Menu_Student();
 void Menu_Room();
 void Menu_Profile();
@@ -170,13 +171,17 @@ void Menu_Card()
 void Menu_chinh()
 {
 	Khoi_tao();
-	Hien_thi_danh_sach(arr_1, 4);
-	int a=bat_su_kien(arr_1,4);
+	Hien_thi_danh_sach(arr_1, 5);
+	int a=bat_su_kien(arr_1,5);
 	switch (a)
 	{
 	case 0:
 	{
 		Xoa_o(4, 14, 39, 35);
+		Xoa_o(48, 10, 170, 36,14);
+		Line(48, 20, 170, 20,14,false);
+		Line(100, 10, 100,36 , 14);
+		Confict_line(48, 20, 170,20, 100, 10, 100, 36, 14);
 		Menu_Student();
 		break;
 	}
@@ -202,6 +207,11 @@ void Menu_chinh()
 	{
 		//Menu_Tk();
 		break;
+	}
+	case 5:
+	{
+		Xoa_o(0, 0, 175, 40);
+		exit(0);
 	}
 	default:
 	{

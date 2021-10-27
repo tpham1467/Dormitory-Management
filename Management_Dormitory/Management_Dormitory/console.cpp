@@ -162,25 +162,3 @@ void deleteRow(SHORT SStartPos, SHORT SNumberRow)
 	FillConsoleOutputAttribute(hConsoleOutput, 15, ConsoleInfo.dwSize.X * SNumberRow, Pos, &Tmp);
 	SetConsoleCursorPosition(hConsoleOutput, Pos);
 }
-void veHop(int x, int y, int w, int h, int color)
-{
-	setColor(color);
-	for (int ix = x; ix <= x + w; ix++)
-	{
-		gotoXY(ix, y);
-		cout << char(219);
-		gotoXY(ix, y + h);
-		cout << char(219);
-	}
-	for (int iy = y; iy <= y + h; iy++)
-	{
-		gotoXY(x, iy);
-		cout << char(219);
-		gotoXY(x + w, iy);
-		cout << char(219);
-	}
-	gotoXY(x, y); cout << char(219);
-	gotoXY(x + w, y); cout << char(219);
-	gotoXY(x, y + h); cout << char(219);
-	gotoXY(x + w, y + h); cout << char(217);
-}

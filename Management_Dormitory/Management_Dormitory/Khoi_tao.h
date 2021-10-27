@@ -9,8 +9,9 @@ using namespace std;
 
 typedef pair<int, int > ii;
 typedef pair<ii, string > list;
-
-list arr_1[5];
+//typedef pair<ii, ii > iii;
+//iii list_confict
+list arr_1[6];
 list arr_Student[5];
 list arr_Room[4];
 list arr_Profile[6];
@@ -18,11 +19,14 @@ list arr_Card[5];
 
 int bat_su_kien(list arr[], int n);
 void Introduction();
-void Xoa_o(int x, int y, int x2, int y2);
+void Xoa_o(int x, int y, int x2, int y2,int color=0);
 void Hien_thi_danh_sach(list arr[], int n);
 void huong_dan();
 void khung_chon();
 void khung();
+void Hcn(int x, int y, int x1, int y1);
+void Line(int x, int y, int x1, int y1, int color=15, bool thang=true);
+void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1, int color);
 void Khoi_tao_cac_danh_sach()
 {
 	arr_1[0].first.first = 15; arr_1[0].first.second = 16; arr_1[0].second = "Quan Li Sinh Vien";
@@ -30,6 +34,7 @@ void Khoi_tao_cac_danh_sach()
 	arr_1[2].first.first = 17; arr_1[2].first.second = 22; arr_1[2].second = "Quan Li Ho So";
 	arr_1[3].first.first = 14; arr_1[3].first.second = 25; arr_1[3].second = "Quan Li The Ra Vao";
 	arr_1[4].first.first = 19; arr_1[4].first.second = 28; arr_1[4].second = "Thong Ke";
+	arr_1[5].first.first = 21; arr_1[5].first.second = 31; arr_1[5].second = "Thoat";
 	//arr_Student
 	arr_Student[0].first.first = 16; arr_Student[0].first.second = 16; arr_Student[0].second = "Them Sinh Vien";
 	arr_Student[1].first.first = 14; arr_Student[1].first.second = 19; arr_Student[1].second = "Tim Kiem Sinh Vien";
@@ -99,17 +104,23 @@ void Introduction()
 
 		string data;
 		getline(input, data);
-		Outstring(60, line++, 11, 0, data);
+		Outstring(70, line++, 11, 0, data);
 
 	}
+	/*for (int i = 0; i < 45; i++)
+	{
+		Outchar(i, 6, 11, 0, char(254));
+	}
+	Outstring(4,7,11, 0, "Sinh Vien 1: Pham Van Tien Truong");
+	Outstring(4,8, 11, 0, "Sinh Vien 1: Pham Cong Huy");*/
 }
-void Xoa_o(int x, int y, int x2, int y2)
+void Xoa_o(int x, int y, int x2, int y2,int color)
 {
 	for (int i = x; i <= x2; i++)
 	{
 		for (int j = y; j <= y2; j++)
 		{
-			Outchar(i, j, 0, 0, ' ');
+			Outchar(i, j, 0, color, ' ');
 		}
 	}
 }
@@ -156,7 +167,7 @@ void khung_chon()
 	}
 	for (int i = 12; i < 36; i++)
 	{
-		Outchar(3, i, 11, 0, (char)219);
+		Outchar(3, i, 11, 0, (char)219);	
 	}
 	for (int i = 12; i < 36; i++)
 	{
@@ -181,5 +192,52 @@ void khung()
 	for (int i = 46; i < 175; i++)
 	{
 		Outchar(i, 7, 15, 0, (char)254);
+	}
+}
+void Hcn(int x, int y, int x1, int y1)
+{
+	for (int i = x; i <= x1; i++)
+	{
+		Outchar(i, y, 14, 0, (char)196);
+		Outchar(i, y1, 14, 0, (char)196);
+	}
+	for (int i = y; i <= y1; i++)
+	{
+		Outchar(x-1, i, 14, 0, (char)179);
+		Outchar(x1+1, i, 14, 0, (char)179);
+	}
+	gotoXY(x-1, y); cout << char(218);
+	gotoXY(x1+1, y); cout << char(191);
+	gotoXY(x-1, y1); cout << char(192);
+	gotoXY(x1+1,y1); cout << char(217);
+	//Xoa_o(x , y , x1 , y1 ,2);
+}
+void Line(int x, int y, int x1, int y1, int color,bool thang)
+{
+	if (thang == true)
+	{
+		for (int i = y; i <= y1; i++)
+		
+		Outchar(x1, i, 0, color, (char)179);
+	}
+	else
+	{
+		for (int i = x; i <= x1; i++)
+
+			Outchar(i, y1, 0, color, (char)196);
+	}
+}
+
+void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1 ,int color)
+{
+	float a = (-y1 + y) / (x - x1);
+	float b = y1 - a * x1;
+	for (int i = _y; i <= _y1; i++)
+	{
+		if (a * _x + b - i == 0)
+		{
+			Outchar(_x, i, 0, color, (char)197);
+			break;
+		}
 	}
 }

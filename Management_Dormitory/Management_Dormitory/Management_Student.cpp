@@ -1,9 +1,11 @@
 #include "Management_Student.h"
-#include"Date_of_Birth.h"
+#include "Date_of_Birth.h"
 #include <fstream>
 #include <string>
+#include <sstream>
+#include <vector>
 using namespace std;
-int Management_Student::N_S=0;
+int Management_Student::N_S = 0;
 Management_Student::Management_Student()
 {
     ifstream input;
@@ -11,12 +13,12 @@ Management_Student::Management_Student()
     if (!input.is_open())
     {
         //throw "Unable to open file Student";
-       cout<<1;
+        cout << 1;
     }
     else
     {
         int n;
-        input>>this->N_S;
+        input >> this->N_S;
         input.ignore();
         while (!input.eof())
         {
@@ -30,7 +32,7 @@ Management_Student::Management_Student()
             Date_of_Birth d_of_b;
             string _d_of_b;
             string Address;
-            int _day,_month,_year;
+            int _day, _month, _year;
             getline(input, name, '-');
             getline(input, Phone_number, '-');
             getline(input, Profile_Code, '-');
@@ -49,11 +51,10 @@ Management_Student::Management_Student()
             // dt.Day=(int)_d_of_b[0]+(int)_d_of_b[1]-96;
             // dt.Month=(int)_d_of_b[3]+(int)_d_of_b[4]-96;
             // dt.Year=(int)_d_of_b[6]+(int)_d_of_b[7]+(int)_d_of_b[8]+(int)_d_of_b[9]-96;
-            Student _Student(name,Phone_number,Room_Code,Profile_Code,Gender,Student_Code,Email,dt,Address);
-            this->Database.InsertAtHead(_Student);
-            cout<<this->Database.Get_P_Head()->Get_Data().Get_Name()<<" "<<this->Database.Get_P_Head()->Get_Data().Get_Address();
+            Student _Student(name, Phone_number, Room_Code, Profile_Code, Gender, Student_Code, Email, dt, Address);
+            this->Database.InsertAtTail(_Student);
+            //cout << this->Database.Get_P_Head()->Get_Data().Get_Name() << " " << this->Database.Get_P_Head()->Get_Data().Get_Address();
         }
-        
     }
 }
 
@@ -61,8 +62,68 @@ Management_Student::~Management_Student()
 {
     this->Database.~Doubly_Linked_List();
 }
-void Management_Student::Add_Student(const Student& _Student)
+void Management_Student::Add_Student(const Student &_Student)
 {
     this->Database.InsertAtTail(_Student);
     Management_Student::N_S++;
+}
+vector<Student> Management_Student::Find_Student(string data)
+{
+    stringstream _data(data);
+    Doubly_Linked_List<string> _data_Token;
+    vector<Student> data_Student;
+    string token;
+    while (_data >> token){
+
+        _data_Token.InsertAtTail(token);
+    }
+    //find
+    Node<Student> *p = this->Database.Get_P_Head();
+    while (p != nullptr)
+    {
+      
+         bool check = false;
+         Node<string> *pp=_data_Token.Get_P_Head();
+        while (pp!=nullptr&&check==false)
+        {
+            string name = p->Get_Data().Get_Name();
+            string Phone_Number = p->Get_Data().Get_Phone_number();
+            string Email = p->Get_Data().Get_Email();
+            string Student_code = p->Get_Data().Get_Student_Code();
+            token = pp->Get_Data();
+            if (name.find(token) >= 0 && name.find(token) <= name.length())
+            {
+                data_Student.push_back(p->Get_Data());
+                check = true;
+            }
+            if (check == false && Phone_Number.find(token) >= 0 && Phone_Number.find(token) <= Email.length())
+            {
+                data_Student.push_back(p->Get_Data());
+                check = true;
+            }
+            if (check == false && Email.find(token) >= 0 && Email.find(token) <= Email.length())
+            {
+                data_Student.push_back(p->Get_Data());
+                check = true;
+            }
+            if (check == false && Student_code.find(token) >= 0 && Student_code.find(token) <= Student_code.length())
+            {
+                data_Student.push_back(p->Get_Data());
+                check = true;
+            }
+            pp=pp->Get_Next();
+            if(check==true)
+            {
+                cout<<token<<endl;
+                break;
+            }
+        }
+        p = p->Get_Next(); 
+    }
+    while(data_Student.size()!=0)
+    {
+        cout<<data_Student.back().Get_Name()<<endl;
+        data_Student.pop_back();
+    }
+    return data_Student;
 }

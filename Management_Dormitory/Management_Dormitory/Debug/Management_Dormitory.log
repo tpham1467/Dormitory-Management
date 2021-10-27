@@ -1,2 +1,3 @@
 ﻿  Management_Dormitory.cpp
+D:\PBL2\Management_Dormitory\Management_Dormitory\Khoi_tao.h(233,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Management_Dormitory.vcxproj -> D:\PBL2\Management_Dormitory\Debug\Management_Dormitory.exe
