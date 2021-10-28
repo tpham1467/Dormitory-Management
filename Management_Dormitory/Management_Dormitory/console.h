@@ -19,4 +19,4 @@ void Outchar(SHORT x, SHORT y, WORD color, WORD background, char s);
 void Outfloat(SHORT x, SHORT y, WORD color, WORD background,  float s);
 void Outint(SHORT x, SHORT y, WORD color, WORD background, int s);
 void Cursor(BOOL bVisible = TRUE, DWORD dwSize = 25);
-void deleteRow(SHORT SStartPos, SHORT SNumberRow);
+int inputKey();

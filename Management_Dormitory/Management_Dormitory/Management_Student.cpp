@@ -19,7 +19,6 @@ Management_Student::Management_Student()
     {
         int n;
         input >> this->N_S;
-        input.ignore();
         while (!input.eof())
         {
             string name;
@@ -33,6 +32,7 @@ Management_Student::Management_Student()
             string _d_of_b;
             string Address;
             int _day, _month, _year;
+            input.ignore();
             getline(input, name, '-');
             getline(input, Phone_number, '-');
             getline(input, Profile_Code, '-');
@@ -112,18 +112,13 @@ vector<Student> Management_Student::Find_Student(string data)
                 check = true;
             }
             pp=pp->Get_Next();
-            if(check==true)
-            {
-                cout<<token<<endl;
-                break;
-            }
+            
         }
         p = p->Get_Next(); 
     }
-    while(data_Student.size()!=0)
-    {
-        cout<<data_Student.back().Get_Name()<<endl;
-        data_Student.pop_back();
-    }
     return data_Student;
+}
+Doubly_Linked_List<Student>&  Management_Student::Get_List_Student()
+{
+    return this->Database;
 }

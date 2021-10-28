@@ -5,9 +5,10 @@ int main()
 { 
 	//Menu_chinh();
 	Management_Student Database;
-	Database.Find_Student("Pham Van Tien Truong");
-
-	//_getch();
+	//Database.Find_Student("Pham Van Tien Truong");
+	Menu_chinh(Database);
+	//Database.Find_Student("pham");
+	_getch();
     return 0;
 }
 

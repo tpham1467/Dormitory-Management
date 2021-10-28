@@ -1,3 +1,4 @@
 ﻿  Management_Dormitory.cpp
-D:\PBL2\Management_Dormitory\Management_Dormitory\Khoi_tao.h(233,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\PBL2\Management_Dormitory\Management_Dormitory\Khoi_tao.h(240,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\PBL2\Management_Dormitory\Management_Dormitory\Giao_dien.h(33,15): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
   Management_Dormitory.vcxproj -> D:\PBL2\Management_Dormitory\Debug\Management_Dormitory.exe

@@ -4,6 +4,7 @@ HANDLE hConsoleInput;
 #include <iostream>
 using namespace std;
 // Ham thay doi kich co man hinh console.
+#define KEY_NONE	-1
 void SetScreenBufferSize(SHORT width, SHORT height)
 {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -151,14 +152,24 @@ void Cursor(BOOL bVisible, DWORD dwSize)
 	SetConsoleCursorInfo(hConsoleOutput, &ConsoleCursorInfo);
 }
 
-// Xoa so luong dong, SStartPos - Vi tri bat dau xoa, SNumberRow so luong dong can xoa.
-void deleteRow(SHORT SStartPos, SHORT SNumberRow)
+int inputKey()
 {
-	CONSOLE_SCREEN_BUFFER_INFO  ConsoleInfo;
-	COORD Pos = { 0, SStartPos };
-	DWORD Tmp;
-	GetConsoleScreenBufferInfo(hConsoleOutput, &ConsoleInfo);
-	FillConsoleOutputCharacter(hConsoleOutput, ' ', ConsoleInfo.dwSize.X * SNumberRow, Pos, &Tmp);
-	FillConsoleOutputAttribute(hConsoleOutput, 15, ConsoleInfo.dwSize.X * SNumberRow, Pos, &Tmp);
-	SetConsoleCursorPosition(hConsoleOutput, Pos);
+	if (_kbhit())
+	{
+		int key = _getch();
+
+		if (key == 224)
+		{
+			key = _getch();
+			return key + 1000;
+		}
+
+		return key;
+	}
+	else
+	{
+		return KEY_NONE;
+	}
+
+	return KEY_NONE;
 }

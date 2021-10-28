@@ -14,7 +14,7 @@ public:
 	void Delete_Student(const Student&);
 	vector<Student> Find_Student(string);
 	void Update_Info();
-	void Get_List_Student();
+	Doubly_Linked_List<Student>& Get_List_Student();
 	Node<Student> *Index_off(string);
 
 };

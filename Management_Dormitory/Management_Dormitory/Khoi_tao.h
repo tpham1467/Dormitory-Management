@@ -6,16 +6,17 @@ using namespace std;
 #include"console.h"
 #include<windows.h>
 #include<conio.h>
-
+#include"Giao_dien.h"
+#include"Management_Student.h"
+#include<vector>
 typedef pair<int, int > ii;
 typedef pair<ii, string > list;
-//typedef pair<ii, ii > iii;
-//iii list_confict
 list arr_1[6];
 list arr_Student[5];
 list arr_Room[4];
 list arr_Profile[6];
 list arr_Card[5];
+list arr_find[2];
 
 int bat_su_kien(list arr[], int n);
 void Introduction();
@@ -24,9 +25,11 @@ void Hien_thi_danh_sach(list arr[], int n);
 void huong_dan();
 void khung_chon();
 void khung();
-void Hcn(int x, int y, int x1, int y1);
+void Hcn(int x, int y, int x1, int y1,int color=0);
 void Line(int x, int y, int x1, int y1, int color=15, bool thang=true);
 void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1, int color);
+void Ve_luoi(int y, int color, vector<Student> database,int j);
+void Ve_luoi_nhieu(vector<Student> Database);
 void Khoi_tao_cac_danh_sach()
 {
 	arr_1[0].first.first = 15; arr_1[0].first.second = 16; arr_1[0].second = "Quan Li Sinh Vien";
@@ -58,7 +61,11 @@ void Khoi_tao_cac_danh_sach()
 	arr_Card[1].first.first = 14; arr_Card[1].first.second = 19; arr_Card[1].second = "Tim Kiem The Ra Vao";
 	arr_Card[2].first.first = 16; arr_Card[2].first.second = 22; arr_Card[2].second = "Xoa The Ra Vao";
 	arr_Card[3].first.first = 9; arr_Card[3].first.second = 25; arr_Card[3].second = "Chinh Sua Thong Tin The Ra Vao";
+	// Find
+	arr_find[0].first.first = 6; arr_find[0].first.second = 16; arr_find[0].second = "Tim Kiem Bang Canh Nhap Thong Tin";
+	arr_find[1].first.first = 11; arr_find[1].first.second = 19; arr_find[1].second = "Tim Kiem Trong Danh Sach";
 }
+
 int bat_su_kien(list arr[], int n)
 {
 	int i = 0;
@@ -116,12 +123,12 @@ void Introduction()
 }
 void Xoa_o(int x, int y, int x2, int y2,int color)
 {
+	string _string;
 	for (int i = x; i <= x2; i++)
+		_string.push_back(' ');
+	for (int i = y; i <= y2; i++)
 	{
-		for (int j = y; j <= y2; j++)
-		{
-			Outchar(i, j, 0, color, ' ');
-		}
+		Outstring(x, i, color, color,_string);
 	}
 }
 void Khoi_tao()
@@ -194,17 +201,17 @@ void khung()
 		Outchar(i, 7, 15, 0, (char)254);
 	}
 }
-void Hcn(int x, int y, int x1, int y1)
+void Hcn(int x, int y, int x1, int y1,int color)
 {
 	for (int i = x; i <= x1; i++)
 	{
-		Outchar(i, y, 14, 0, (char)196);
-		Outchar(i, y1, 14, 0, (char)196);
+		Outchar(i, y, 14, color, (char)196);
+		Outchar(i, y1, 14, color, (char)196);
 	}
 	for (int i = y; i <= y1; i++)
 	{
-		Outchar(x-1, i, 14, 0, (char)179);
-		Outchar(x1+1, i, 14, 0, (char)179);
+		Outchar(x-1, i, 14, color, (char)179);
+		Outchar(x1+1, i, 14, color, (char)179);
 	}
 	gotoXY(x-1, y); cout << char(218);
 	gotoXY(x1+1, y); cout << char(191);
@@ -239,5 +246,102 @@ void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1
 			Outchar(_x, i, 0, color, (char)197);
 			break;
 		}
+	}
+}
+void Ve_luoi(int y, int color, vector<Student> Database,int j)
+{
+	Xoa_o(48, 10, 170, 12, 15);
+	Xoa_o(48, 13, 170, 13+2*y, 6);
+	Outstring(50, 11, 0, 15, "Ma Sinh Vien");
+	Outstring(84, 11, 0, 15, "Ho Va Ten");
+	Outstring(112, 11, 0, 15, "Gioi Tinh");
+	Outstring(140, 11, 0, 15, "Dia Chi");
+	int i;
+
+	for (i = 15; i < 13+2*y; i += 2)
+	{
+		Outstring(51, i-1, 0, 6,Database[j].Get_Student_Code());
+		Outstring(72, i - 1, 0, 6, Database[j].Get_Name());
+		Outstring(111, i - 1, 0, 6, (Database[j].Get_Gender()==1)?"Nam":"Nu");
+		Outstring(128, i - 1, 0, 6, Database[j].Get_Address());
+		Line(48, i, 170, i, 6, false);
+		j++;
+	}
+	Outstring(51, i - 1, 0, 6, Database[j].Get_Student_Code());
+	Outstring(72, i - 1, 0, 6, Database[j].Get_Name());
+	Outstring(111, i - 1, 0, 6, (Database[j].Get_Gender() == 1) ? "Nam" : "Nu");
+	Outstring(128, i - 1, 0, 6, Database[j].Get_Address());
+
+	Line(68, 13, 68, 13 + 2 * y,6);
+	Line(68, 10, 68, 12, 15);
+	Line(108, 13, 108, 13+2*y, 6);
+	Line(108, 10, 108, 12, 15);
+	Line(125, 13, 125, 13 + 2 * y, 6);
+	Line(125, 10, 125, 12, 15);
+	for (int i = 15; i < 13 + 2 * y; i += 2)
+	{
+		
+		Confict_line(48, i, 170, i, 68, 13, 68, 13 + 2 * y, 6);
+		Confict_line(48, i, 170, i, 125, 13, 125, 13 + 2 * y, 6);
+		Confict_line(48, i, 170, i, 108, 13, 108, 13 + 2 * y, 6);
+	
+	}
+}
+void Ve_luoi_nhieu(vector<Student> Database)
+{
+	int lenght =Database.size();
+	int so_lan =(int) (lenght / 10);
+	int i = 1,j=0; int z = 0;
+	Xoa_o(48, 10, 170, 35, 0);
+	if (so_lan==0)
+	{
+		Ve_luoi(lenght - 1, 6, Database, 0);
+	}
+	else
+	{
+		Ve_luoi(10, 6, Database, i - 1);
+	}
+	while (1)
+	{
+		char key = _getch();
+		switch (key)
+		{
+		case 77:
+		{	
+			if (i == so_lan*10+1) i = i;
+			else {
+				i += 10;
+				j++;
+			}
+			break;
+		}
+		case 75:
+		{
+			if (i == 1) i = 1;
+			else
+			{
+				i -= 10;
+				j--;
+			}
+			break;
+		}
+		case 27:
+			return;
+			break;
+		}
+		Xoa_o(48, 10, 170, 35, 0);
+		if (i == so_lan * 10 + 1)
+		{
+			Ve_luoi(lenght - so_lan * 10 - 1, 6, Database, i - 1);
+			z = (lenght - so_lan * 10 - 1) ;
+		}
+		else
+		{
+			Ve_luoi(10, 6, Database, i - 1);
+			z = 10;
+		}
+		Outstring(111, 13 + 2 *z + 1,2,0,"<<");
+		Outint(113, 13 + 2 * z + 1, 1, 0, (j==so_lan)?(j+1):j+1);
+		Outstring(114, 13 + 2 * z + 1, 2, 0, ">>");
 	}
 }
