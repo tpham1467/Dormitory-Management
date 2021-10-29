@@ -28,8 +28,10 @@ void khung();
 void Hcn(int x, int y, int x1, int y1,int color=0);
 void Line(int x, int y, int x1, int y1, int color=15, bool thang=true);
 void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1, int color);
-void Ve_luoi(int y, int color, vector<Student> database,int j);
-void Ve_luoi_nhieu(vector<Student> Database);
+void Ve_mot_trang(int y, int color, vector<Student> Database, int j);
+void Ve_nhieu_trang(vector<Student> Database);
+int Ve_nhieu_trang_chon(vector<Student> Database);
+void To_mau_mot_doi_tuong(vector<Student> Database, int index, int color,int i);
 void Khoi_tao_cac_danh_sach()
 {
 	arr_1[0].first.first = 15; arr_1[0].first.second = 16; arr_1[0].second = "Quan Li Sinh Vien";
@@ -237,8 +239,8 @@ void Line(int x, int y, int x1, int y1, int color,bool thang)
 
 void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1 ,int color)
 {
-	float a = (-y1 + y) / (x - x1);
-	float b = y1 - a * x1;
+	float a = (float)((-y1 + y) / (x - x1));
+	float b = (float)(y1 - a * x1);
 	for (int i = _y; i <= _y1; i++)
 	{
 		if (a * _x + b - i == 0)
@@ -248,14 +250,35 @@ void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1
 		}
 	}
 }
-void Ve_luoi(int y, int color, vector<Student> Database,int j)
+// ve danh 1 trang
+void Ve_mot_trang(int y, int color, vector<Student> Database, int j)
 {
-	Xoa_o(48, 10, 170, 12, 15);
-	Xoa_o(48, 13, 170, 13+2*y, 6);
-	Outstring(50, 11, 0, 15, "Ma Sinh Vien");
-	Outstring(84, 11, 0, 15, "Ho Va Ten");
-	Outstring(112, 11, 0, 15, "Gioi Tinh");
-	Outstring(140, 11, 0, 15, "Dia Chi");
+	if (j == -1) {
+
+
+		Xoa_o(48, 10, 170, 12, 15);
+		Xoa_o(48, 13, 170, 13 + 1, 6);
+		Outstring(50, 11, 0, 15, "Ma Sinh Vien");
+		Outstring(84, 11, 0, 15, "Ho Va Ten");
+		Outstring(112, 11, 0, 15, "Gioi Tinh");
+		Outstring(140, 11, 0, 15, "Dia Chi");
+		Line(68, 13, 68, 13 + 1, 6);
+		Line(68, 10, 68, 12, 15);
+		Line(108, 13, 108, 13 +  1, 6);
+		Line(108, 10, 108, 12, 15);
+		Line(125, 13, 125, 13 + 1, 6);
+		Line(125, 10, 125, 12, 15);
+		return;
+	}
+	else
+	{
+		Xoa_o(48, 10, 170, 12, 15);
+		Xoa_o(48, 13, 170, 13 + 2 * y, 6);
+		Outstring(50, 11, 0, 15, "Ma Sinh Vien");
+		Outstring(84, 11, 0, 15, "Ho Va Ten");
+		Outstring(112, 11, 0, 15, "Gioi Tinh");
+		Outstring(140, 11, 0, 15, "Dia Chi");
+	}
 	int i;
 
 	for (i = 15; i < 13+2*y; i += 2)
@@ -286,20 +309,30 @@ void Ve_luoi(int y, int color, vector<Student> Database,int j)
 		Confict_line(48, i, 170, i, 108, 13, 108, 13 + 2 * y, 6);
 	
 	}
+	
 }
-void Ve_luoi_nhieu(vector<Student> Database)
+// ve danh nhieu trang
+void Ve_nhieu_trang(vector<Student> Database)
 {
 	int lenght =Database.size();
-	int so_lan =(int) (lenght / 10);
-	int i = 1,j=0; int z = 0;
+	int so_lan =(int)(lenght / 10)+1;
+	int i = 0,j=1; int z = 0;
 	Xoa_o(48, 10, 170, 35, 0);
-	if (so_lan==0)
+	bool Firt = false;
+	if (so_lan==1)
 	{
-		Ve_luoi(lenght - 1, 6, Database, 0);
+		Ve_mot_trang(lenght , 6, Database, 0);
+		Firt = true;
 	}
 	else
 	{
-		Ve_luoi(10, 6, Database, i - 1);
+		Ve_mot_trang(10, 6, Database, 0);
+		Outstring(111, 13 + 2 * 10 + 1, 2, 0, "<<");
+		Outint(113, 13 + 2 * 10 + 1, 1, 0, j);
+		Outstring(114, 13 + 2 * 10 + 1, 2, 0, ">>");
+		//gotoXY(114, 13 + 2 * 10 + 2);
+		//cout << lenght << " " << so_lan << " " << lenght - (so_lan - 1) * 10;
+		Firt = true;
 	}
 	while (1)
 	{
@@ -308,7 +341,7 @@ void Ve_luoi_nhieu(vector<Student> Database)
 		{
 		case 77:
 		{	
-			if (i == so_lan*10+1) i = i;
+			if (j==so_lan) break;
 			else {
 				i += 10;
 				j++;
@@ -317,7 +350,7 @@ void Ve_luoi_nhieu(vector<Student> Database)
 		}
 		case 75:
 		{
-			if (i == 1) i = 1;
+			if (i == 0) break;
 			else
 			{
 				i -= 10;
@@ -329,19 +362,276 @@ void Ve_luoi_nhieu(vector<Student> Database)
 			return;
 			break;
 		}
-		Xoa_o(48, 10, 170, 35, 0);
-		if (i == so_lan * 10 + 1)
+		if (Firt == true)
 		{
-			Ve_luoi(lenght - so_lan * 10 - 1, 6, Database, i - 1);
-			z = (lenght - so_lan * 10 - 1) ;
+			Xoa_o(48, 10, 170, 35, 0);
+			if (j ==so_lan||lenght<10)
+			{
+				if (lenght < 10)
+				{
+					Ve_mot_trang(lenght, 6, Database, i);
+					z = lenght;
+				}
+				else
+				{
+					if (lenght - (so_lan - 1) * 10 == 0)
+					{
+						z = 1;
+						Ve_mot_trang(lenght - (so_lan - 1) * 10, 6, Database, -1);
+					}
+					else
+					{
+						Ve_mot_trang(lenght - (so_lan - 1) * 10, 6, Database, i);
+						z = lenght - (so_lan - 1) * 10;
+					}
+				}
+		
+			}
+			else
+			{
+				Ve_mot_trang(10, 6, Database, i );
+				z = 10;
+			}
+			Outstring(111, 13 + 2 * z + 1, 2, 0, "<<");
+			Outint(113, 13 + 2 * z + 1, 1, 0, j);
+			Outstring(114, 13 + 2 * z + 1, 2, 0, ">>");
 		}
-		else
+	}
+}
+//int Ve_nhieu_trang_chon(vector<Student> Database)
+//{
+//	int lenght = Database.size();
+//	int so_lan = (lenght==10)?0:(int)(lenght / 10);
+//	int i = 1, j = 0; int z = 0;
+//	Xoa_o(48, 10, 170, 35, 0);
+//	int dem = 1;
+//	int check = false;
+//	if (so_lan == 0)
+//	{
+//		Ve_mot_trang(lenght , 6, Database, 0);
+//		To_mau_mot_doi_tuong(Database, 0, 4,1);
+//	}
+//	else
+//	{
+//		Ve_mot_trang(10, 6, Database, i - 1);
+//		To_mau_mot_doi_tuong(Database, 0, 4,1);
+//	}
+//	while (1)
+//	{
+//		char key = _getch();
+//		switch (key)
+//		{
+//		case 77:
+//		{
+//			if (i == so_lan * 10 + 1) {
+//				i = i;
+//				check = true;
+//			}
+//			else {
+//				i += 10;
+//				j++;
+//				dem = i;
+//				To_mau_mot_doi_tuong(Database, dem - 1, 4, i);
+//			}
+//			check = false;
+//			break;
+//		}
+//		case 75:
+//		{
+//			if (i == 1) i = 1;
+//			else
+//			{
+//				i -= 10;
+//				dem = i;
+//				j--;
+//				To_mau_mot_doi_tuong(Database, dem-1, 4, i);
+//			}
+//			check = false;
+//			break;
+//		}
+//		case 72:
+//		{
+//			if (dem == i) dem = i;
+//			else {
+//				To_mau_mot_doi_tuong(Database, dem - 1, (dem - i == 0) ? 4 : 0, i);
+//				dem += -1;
+//				check = true;
+//				To_mau_mot_doi_tuong(Database, dem - 1, 4, i);
+//			}
+//			break;
+//		}
+//		case 80:
+//		{
+//			if (lenght == 10 && dem == lenght-1)
+//			{
+//				To_mau_mot_doi_tuong(Database, dem - 1, (dem == i + 9 || dem == lenght) ? 4 : 0, i);
+//				dem += 1;
+//				To_mau_mot_doi_tuong(Database, dem - 1, 4, i);
+//				check = true;
+//			}
+//			else
+//			{
+//				if (dem == i + 9 || dem == lenght - 1) dem = dem;
+//				else {
+//					To_mau_mot_doi_tuong(Database, dem - 1, (dem == i + 9 || dem == lenght) ? 4 : 0, i);
+//					dem += 1;
+//					To_mau_mot_doi_tuong(Database, dem - 1, 4, i);
+//					check = true;
+//				}
+//			}
+//			break;
+//		}
+//		case 13: {
+//			return  dem;
+//		}
+//		}
+//		if (check == false)
+//		{
+//			Xoa_o(48, 10, 170, 35, 0);
+//			if (i == so_lan * 10 + 1)
+//			{
+//				Ve_mot_trang((so_lan==0)?lenght:(lenght - so_lan * 10 - 1), 6, Database, i - 1);
+//				z = (so_lan == 0) ? lenght : (lenght - so_lan * 10 - 1);
+//			}
+//			else
+//			{
+//				Ve_mot_trang(10, 6, Database, i - 1);
+//				z = 10;
+//			}
+//			Outstring(111, 13 + 2 * z + 1, 2, 0, "<<");
+//			Outint(113, 13 + 2 * z + 1, 1, 0, (j == so_lan) ? (j + 1) : j + 1);
+//			Outstring(114, 13 + 2 * z + 1, 2, 0, ">>");
+//		}
+//	}
+//}
+void To_mau_mot_doi_tuong(vector<Student> Database, int index,int color,int i)
+{
+	
+		
+		Outstring(51, (index-i)* 2 + 14, color, 6, Database[index].Get_Student_Code());
+		Outstring(72, (index-i) * 2 + 14, color, 6, Database[index].Get_Name());
+		Outstring(111, (index-i) * 2 + 14, color, 6, (Database[index].Get_Gender() == 1) ? "Nam" : "Nu");
+		Outstring(128, (index-i) * 2 + 14, color, 6, Database[index].Get_Address());
+	
+}
+int Ve_nhieu_trang_chon(vector<Student> Database)
+{
+	int lenght = Database.size();
+	int so_lan = (int)(lenght / 10) + 1;
+	int i = 0, j = 1; int z = 0; ; int dem = 0; bool check = false;
+	Xoa_o(48, 10, 170, 35, 0);
+	bool Firt = false;
+	if (so_lan == 1)
+	{
+		Ve_mot_trang(lenght, 6, Database, 0);
+		Firt = true;
+	}
+	else
+	{
+		Ve_mot_trang(10, 6, Database, 0);
+		Outstring(111, 13 + 2 * 10 + 1, 2, 0, "<<");
+		Outint(113, 13 + 2 * 10 + 1, 1, 0, j);
+		Outstring(114, 13 + 2 * 10 + 1, 2, 0, ">>");
+		//gotoXY(114, 13 + 2 * 10 + 2);
+		//cout << lenght << " " << so_lan << " " << lenght - (so_lan - 1) * 10;
+		Firt = true;
+	}
+	while (1)
+	{
+		char key = _getch();
+		switch (key)
 		{
-			Ve_luoi(10, 6, Database, i - 1);
-			z = 10;
+		case 77:
+		{
+			if (j == so_lan) i = i;
+			else {
+				i += 10;
+				j++;
+				dem = i;
+				check = true;
+			}
+			break;
 		}
-		Outstring(111, 13 + 2 *z + 1,2,0,"<<");
-		Outint(113, 13 + 2 * z + 1, 1, 0, (j==so_lan)?(j+1):j+1);
-		Outstring(114, 13 + 2 * z + 1, 2, 0, ">>");
+		case 75:
+		{
+			if (i == 0) break;
+			else
+			{
+				i -= 10;
+				j--;
+				dem = i;
+				check = true;
+			}
+			break;
+		}
+		case 72:
+		{
+			if (dem == i) break;
+			else {
+				To_mau_mot_doi_tuong(Database, dem, 0, i);
+				dem += -1;
+				check = false;
+				To_mau_mot_doi_tuong(Database, dem, 4, i);
+			}
+			break;
+		}
+		case 80:
+		{
+			if (dem == i + 9 || dem == lenght - 1) break;
+			else
+			{
+				To_mau_mot_doi_tuong(Database, dem, 0, i);
+				dem += 1;
+				To_mau_mot_doi_tuong(Database, dem, 4, i);
+				check = false;
+			}
+
+			break;
+		}
+		case 13:
+		{
+
+			return dem;
+			break;
+		}
+		}
+		if (Firt == true && check == true)
+		{
+			Xoa_o(48, 10, 170, 35, 0);
+			if (j == so_lan || lenght < 10)
+			{
+				if (lenght < 10)
+				{
+					Ve_mot_trang(lenght, 6, Database, i);
+					To_mau_mot_doi_tuong(Database, lenght, 4, i);
+					z = lenght;
+				}
+				else
+				{
+					if (lenght - (so_lan - 1) * 10 == 0)
+					{
+						z = 1;
+						Ve_mot_trang(lenght - (so_lan - 1) * 10, 6, Database, -1);
+					}
+					else
+					{
+						Ve_mot_trang(lenght - (so_lan - 1) * 10, 6, Database, i);
+						To_mau_mot_doi_tuong(Database, dem, 4, i);
+						z = lenght - (so_lan - 1) * 10;
+					}
+				}
+
+			}
+			else
+			{
+				Ve_mot_trang(10, 6, Database, i);
+				To_mau_mot_doi_tuong(Database, dem, 4, i);
+				z = 10;
+			}
+			Outstring(111, 13 + 2 * z + 1, 2, 0, "<<");
+			Outint(113, 13 + 2 * z + 1, 1, 0, j);
+			Outstring(114, 13 + 2 * z + 1, 2, 0, ">>");
+	
+		}
 	}
 }
