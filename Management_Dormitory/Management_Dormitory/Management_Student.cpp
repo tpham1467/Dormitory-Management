@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 int Management_Student::N_S = 0;
 Management_Student::Management_Student()
@@ -87,14 +88,30 @@ vector<Student> Management_Student::Find_Student(string data)
         while (pp!=nullptr&&check==false)
         {
             string name = p->Get_Data().Get_Name();
+            transform(name.begin(), name.end(), name.begin(), toupper);
             string Phone_Number = p->Get_Data().Get_Phone_number();
+            transform(Phone_Number.begin(), Phone_Number.end(), Phone_Number.begin(), toupper);
             string Email = p->Get_Data().Get_Email();
+            transform(Email.begin(), Email.end(), Email.begin(), toupper);
             string Student_code = p->Get_Data().Get_Student_Code();
+            transform(Student_code.begin(), Student_code.end(), Student_code.begin(), toupper);
             token = pp->Get_Data();
+            transform(token.begin(), token.end(), token.begin(), toupper);
+            int index =name.find(token)-1;
+            int size_token = token.size();
             if (name.find(token) >= 0 && name.find(token) <= name.length())
-            {
-                data_Student.push_back(p->Get_Data());
-                check = true;
+            {   
+                if (index==-1||(index + size_token+1)==name.size())
+                {
+     
+                        data_Student.push_back(p->Get_Data());
+                         check = true;
+                }
+                else if (name.at(index) == ' ' && name.at(index + size_token+1) == ' ')
+                {
+                    data_Student.push_back(p->Get_Data());
+                    check = true;
+                }
             }
             if (check == false && Phone_Number.find(token) >= 0 && Phone_Number.find(token) <= Email.length())
             {
@@ -121,4 +138,18 @@ vector<Student> Management_Student::Find_Student(string data)
 Doubly_Linked_List<Student>&  Management_Student::Get_List_Student()
 {
     return this->Database;
+}
+void Management_Student::Delete_Student( Student& _student)
+{
+
+    this->Database.Delete_indexoff(Index_off(_student.Get_Student_Code()));
+}
+Node<Student>* Management_Student::Index_off(string _student_code)
+{
+    Node<Student>* p = this->Database.Get_P_Head();
+    while (p != nullptr)
+    {
+        if (p->Get_Data().Get_Student_Code() == _student_code) return p;
+        p = p->Get_Next();
+    }
 }

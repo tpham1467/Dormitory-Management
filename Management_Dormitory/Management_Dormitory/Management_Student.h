@@ -11,7 +11,7 @@ public:
 	Management_Student();
 	~Management_Student();
 	void Add_Student(const Student&);
-	void Delete_Student(const Student&);
+	void Delete_Student(Student& _student);
 	vector<Student> Find_Student(string);
 	void Update_Info();
 	Doubly_Linked_List<Student>& Get_List_Student();
