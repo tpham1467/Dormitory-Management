@@ -154,6 +154,7 @@
     <ClInclude Include="Giao_dien.h" />
     <ClInclude Include="Khoi_tao.h" />
     <ClInclude Include="Management_Student.h" />
+    <ClInclude Include="Menu_Student.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Student.h" />

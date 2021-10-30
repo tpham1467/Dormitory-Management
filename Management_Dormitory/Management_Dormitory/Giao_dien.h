@@ -47,7 +47,8 @@ void Menu_Student( Management_Student& Database)
 		}
 		case 3:
 		{
-
+			Xoa_o(48, 10, 170, 36, 0);
+			Xoa_o(4, 14, 39, 35, 0);
 			break;
 		}
 		case 4:
@@ -58,7 +59,7 @@ void Menu_Student( Management_Student& Database)
 		default:
 		{
 			Xoa_o(4, 14, 39, 35);
-			Menu_chinh(Database);
+			return;
 			break; }
 
 		}

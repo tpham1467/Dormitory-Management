@@ -13,7 +13,7 @@ public:
 	void Add_Student(const Student&);
 	void Delete_Student(Student& _student);
 	vector<Student> Find_Student(string);
-	void Update_Info();
+	//void Update_Info(Node<Student>* p);
 	Doubly_Linked_List<Student>& Get_List_Student();
 	Node<Student> *Index_off(string);
 

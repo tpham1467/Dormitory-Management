@@ -32,6 +32,9 @@ void Ve_mot_trang(int y, int color, vector<Student> Database, int j);
 void Ve_nhieu_trang(vector<Student> Database);
 int Ve_nhieu_trang_chon(vector<Student> Database);
 void To_mau_mot_doi_tuong(vector<Student> Database, int index, int color,int i);
+void Not_Found();
+//vector<string> update();
+
 void Khoi_tao_cac_danh_sach()
 {
 	arr_1[0].first.first = 15; arr_1[0].first.second = 16; arr_1[0].second = "Quan Li Sinh Vien";
@@ -398,112 +401,6 @@ void Ve_nhieu_trang(vector<Student> Database)
 		}
 	}
 }
-//int Ve_nhieu_trang_chon(vector<Student> Database)
-//{
-//	int lenght = Database.size();
-//	int so_lan = (lenght==10)?0:(int)(lenght / 10);
-//	int i = 1, j = 0; int z = 0;
-//	Xoa_o(48, 10, 170, 35, 0);
-//	int dem = 1;
-//	int check = false;
-//	if (so_lan == 0)
-//	{
-//		Ve_mot_trang(lenght , 6, Database, 0);
-//		To_mau_mot_doi_tuong(Database, 0, 4,1);
-//	}
-//	else
-//	{
-//		Ve_mot_trang(10, 6, Database, i - 1);
-//		To_mau_mot_doi_tuong(Database, 0, 4,1);
-//	}
-//	while (1)
-//	{
-//		char key = _getch();
-//		switch (key)
-//		{
-//		case 77:
-//		{
-//			if (i == so_lan * 10 + 1) {
-//				i = i;
-//				check = true;
-//			}
-//			else {
-//				i += 10;
-//				j++;
-//				dem = i;
-//				To_mau_mot_doi_tuong(Database, dem - 1, 4, i);
-//			}
-//			check = false;
-//			break;
-//		}
-//		case 75:
-//		{
-//			if (i == 1) i = 1;
-//			else
-//			{
-//				i -= 10;
-//				dem = i;
-//				j--;
-//				To_mau_mot_doi_tuong(Database, dem-1, 4, i);
-//			}
-//			check = false;
-//			break;
-//		}
-//		case 72:
-//		{
-//			if (dem == i) dem = i;
-//			else {
-//				To_mau_mot_doi_tuong(Database, dem - 1, (dem - i == 0) ? 4 : 0, i);
-//				dem += -1;
-//				check = true;
-//				To_mau_mot_doi_tuong(Database, dem - 1, 4, i);
-//			}
-//			break;
-//		}
-//		case 80:
-//		{
-//			if (lenght == 10 && dem == lenght-1)
-//			{
-//				To_mau_mot_doi_tuong(Database, dem - 1, (dem == i + 9 || dem == lenght) ? 4 : 0, i);
-//				dem += 1;
-//				To_mau_mot_doi_tuong(Database, dem - 1, 4, i);
-//				check = true;
-//			}
-//			else
-//			{
-//				if (dem == i + 9 || dem == lenght - 1) dem = dem;
-//				else {
-//					To_mau_mot_doi_tuong(Database, dem - 1, (dem == i + 9 || dem == lenght) ? 4 : 0, i);
-//					dem += 1;
-//					To_mau_mot_doi_tuong(Database, dem - 1, 4, i);
-//					check = true;
-//				}
-//			}
-//			break;
-//		}
-//		case 13: {
-//			return  dem;
-//		}
-//		}
-//		if (check == false)
-//		{
-//			Xoa_o(48, 10, 170, 35, 0);
-//			if (i == so_lan * 10 + 1)
-//			{
-//				Ve_mot_trang((so_lan==0)?lenght:(lenght - so_lan * 10 - 1), 6, Database, i - 1);
-//				z = (so_lan == 0) ? lenght : (lenght - so_lan * 10 - 1);
-//			}
-//			else
-//			{
-//				Ve_mot_trang(10, 6, Database, i - 1);
-//				z = 10;
-//			}
-//			Outstring(111, 13 + 2 * z + 1, 2, 0, "<<");
-//			Outint(113, 13 + 2 * z + 1, 1, 0, (j == so_lan) ? (j + 1) : j + 1);
-//			Outstring(114, 13 + 2 * z + 1, 2, 0, ">>");
-//		}
-//	}
-//}
 void To_mau_mot_doi_tuong(vector<Student> Database, int index,int color,int i)
 {
 	
@@ -524,6 +421,7 @@ int Ve_nhieu_trang_chon(vector<Student> Database)
 	if (so_lan == 1)
 	{
 		Ve_mot_trang(lenght, 6, Database, 0);
+		To_mau_mot_doi_tuong(Database, 0, 4, i);
 		Firt = true;
 	}
 	else
@@ -532,8 +430,7 @@ int Ve_nhieu_trang_chon(vector<Student> Database)
 		Outstring(111, 13 + 2 * 10 + 1, 2, 0, "<<");
 		Outint(113, 13 + 2 * 10 + 1, 1, 0, j);
 		Outstring(114, 13 + 2 * 10 + 1, 2, 0, ">>");
-		//gotoXY(114, 13 + 2 * 10 + 2);
-		//cout << lenght << " " << so_lan << " " << lenght - (so_lan - 1) * 10;
+		To_mau_mot_doi_tuong(Database, 0, 4, i);
 		Firt = true;
 	}
 	while (1)
@@ -594,6 +491,11 @@ int Ve_nhieu_trang_chon(vector<Student> Database)
 			return dem;
 			break;
 		}
+		case 27:
+		{
+			return -1;
+			break;
+		}
 		}
 		if (Firt == true && check == true)
 		{
@@ -635,3 +537,15 @@ int Ve_nhieu_trang_chon(vector<Student> Database)
 		}
 	}
 }
+void Not_Found()
+{
+	Xoa_o(48, 10, 170, 35, 0);
+	/*Xoa_o(100, 24, 120, 25, 4);*/
+	Outstring(102,24,0 , 4, "      Khong Tim Thay     ");
+	Outstring(102, 25, 0,4, " Nhan Bat Ki De Tiep Tuc ");
+	_getch();
+}
+//vector<string> update()
+//{
+//		
+//}

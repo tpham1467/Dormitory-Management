@@ -1,23 +1,22 @@
 #pragma once
 #include<iostream>
 using namespace std;
-#include"Date_of_Birth.h"
 class Student
 {
 private:
-	string name;
-	string Phone_number;
+	string name; //
+	string Phone_number; //
 	string Profile_Code;
 	string Room_Code;
-	int Gender;
-	string Email;
+	int Gender; //
+	string Email;//
 	string Student_Code;
-	Date_of_Birth d_of_b;
-	string Address;
+	string Date_of_Birth;//
+	string Address;//
 
 public:
 	Student();
-	Student(const string&,const string&, const string&,const string&,const int&,const string&,const string&,const Date_of_Birth&,const string&);
+	Student(const string&,const string&, const string&,const string&,const int&,const string&,const string&,const string&,const string&);
 	//Student(const Student&);
 	~Student();
 	//name
@@ -42,8 +41,8 @@ public:
 	void Set_Student_Code(const string&);
 	const string& Get_Student_Code();
 	//Date_of_Birth
-	void Set_Date_of_Birth(const Date_of_Birth&);
-	const Date_of_Birth& Get_Date_of_Birth();
+	void Set_Date_of_Birth(const string&);
+	const string& Get_Date_of_Birth();
 	//address
 	void Set_Address(const string&);
 	const string& Get_Address();
