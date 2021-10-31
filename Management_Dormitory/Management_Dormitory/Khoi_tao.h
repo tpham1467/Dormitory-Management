@@ -330,9 +330,9 @@ void Ve_nhieu_trang(vector<Student> Database)
 	else
 	{
 		Ve_mot_trang(10, 6, Database, 0);
-		Outstring(111, 13 + 2 * 10 + 1, 2, 0, "<<");
-		Outint(113, 13 + 2 * 10 + 1, 1, 0, j);
-		Outstring(114, 13 + 2 * 10 + 1, 2, 0, ">>");
+		Outstring(101, 13 + 2 * 10 + 1, 2, 0, "<<");
+		Outint(103, 13 + 2 * 10 + 1, 1, 0, j);
+		Outstring(104, 13 + 2 * 10 + 1, 2, 0, ">>");
 		//gotoXY(114, 13 + 2 * 10 + 2);
 		//cout << lenght << " " << so_lan << " " << lenght - (so_lan - 1) * 10;
 		Firt = true;
@@ -395,9 +395,9 @@ void Ve_nhieu_trang(vector<Student> Database)
 				Ve_mot_trang(10, 6, Database, i );
 				z = 10;
 			}
-			Outstring(111, 13 + 2 * z + 1, 2, 0, "<<");
-			Outint(113, 13 + 2 * z + 1, 1, 0, j);
-			Outstring(114, 13 + 2 * z + 1, 2, 0, ">>");
+			Outstring(101, 13 + 2 * z + 1, 2, 0, "<<");
+			Outint(103, 13 + 2 * z + 1, 1, 0, j);
+			Outstring((j > 9) ? 105 : 104, 13 + 2 * z + 1, 2, 0, ">>");
 		}
 	}
 }
@@ -427,9 +427,9 @@ int Ve_nhieu_trang_chon(vector<Student> Database)
 	else
 	{
 		Ve_mot_trang(10, 6, Database, 0);
-		Outstring(111, 13 + 2 * 10 + 1, 2, 0, "<<");
-		Outint(113, 13 + 2 * 10 + 1, 1, 0, j);
-		Outstring(114, 13 + 2 * 10 + 1, 2, 0, ">>");
+		Outstring(101, 13 + 2 * 10 + 1, 2, 0, "<<");
+		Outint(103, 13 + 2 * 10 + 1, 1, 0, j);
+		Outstring(104, 13 + 2 * 10 + 1, 2, 0, ">>");
 		To_mau_mot_doi_tuong(Database, 0, 4, i);
 		Firt = true;
 	}
@@ -530,9 +530,9 @@ int Ve_nhieu_trang_chon(vector<Student> Database)
 				To_mau_mot_doi_tuong(Database, dem, 4, i);
 				z = 10;
 			}
-			Outstring(111, 13 + 2 * z + 1, 2, 0, "<<");
-			Outint(113, 13 + 2 * z + 1, 1, 0, j);
-			Outstring(114, 13 + 2 * z + 1, 2, 0, ">>");
+			Outstring(101, 13 + 2 * z + 1, 2, 0, "<<");
+			Outint(103, 13 + 2 * z + 1, 1, 0, j);
+			Outstring((j > 9) ? 105 : 104, 13 + 2 * z + 1, 2, 0, ">>");
 	
 		}
 	}

@@ -16,7 +16,7 @@ public:
 	//void Update_Info(Node<Student>* p);
 	Doubly_Linked_List<Student>& Get_List_Student();
 	Node<Student> *Index_off(string);
-
+	void file_1();
 };
 
 

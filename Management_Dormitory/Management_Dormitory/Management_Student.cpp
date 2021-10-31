@@ -1,5 +1,4 @@
-#include "Management_Student.h"
-#include "Date_of_Birth.h"
+﻿#include "Management_Student.h"
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -18,7 +17,6 @@ Management_Student::Management_Student()
     }
     else
     {
-        int n;
         input >> this->N_S;
         while (!input.eof())
         {
@@ -29,7 +27,6 @@ Management_Student::Management_Student()
             int Gender;
             string Email;
             string Student_Code;
-            Date_of_Birth d_of_b;
             string _d_of_b;
             string Address;
             int _day, _month, _year;
@@ -48,13 +45,10 @@ Management_Student::Management_Student()
             this->Database.InsertAtTail(_Student);
             //cout << this->Database.Get_P_Head()->Get_Data().Get_Name() << " " << this->Database.Get_P_Head()->Get_Data().Get_Address();
         }
+        input.close();
     }
 }
 
-Management_Student::~Management_Student()
-{
-    this->Database.~Doubly_Linked_List();
-}
 void Management_Student::Add_Student(const Student &_Student)
 {
     this->Database.InsertAtTail(_Student);
@@ -149,3 +143,26 @@ Node<Student>* Management_Student::Index_off(string _student_code)
 //{
 //    
 //}
+Management_Student::~Management_Student()
+{
+    this->Database.~Doubly_Linked_List();
+}
+void Management_Student::file_1()
+{
+    ofstream output;
+    output.open("Student.csv", ios::out);
+    if (output.is_open()) cout << " mo";
+    else cout << "fall";
+    Node<Student>* p = this->Database.Get_P_Head();
+    this->Database.DeleteAtTail();
+    output << "Ho Va Ten," << "So Dien Thoai," << "Ma Ho So," << "Ma Phong," << "Gioi Tinh," << "Email," << "Ma Sinh Vien," << "Ngay Sinh," << "Dia Chi" << endl;
+    while (p != nullptr)
+    {
+        output << p->Get_Data().Get_Name() << ',' << p->Get_Data().Get_Phone_number() << ',' 
+       << p->Get_Data().Get_Profile_Code() << ',' << p->Get_Data().Get_Room_Code() << ',' 
+       << ((p->Get_Data().Get_Gender() == 1) ? "Nam" : "Nu") << ',' <<p->Get_Data().Get_Email()<<','<< p->Get_Data().Get_Student_Code() << ','
+      << p->Get_Data().Get_Date_of_Birth() << ',' << p->Get_Data().Get_Address() << endl;
+        p = p->Get_Next();
+    }
+    output.close();
+}
