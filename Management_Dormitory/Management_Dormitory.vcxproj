@@ -142,6 +142,7 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Entrance_Card.cpp" />
     <ClCompile Include="Management_Dormitory.cpp" />
+    <ClCompile Include="Management_Room.cpp" />
     <ClCompile Include="Management_Student.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Student.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Entrance_Card.h" />
     <ClInclude Include="Giao_dien.h" />
     <ClInclude Include="Khoi_tao.h" />
+    <ClInclude Include="Management_Room.h" />
     <ClInclude Include="Management_Student.h" />
     <ClInclude Include="Menu_Student.h" />
     <ClInclude Include="Node.h" />
@@ -162,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="introduction.txt" />
+    <Text Include="Room.txt" />
     <Text Include="Student.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

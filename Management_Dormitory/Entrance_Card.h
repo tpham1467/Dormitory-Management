@@ -1,6 +1,6 @@
+#pragma once
 #include <string>
 using namespace std;
-#pragma once
 class Entrance_Card
 {
     private:

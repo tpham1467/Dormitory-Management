@@ -14,6 +14,7 @@ private:
     string Han_Dong_Tien_Phi_Sinh_Hoat;
 public:
     Room(const string&,const int&,const bool&,const string&);
+    Room();
    // Room(const Room&);
     ~Room();
     const vector<Student>& Get_List_Student(Management_Student&);
@@ -28,8 +29,8 @@ public:
     void Set_NS(const int&);
     // Room_code;
     const string& Get_Room_code();
-    void Add_Student(Management_Student&,const string&);
-    void Delete_Student(Management_Student&,const string&);
+   /* void Add_Student(Management_Student&,const string&);
+    void Delete_Student(Management_Student&,const string&);*/
 };
 
 

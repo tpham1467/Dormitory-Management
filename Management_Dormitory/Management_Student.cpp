@@ -29,7 +29,6 @@ Management_Student::Management_Student()
             string Student_Code;
             string _d_of_b;
             string Address;
-            int _day, _month, _year;
             input.ignore();
             getline(input, name, '-');
             getline(input, Phone_number, '-');
@@ -41,9 +40,10 @@ Management_Student::Management_Student()
             getline(input, Student_Code, '-');
             getline(input, _d_of_b, '-');
             getline(input, Address, '.');
+
             Student _Student(name, Phone_number, Room_Code, Profile_Code, Gender, Student_Code, Email, _d_of_b, Address);
             this->Database.InsertAtTail(_Student);
-            //cout << this->Database.Get_P_Head()->Get_Data().Get_Name() << " " << this->Database.Get_P_Head()->Get_Data().Get_Address();
+        
         }
         input.close();
     }
@@ -87,24 +87,42 @@ vector<Student> Management_Student::Find_Student(string data)
             int size_token = token.size();
             if (name.find(token) >= 0 && name.find(token) <= name.length())
             {   
-                if (index==-1||(index + size_token+1)==name.size())
+                if (index==-1 || (index + size_token + 1) == name.size())
                 {
-     
-                        data_Student.push_back(p->Get_Data());
-                         check = true;
+
+                         if(index==-1)
+                         {
+                             if (name.at(index + size_token + 1) == ' ')
+                             {
+
+                                 data_Student.push_back(p->Get_Data());
+                                 check = true;
+                             }
+                         }
+                         else
+                         {
+                             if (name.at(index) == ' ')
+                             {
+
+                                 data_Student.push_back(p->Get_Data());
+                                 check = true;
+                             }
+                         }
+                        
                 }
                 else if (name.at(index) == ' ' && name.at(index + size_token+1) == ' ')
                 {
+                   
                     data_Student.push_back(p->Get_Data());
                     check = true;
                 }
             }
-            if (check == false && Phone_Number.find(token) >= 0 && Phone_Number.find(token) <= Email.length())
+            if (check == false && Phone_Number.find(token) >= 0 && Phone_Number.find(token) <= Phone_Number.length()&& Phone_Number.length()==token.size())
             {
                 data_Student.push_back(p->Get_Data());
                 check = true;
             }
-            if (check == false && Email.find(token) >= 0 && Email.find(token) <= Email.length())
+           if (check == false && Email.find(token) >= 0 && Email.find(token) <= Email.length()&&token.size()== Email.length())
             {
                 data_Student.push_back(p->Get_Data());
                 check = true;

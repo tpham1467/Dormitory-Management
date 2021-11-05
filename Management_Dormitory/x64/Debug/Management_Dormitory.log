@@ -1,2 +1,5 @@
 ﻿  Management_Dormitory.cpp
+D:\PBL2\Management_Dormitory\Khoi_tao.h(320,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\PBL2\Management_Dormitory\Khoi_tao.h(416,30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\PBL2\Management_Dormitory\Menu_Student.h(76,51): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Management_Dormitory.vcxproj -> D:\PBL2\x64\Debug\Management_Dormitory.exe

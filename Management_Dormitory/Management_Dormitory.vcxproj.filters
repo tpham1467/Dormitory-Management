@@ -36,6 +36,9 @@
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Management_Room.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Doubly_Linked_List.h">
@@ -71,12 +74,18 @@
     <ClInclude Include="Menu_Student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Management_Room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="introduction.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="Student.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Room.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

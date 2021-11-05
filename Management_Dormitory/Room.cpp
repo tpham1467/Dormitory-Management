@@ -3,7 +3,10 @@ Room::Room(const string &_Room_code, const int &_Number_Student, const bool &COF
     : Room_Code(_Room_code), Number_Students(_Number_Student), condition_of_facilities(COF), Han_Dong_Tien_Phi_Sinh_Hoat(HDTPNSH)
 {
 }
+Room::Room()
+{
 
+}
 Room::~Room()
 {
 }

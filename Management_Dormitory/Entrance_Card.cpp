@@ -25,14 +25,15 @@ void Entrance_Card::Set_Registration_Date(const string &_Registration_Date)
 }
 const string &Entrance_Card::Get_Registration_Date()
 {
-    return this->Expiration_Date;
+    return this->Registration_Date;
 }
 //Expiration_Date
-void Entrance_Card::Set_Registration_Date(const string &_Expiration_Date)
-{
-    this->Expiration_Date = _Expiration_Date;
-}
 const string &Entrance_Card::Get_Expiration_Date()
 {
     return this->Expiration_Date;
+    this->Set_Expiration_Date("hjhjk");
+}
+void Entrance_Card::Set_Expiration_Date(const string& _Expiration_Date)
+{
+    this->Expiration_Date = _Expiration_Date;
 }
