@@ -13,7 +13,7 @@ public:
     Node<T>* Get_Prev();
     void    Set_Next(Node<T>*);
     void    Set_Prev(Node<T>*);
-    T       Get_Data();
+    T&       Get_Data();
     void    Set_Data(T);
 };
 template<class T>
@@ -33,7 +33,7 @@ void Node<T>::Set_Data(T Val)
     this->data = Val;
 }
 template<class T>
-T Node<T>::Get_Data()
+T& Node<T>::Get_Data()
 {
     return this->data;
 }

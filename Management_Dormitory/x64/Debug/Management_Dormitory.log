@@ -1,5 +1,10 @@
 ﻿  Management_Dormitory.cpp
-D:\PBL2\Management_Dormitory\Khoi_tao.h(320,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\PBL2\Management_Dormitory\Khoi_tao.h(416,30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\PBL2\Management_Dormitory\Menu_Student.h(76,51): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Management_Room.cpp
+  Management_Student.cpp
+D:\PBL2\Management_Dormitory\Management_Student.cpp(86,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\PBL2\Management_Dormitory\Management_Student.cpp(87,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Room.cpp
+  Generating Code...
+D:\PBL2\Management_Dormitory\Room.cpp(55): warning C4172: returning address of local variable or temporary: List
+D:\PBL2\Management_Dormitory\Management_Student.cpp(159): warning C4715: 'Management_Student::Index_off': not all control paths return a value
   Management_Dormitory.vcxproj -> D:\PBL2\x64\Debug\Management_Dormitory.exe

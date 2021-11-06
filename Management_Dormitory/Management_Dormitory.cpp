@@ -1,26 +1,38 @@
 #include <iostream>
-#include"Management_Student.h"
-#include"Management_Room.h"
-#include"Giao_dien.h"
+// #include"Management_Student.h"
+// #include"Management_Room.h"
+// #include"Giao_dien.h"
+#include"Doubly_Linked_List.h"
 #include <algorithm>
 using namespace std;
 int main()
 { 
-	//Menu_chinh();
-	Management_Student Data_Student;
-	Mamagement_Room data_room;
-	data_room.Read_File();
- vector<Room> data=	data_room.Find_Room("huy truong",Data_Student);
+	Doubly_Linked_List<int> data;
+	for (int i = 0; i <= 5; i++)
+		data.InsertAtTail(i);
+	cout << endl;
+	data.replace(data.Get_P_Head()->Get_Next(), -1);
+	for (int i = 0; i < data.Get_Lenght(); i++)
+		cout << data[i];
 
- while (data.size() != 0)
- {
-	Room _r = data.back();
-	 cout << _r.Get_Room_code() <<"  " << _r.Get_NS() <<"   " << _r.Get_COF() <<"  " << _r.Get_HDTPSH() << endl;
-	 data.pop_back();
- }
+
+
+
+	//Menu_chinh();
+	/*Management_Student Data_Student;*/
+	//Mamagement_Room data_room;
+	//data_room.Read_File();
+ //vector<Room> data=	data_room.Find_Room("huy truong",Data_Student);
+
+ //while (data.size() != 0)
+ //{
+	//Room _r = data.back();
+	// cout << _r.Get_Room_code() <<"  " << _r.Get_NS() <<"   " << _r.Get_COF() <<"  " << _r.Get_HDTPSH() << endl;
+	// data.pop_back();
+ //}
 //	Data_Room.Find_Room();
 	//Database.Find_Student("Pham Van Tien Truong");
-	//Menu_chinh(Data_Student);
+	/*Menu_chinh(Data_Student);*/
 	//Database.Find_Student("pham");
 	//Node<Student>* p = Database.Get_List_Student().Get_P_Head();
 	//vector<string> list;
@@ -81,7 +93,7 @@ int main()
 // 	//	}
 	/* cout << s;*/
 // 	//Database.file_1();
- _getch();
+
     return 0;
 }
 
