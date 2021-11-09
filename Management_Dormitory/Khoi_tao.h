@@ -28,10 +28,10 @@ void khung();
 void Hcn(int x, int y, int x1, int y1, int color = 0);
 void Line(int x, int y, int x1, int y1, int color = 15, bool thang = true);
 void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1, int color);
-void Ve_mot_trang(int y, int color, vector<Student> Database, int j);
-void Ve_nhieu_trang(vector<Student> Database);
-int Ve_nhieu_trang_chon(vector<Student> Database);
-void To_mau_mot_doi_tuong(vector<Student> Database, int index, int color, int i);
+void Ve_mot_trang(int y, int color, Doubly_Linked_List<Student>& Database, int j);
+void Ve_nhieu_trang(Doubly_Linked_List<Student>& Database);
+int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database);
+void To_mau_mot_doi_tuong(Doubly_Linked_List<Student>& Database, int index, int color, int i);
 void Not_Found();
 //vector<string> update();
 
@@ -254,7 +254,7 @@ void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1
 	}
 }
 // ve danh 1 trang
-void Ve_mot_trang(int y, int color, vector<Student> Database, int j)
+void Ve_mot_trang(int y, int color, Doubly_Linked_List<Student>& Database, int j)
 {
 	if (j == -1) {
 
@@ -286,10 +286,12 @@ void Ve_mot_trang(int y, int color, vector<Student> Database, int j)
 
 	for (i = 15; i < 13 + 2 * y; i += 2)
 	{
-		Outstring(51, i - 1, 0, 6, Database[j].Get_Student_Code());
+
+		Outstring(51, i - 1, 0, 6, Database[j].Get_Room_Code());
 		Outstring(72, i - 1, 0, 6, Database[j].Get_Name());
 		Outstring(111, i - 1, 0, 6, (Database[j].Get_Gender() == 1) ? "Nam" : "Nu");
 		Outstring(128, i - 1, 0, 6, Database[j].Get_Address());
+
 		Line(48, i, 170, i, 6, false);
 		j++;
 	}
@@ -315,9 +317,9 @@ void Ve_mot_trang(int y, int color, vector<Student> Database, int j)
 
 }
 // ve danh nhieu trang
-void Ve_nhieu_trang(vector<Student> Database)
+void Ve_nhieu_trang(Doubly_Linked_List<Student>& Database)
 {
-	int lenght = Database.size();
+	int lenght = Database.Get_Lenght();
 	int so_lan = (int)(lenght / 10) + 1;
 	int i = 0, j = 1; int z = 0;
 	Xoa_o(48, 10, 170, 35, 0);
@@ -401,7 +403,7 @@ void Ve_nhieu_trang(vector<Student> Database)
 		}
 	}
 }
-void To_mau_mot_doi_tuong(vector<Student> Database, int index, int color, int i)
+void To_mau_mot_doi_tuong(Doubly_Linked_List<Student>& Database, int index, int color, int i)
 {
 
 
@@ -411,9 +413,9 @@ void To_mau_mot_doi_tuong(vector<Student> Database, int index, int color, int i)
 	Outstring(128, (index - i) * 2 + 14, color, 6, Database[index].Get_Address());
 
 }
-int Ve_nhieu_trang_chon(vector<Student> Database)
+int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database)
 {
-	int lenght = Database.size();
+	int lenght = Database.Get_Lenght();
 	int so_lan = (int)(lenght / 10) + 1;
 	int i = 0, j = 1; int z = 0; ; int dem = 0; bool check = false;
 	Xoa_o(48, 10, 170, 35, 0);

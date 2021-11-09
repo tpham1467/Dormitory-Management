@@ -24,10 +24,10 @@ public:
     void Delete_indexoff(Node<T>*);
     void Delete_indexoff(int);
     int Get_Lenght();
-    T Font();
-    T Back();
-    T at(int);
-    T operator[](int);
+    T& Font();
+    T& Back();
+    T& at(int);
+    T& operator[](int);
  /*   Doubly_Linked_List<T>& operator=(const Doubly_Linked_List<T>&);*/
     void replace(int,T);
     void replace(Node<T>*,T);
@@ -36,7 +36,6 @@ template<class T>
 Doubly_Linked_List<T>::Doubly_Linked_List(const Doubly_Linked_List<T>& db)
 {
     Node<T>* p1 = db.P_Head;
-    this->lenght = db.lenght;
     while (p1 != nullptr)
     {
         this->InsertAtTail(p1->Get_Data());
@@ -133,19 +132,38 @@ template<class T>
 void Doubly_Linked_List<T>::DeleteAtHead()
 {
     Node<T>* p = this->P_Head->Get_Next();
-    delete this->P_Head;
-    this->Set_P_Head(p);
-    this->P_Head->Set_Prev(nullptr);
+    Node<T>* p1 = this->P_Head;
+    if (p != nullptr)
+    {   
+        this->Set_P_Head(p);
+        this->P_Head->Set_Prev(nullptr);
+    }
+    else
+    {
+        this->P_Head = nullptr;
+        this->P_Tail = nullptr;
+    }
     this->lenght--;
+    delete p1;
 }
 template<class T>
 void Doubly_Linked_List<T>::DeleteAtTail()
 {
-    Node<T>* p = this->P_Tail->Get_Prev();
-    delete this->P_Tail;
-    this->Set_P_Tail(p);
-    this->P_Tail->Set_Next(nullptr);
+    Node<T>* p = this->P_Tail->Get_Prev();  
+    Node<T>* p1 = this->P_Tail;
+    //delete this->P_Tail;
+    if (p != nullptr)
+    {
+        this->Set_P_Tail(p);
+        this->P_Tail->Set_Next(nullptr);
+    }
+    else
+    {
+        this->P_Head = nullptr;
+        this->P_Tail = nullptr;
+    }
     this->lenght--;
+    delete p1;
 }
 template<class T>
 void Doubly_Linked_List<T>::Delete_indexoff(Node<T>* p)
@@ -173,17 +191,17 @@ int Doubly_Linked_List<T>::Get_Lenght()
     return this->lenght;
 }
 template<class T>
-T Doubly_Linked_List<T>::Font()
+T& Doubly_Linked_List<T>::Font()
 {
     return this->Get_P_Head()->Get_Data();
 }
 template<class T>
-T  Doubly_Linked_List<T>::Back()
-{
+T& Doubly_Linked_List<T>::Back()
+{   
     return this->Get_P_Tail()->Get_Data();
 }
 template<class T>
-T Doubly_Linked_List<T>::at(int i)
+T& Doubly_Linked_List<T>::at(int i)
 {
     Node<T>* p = this->Get_P_Head();
     for (int j = 0; j < i; j++)
@@ -205,7 +223,7 @@ void Doubly_Linked_List<T>::Delete_indexoff(int i)
 
 }
 template<class T>
-T Doubly_Linked_List<T>::operator[](int i)
+T& Doubly_Linked_List<T>::operator[](int i)
 {
     return at(i);
 }

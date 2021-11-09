@@ -99,7 +99,6 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
         }
         p = p->Get_Next(); 
     }
-
     return data_Student;
 }
 Doubly_Linked_List<Student>&  Management_Student::Get_List_Student()

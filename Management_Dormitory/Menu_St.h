@@ -35,16 +35,16 @@ void Menu_find_Studen_silde(Management_Student& Database, int n, bool flag, bool
 			getline(cin, data);
 			Cursor(false);
 			Doubly_Linked_List<Student> _data_find = Database.Find_Student(data);
-			vector<Student> list_kt;
+			/*vector<Student> list_kt;
 			Node<Student>* p = _data_find.Get_P_Head();
 			while (p != nullptr)
 			{
 				list_kt.push_back(p->Get_Data());
 				p = p->Get_Next();
-			}
+			}*/
 			
 			
-			if (list_kt.size() == 0)
+			if (_data_find.Get_Lenght() == 0)
 			{
 				Not_Found();
 			}
@@ -52,18 +52,18 @@ void Menu_find_Studen_silde(Management_Student& Database, int n, bool flag, bool
 			{
 				if (flag_delete == true)
 				{
-					index = Ve_nhieu_trang_chon(list_kt);
+					index = Ve_nhieu_trang_chon(_data_find);
 					if (index == -1)
 					{
 						return;
 					}
 
 					else
-						_student_del = list_kt.at(index);
+						_student_del = _data_find.at(index);
 
 				}
 				else
-					Ve_nhieu_trang(list_kt);
+					Ve_nhieu_trang(_data_find);
 			}
 		}
 	}
@@ -72,42 +72,43 @@ void Menu_find_Studen_silde(Management_Student& Database, int n, bool flag, bool
 		if (flag == false)
 		{
 
-			vector<Student> list_kt;
+			/*vector<Student> list_kt;
 			Node<Student>* p = Database.Get_List_Student().Get_P_Head();
 			for (; p != nullptr;)
 			{
 				list_kt.push_back(p->Get_Data());
 				p = p->Get_Next();
-			}
+			}*/
 				
-			if (list_kt.size() < 10)
-				Ve_mot_trang(list_kt.size() - 1, 6, list_kt, 0);
+			if (Database.Get_List_Student().Get_Lenght() < 10)
+				Ve_mot_trang(Database.Get_List_Student().Get_Lenght() - 1, 6, Database.Get_List_Student(), 0);
+				
 			else
-				Ve_mot_trang(10, 6, list_kt, 0);
+				Ve_mot_trang(10, 6, Database.Get_List_Student(), 0);
 		}
 		else
 		{
-			vector<Student> list_kt;
+			/*vector<Student> list_kt;
 			Node<Student>* p = Database.Get_List_Student().Get_P_Head();
 			for (; p != nullptr;)
 			{
 				list_kt.push_back(p->Get_Data());
 				p = p->Get_Next();
-			}
-			list_kt.pop_back();
+			}*/
+			/*list_kt.pop_back();*/
 			if (flag_delete == true)
 			{
-				index = Ve_nhieu_trang_chon(list_kt);
+				index = Ve_nhieu_trang_chon(Database.Get_List_Student());
 				if (index == -1)
 					return;
 
 				else
-					_student_del = list_kt.at(index);
+					_student_del = Database.Get_List_Student().at(index);
 
 
 			}
 			else
-				Ve_nhieu_trang(list_kt);
+				Ve_nhieu_trang(Database.Get_List_Student());
 		}
 	}
 
