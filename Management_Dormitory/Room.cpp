@@ -42,14 +42,14 @@ const string &Room::Get_Room_code()
 {
     return this->Room_Code;
 }
-const vector<Student> &Room::Get_List_Student(Management_Student &Data)
+const Doubly_Linked_List<Student> Room::Get_List_Student(Management_Student &Data)
 {
     Node<Student> *p = Data.Get_List_Student().Get_P_Head();
-    vector<Student> List;
+    Doubly_Linked_List<Student> List;
     while (p != nullptr)
     {
         if (p->Get_Data().Get_Room_Code() == this->Room_Code)
-            List.push_back(p->Get_Data());
+            List.InsertAtTail(p->Get_Data());
         p = p->Get_Next();
     }
     return List;

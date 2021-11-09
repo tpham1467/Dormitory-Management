@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Entrance_Card.cpp" />
+    <ClCompile Include="Management.cpp" />
     <ClCompile Include="Management_Dormitory.cpp" />
     <ClCompile Include="Management_Room.cpp" />
     <ClCompile Include="Management_Student.cpp" />
@@ -152,11 +153,12 @@
     <ClInclude Include="console.h" />
     <ClInclude Include="Doubly_Linked_List.h" />
     <ClInclude Include="Entrance_Card.h" />
-    <ClInclude Include="Giao_dien.h" />
     <ClInclude Include="Khoi_tao.h" />
+    <ClInclude Include="Management.h" />
     <ClInclude Include="Management_Room.h" />
     <ClInclude Include="Management_Student.h" />
-    <ClInclude Include="Menu_Student.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Menu_St.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Student.h" />

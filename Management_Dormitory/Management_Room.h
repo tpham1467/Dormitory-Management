@@ -11,10 +11,11 @@ public:
     ~Mamagement_Room();
     void Read_File();
     const Doubly_Linked_List<Room> Get_List_Room();
-    vector<Room> Find_Room(const string&,Management_Student&);
-    const Room Get_Room(string&); 
-    /*oid Confirm_Repair();
+    Doubly_Linked_List<Room> Find_Room(const string&,Management_Student&);
+    const Room Get_Room(string&);
+    /*void Confirm_Repair();
     void Payment();*/
+   /* void Write_File();  */
 
 };
 

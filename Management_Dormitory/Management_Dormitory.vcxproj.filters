@@ -39,6 +39,9 @@
     <ClCompile Include="Management_Room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Management.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Doubly_Linked_List.h">
@@ -65,16 +68,19 @@
     <ClInclude Include="console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Giao_dien.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Khoi_tao.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu_Student.h">
+    <ClInclude Include="Management_Room.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Management_Room.h">
+    <ClInclude Include="Management.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_St.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,45 +8,7 @@ using namespace std;
 int Management_Student::N_S = 0;
 Management_Student::Management_Student()
 {
-    ifstream input;
-    input.open("Student.txt", ios::in);
-    if (!input.is_open())
-    {
-        //throw "Unable to open file Student";
-        cout << 1;
-    }
-    else
-    {
-        input >> this->N_S;
-        while (!input.eof())
-        {
-            string name;
-            string Phone_number;
-            string Profile_Code;
-            string Room_Code;
-            int Gender;
-            string Email;
-            string Student_Code;
-            string _d_of_b;
-            string Address;
-            input.ignore();
-            getline(input, name, '-');
-            getline(input, Phone_number, '-');
-            getline(input, Profile_Code, '-');
-            getline(input, Room_Code, '-');
-            input >> Gender;
-            input.ignore();
-            getline(input, Email, '-');
-            getline(input, Student_Code, '-');
-            getline(input, _d_of_b, '-');
-            getline(input, Address, '.');
-
-            Student _Student(name, Phone_number, Room_Code, Profile_Code, Gender, Student_Code, Email, _d_of_b, Address);
-            this->Database.InsertAtTail(_Student);
-        
-        }
-        input.close();
-    }
+ 
 }
 
 void Management_Student::Add_Student(const Student &_Student)
@@ -54,11 +16,11 @@ void Management_Student::Add_Student(const Student &_Student)
     this->Database.InsertAtTail(_Student);
     Management_Student::N_S++;
 }
-vector<Student> Management_Student::Find_Student(string data)
+Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
 {
     stringstream _data(data);
     Doubly_Linked_List<string> _data_Token;
-    vector<Student> data_Student;
+    Doubly_Linked_List<Student> data_Student;
     string token;
     while (_data >> token){
 
@@ -95,7 +57,7 @@ vector<Student> Management_Student::Find_Student(string data)
                              if (name.at(index + size_token + 1) == ' ')
                              {
 
-                                 data_Student.push_back(p->Get_Data());
+                                 data_Student.InsertAtTail(p->Get_Data());
                                  check = true;
                              }
                          }
@@ -104,7 +66,7 @@ vector<Student> Management_Student::Find_Student(string data)
                              if (name.at(index) == ' ')
                              {
 
-                                 data_Student.push_back(p->Get_Data());
+                                 data_Student.InsertAtTail(p->Get_Data());
                                  check = true;
                              }
                          }
@@ -113,23 +75,23 @@ vector<Student> Management_Student::Find_Student(string data)
                 else if (name.at(index) == ' ' && name.at(index + size_token+1) == ' ')
                 {
                    
-                    data_Student.push_back(p->Get_Data());
+                    data_Student.InsertAtTail(p->Get_Data());
                     check = true;
                 }
             }
             if (check == false && Phone_Number.find(token) >= 0 && Phone_Number.find(token) <= Phone_Number.length()&& Phone_Number.length()==token.size())
             {
-                data_Student.push_back(p->Get_Data());
+                data_Student.InsertAtTail(p->Get_Data());
                 check = true;
             }
            if (check == false && Email.find(token) >= 0 && Email.find(token) <= Email.length()&&token.size()== Email.length())
             {
-                data_Student.push_back(p->Get_Data());
+                data_Student.InsertAtTail(p->Get_Data());
                 check = true;
             }
             if (check == false && Student_code.find(token) >= 0 && Student_code.find(token) <= Student_code.length())
             {
-                data_Student.push_back(p->Get_Data());
+                data_Student.InsertAtTail(p->Get_Data());
                 check = true;
             }
             pp=pp->Get_Next();
@@ -137,6 +99,7 @@ vector<Student> Management_Student::Find_Student(string data)
         }
         p = p->Get_Next(); 
     }
+
     return data_Student;
 }
 Doubly_Linked_List<Student>&  Management_Student::Get_List_Student()
@@ -165,7 +128,7 @@ Management_Student::~Management_Student()
 {
     this->Database.~Doubly_Linked_List();
 }
-void Management_Student::file_1()
+void Management_Student::Write_File()
 {
     ofstream output;
     output.open("Student.csv", ios::out);
@@ -183,4 +146,47 @@ void Management_Student::file_1()
         p = p->Get_Next();
     }
     output.close();
+}
+void Management_Student::Read_File()
+{
+    ifstream input;
+    input.open("Student.txt", ios::in);
+    if (!input.is_open())
+    {
+        //throw "Unable to open file Student";
+        cout << 1;
+    }
+    else
+    {
+        input >> this->N_S;
+        while (!input.eof())
+        {
+            string name;
+            string Phone_number;
+            string Profile_Code;
+            string Room_Code;
+            int Gender;
+            string Email;
+            string Student_Code;
+            string _d_of_b;
+            string Address;
+            input.ignore();
+            getline(input, name, '-');
+            getline(input, Phone_number, '-');
+            getline(input, Profile_Code, '-');
+            getline(input, Room_Code, '-');
+            input >> Gender;
+            input.ignore();
+            getline(input, Email, '-');
+            getline(input, Student_Code, '-');
+            getline(input, _d_of_b, '-');
+            getline(input, Address, '.');
+
+            Student _Student(name, Phone_number, Room_Code, Profile_Code, Gender, Student_Code, Email, _d_of_b, Address);
+            this->Database.InsertAtTail(_Student);
+
+        }
+        this->Database.DeleteAtTail();
+        input.close();
+    }
 }

@@ -32,8 +32,9 @@ void Mamagement_Room::Read_File()
             getline(input, Han_Dong_Tien_Phi_Sinh_Hoat, ',');
             Room _Room(Room_Code, Number_Student, (COF == 1) ? true : false, Han_Dong_Tien_Phi_Sinh_Hoat);
             this->DataBase.InsertAtHead(_Room);
-            cout << _Room.Get_Room_code() << " " << _Room.Get_NS() << " " << _Room.Get_COF() << " " << _Room.Get_HDTPSH() << endl;
+          /*  cout << _Room.Get_Room_code() << " " << _Room.Get_NS() << " " << _Room.Get_COF() << " " << _Room.Get_HDTPSH() << endl;*/
         }
+        this->DataBase.DeleteAtTail();
         input.close();
     }
  
@@ -51,11 +52,11 @@ const Doubly_Linked_List<Room> Mamagement_Room::Get_List_Room()
 {
 	return this->DataBase;
 }
-vector<Room> Mamagement_Room::Find_Room(const string& data,Management_Student& DataBase_Student)
+Doubly_Linked_List<Room> Mamagement_Room::Find_Room(const string& data,Management_Student& DataBase_Student)
 {
     stringstream _data(data);
     Doubly_Linked_List<string> _data_Token;
-    vector<Room> data_Room;
+    Doubly_Linked_List<Room> data_Room;
     string token;
     while (_data >> token) {
 
@@ -69,7 +70,7 @@ vector<Room> Mamagement_Room::Find_Room(const string& data,Management_Student& D
             Room _room = this->Get_Room(token);
             if (flag == false)
             {
-                data_Room.push_back(_room);
+                data_Room.InsertAtTail(_room);
             }
             else
             {
@@ -80,32 +81,36 @@ vector<Room> Mamagement_Room::Find_Room(const string& data,Management_Student& D
      
    
 
-    if (data_Room.size() == 0)
+    if (data_Room.Get_Lenght() == 0)
     {
         Node<string>* pp = _data_Token.Get_P_Head();
         vector<string> List_rCode;
         while (pp != nullptr)
         {
              token = pp->Get_Data();
-            vector<Student> _Data_Student = DataBase_Student.Find_Student(token);
-            if (_Data_Student.size() != 0)
-            {
-                while (_Data_Student.size() != 0)
-                {
-                    Student _s = _Data_Student.back();
-                    string rCode = _s.Get_Room_Code();
-                    cout << _s.Get_Name() << _s.Get_Room_Code() << endl;
-                    List_rCode.push_back(rCode);
-                    _Data_Student.pop_back();
+             Doubly_Linked_List<Student> _Data_Student= DataBase_Student.Find_Student(token);
+
+            
+         
+                Node<Student>* p = _Data_Student.Get_P_Head();
+                while (p!=nullptr){
+                
+                    cout << p->Get_Data().Get_Name() << p->Get_Data().Get_Room_Code() << endl;
+                    List_rCode.push_back(p->Get_Data().Get_Room_Code());
+                    p = p->Get_Next();
                 }
-            }
+            
             pp = pp->Get_Next();
         }
         sort(begin(List_rCode), end(List_rCode));
         List_rCode.erase(unique(begin(List_rCode), end(List_rCode)), end(List_rCode));
+
         while (List_rCode.size() != 0)
         {
-            data_Room.push_back(Mamagement_Room::Get_Room(List_rCode.back()));
+            Room _r = this->Get_Room(List_rCode.back());
+            cout << _r.Get_Room_code() << 1;
+            data_Room.InsertAtTail(_r);
+
             List_rCode.pop_back();
         }
 
@@ -118,16 +123,17 @@ vector<Room> Mamagement_Room::Find_Room(const string& data,Management_Student& D
     }
 }
 const Room Mamagement_Room::Get_Room(string& _Room_code)
-{
-    Node<Room>* p = this->DataBase.Get_P_Head();
-    while (p != nullptr)
-    {
-        transform(_Room_code.begin(), _Room_code.end(), _Room_code.begin(), toupper);
-        string Room_Code_2 = p->Get_Data().Get_Room_code();
-        transform(Room_Code_2.begin(), Room_Code_2.end(), Room_Code_2.begin(), toupper);
-        if (_Room_code == Room_Code_2) return p->Get_Data();
-        p = p->Get_Next();
-    }
+{   
+    transform(_Room_code.begin(), _Room_code.end(), _Room_code.begin(), toupper);
+     Node<Room>* p = this->DataBase.Get_P_Head();
+     while (p != nullptr)
+     {
+  
+         string Room_Code_2 = p->Get_Data().Get_Room_code();
+         transform(Room_Code_2.begin(), Room_Code_2.end(), Room_Code_2.begin(), toupper);
+         if (_Room_code == Room_Code_2) return p->Get_Data();
+         p = p->Get_Next();
+     }
     flag = true;
     return Room(" ", 0, 0, " ");
 }

@@ -17,7 +17,7 @@ public:
     Room();
    // Room(const Room&);
     ~Room();
-    const vector<Student>& Get_List_Student(Management_Student&);
+    const Doubly_Linked_List<Student> Get_List_Student(Management_Student&);
     //condition of facilities
     const bool& Get_COF();
     void Set_COF(const bool&);
