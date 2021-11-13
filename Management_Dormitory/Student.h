@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include"Date.h"
 using namespace std;
 class Student
 {
@@ -11,13 +12,13 @@ private:
 	int Gender; //
 	string Email;//
 	string Student_Code;
-	string Date_of_Birth;//
+	CDate Date_of_Birth;//
 	string Address;//
 
 public:
 	Student();
-	Student(const string&,const string&, const string&,const string&,const int&,const string&,const string&,const string&,const string&);
-	//Student(const Student&);
+	Student(const string&,const string&, const string&,const string&,const int&,const string&,const string&,const CDate&,const string&);
+	Student(const Student&);
 	~Student();
 	//name
 	void Set_Name(const string&);
@@ -41,10 +42,11 @@ public:
 	void Set_Student_Code(const string&);
 	const string& Get_Student_Code();
 	//Date_of_Birth
-	void Set_Date_of_Birth(const string&);
-	const string& Get_Date_of_Birth();
+	void Set_Date_of_Birth(const CDate&);
+	CDate& Get_Date_of_Birth();
 	//address
 	void Set_Address(const string&);
 	const string& Get_Address();
+	/*Student& operator = (const Stdudent&);*/
 };
 

@@ -9,7 +9,7 @@ private:
 public:
 	Management();
 	~Management();
-	/*friend void Menu_chinh(Management&);*/
+	void Menu_chinh();
 
 };
 

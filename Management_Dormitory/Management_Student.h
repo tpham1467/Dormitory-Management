@@ -1,6 +1,7 @@
 #pragma once
 #include"Student.h"
 #include"Doubly_Linked_List.h"
+#include"Khoi_tao.h"
 class Management_Student
 {
 private:
@@ -17,7 +18,8 @@ public:
 	Node<Student> *Index_off(string);
 	void Write_File();
 	void Read_File();
-	/*friend void Menu_Student(Management_Student&);*/
+	void Menu_Student();
+	void Menu_update(Student&);
 };
 
 

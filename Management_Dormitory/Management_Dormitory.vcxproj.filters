@@ -30,7 +30,7 @@
     <ClCompile Include="Student.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Student_Profile.cpp">
+    <ClCompile Include="Profile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="console.cpp">
@@ -40,6 +40,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Management.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Admission_Profile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Residency_Profile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,13 +68,10 @@
     <ClInclude Include="Student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Student_Profile.h">
+    <ClInclude Include="Profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="console.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Khoi_tao.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Management_Room.h">
@@ -77,10 +80,16 @@
     <ClInclude Include="Management.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
+    <ClInclude Include="Date.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu_St.h">
+    <ClInclude Include="Admission_Profile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Khoi_tao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Residency_Profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

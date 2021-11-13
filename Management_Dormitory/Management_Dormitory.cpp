@@ -1,18 +1,17 @@
 #include <iostream>
 #include<string>
-#include"Student.h"
 // #include"management_room.h"
-#include"Management_Student.h"
-
-#include"Menu.h"
-#include"Doubly_Linked_List.h"
+//#include"Management_Student.h"
+//#include"Date.h"
+//#include"Doubly_Linked_List.h"
 //#include <algorithm>
 using namespace std;
 int main()
 { 
-    Management_Student Data_s;
-    Data_s.Read_File();
-    Menu_chinh(Data_s);
+    /*CDate ns(02, 11, 2021);
+    string _data = ns.Get_String();
+
+    cout << ns.Get_String();*/
     // Mamagement_Room data_r;
     // data_r.Read_File();
     // Doubly_Linked_List<Room> data_f = data_r.Find_Room("huy",Data_s);

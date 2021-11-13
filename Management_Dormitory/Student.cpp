@@ -1,16 +1,26 @@
 #include "Student.h"
 Student::Student()
 {
+    cout << 1;
 }
 
-Student::Student(const string &_name, const string &_Phone_number, const string &_Room_Code, const string &_Profile_Code, const int &_Gender, const string &_Student_Code, const string &_Email, const string&_D_of_b, const string &_Address)
+Student::Student(const string &_name, const string &_Phone_number, const string &_Room_Code, const string &_Profile_Code, const int &_Gender, const string &_Student_Code, const string &_Email, const CDate&_D_of_b, const string &_Address)
     : name(_name), Phone_number(_Phone_number), Room_Code(_Room_Code), Profile_Code(_Profile_Code), Gender(_Gender), Student_Code(_Student_Code), Email(_Email), Address(_Address),Date_of_Birth(_D_of_b)
 {
 }
-// Student::Student(const Student& _Student)
-// {
+ Student::Student(const Student& s )
+ {
 
-// }
+     this->Room_Code = s.Room_Code;
+     this->Profile_Code = s.Profile_Code;
+     this->name = s.name;
+     this->Phone_number = s.Phone_number;
+     this->Address = s.Address;
+     this->Email = s.Email;
+     this->Gender = s.Gender;
+    this->Date_of_Birth = s.Date_of_Birth;
+    this->Student_Code = s.Student_Code;
+ }
 Student::~Student()
 {
 }
@@ -69,11 +79,11 @@ const string &Student::Get_Email()
     return this->Email;
 }
 //Date_of_Birth
-void Student::Set_Date_of_Birth(const string &_D_of_b)
+void Student::Set_Date_of_Birth(const CDate &_D_of_b)
 {
     this->Date_of_Birth = _D_of_b;
 }
-const string& Student::Get_Date_of_Birth()
+CDate& Student::Get_Date_of_Birth()
 {
     return this->Date_of_Birth;
 }
@@ -97,3 +107,16 @@ const string &Student::Get_Address()
 {
     return this->Address;
 }
+
+//Student& Student::operator=(const Student& s)
+//{
+//    this->Room_Code = s.Room_Code;
+//    this->Profile_Code = s.Profile_Code;
+//    this->name = s.name;
+//    this->Phone_number = s.Phone_number;
+//    this->Address = s.Address;
+//    this->Email = s.Email;
+//    this->Gender = s.Gender;
+//    this->Date_of_Birth = s.Date_of_Birth;
+//    return *this;
+//}

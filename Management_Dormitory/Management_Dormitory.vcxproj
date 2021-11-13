@@ -139,30 +139,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Admission_Profile.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Entrance_Card.cpp" />
     <ClCompile Include="Management.cpp" />
     <ClCompile Include="Management_Dormitory.cpp" />
     <ClCompile Include="Management_Room.cpp" />
     <ClCompile Include="Management_Student.cpp" />
+    <ClCompile Include="Residency_Profile.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Student.cpp" />
-    <ClCompile Include="Student_Profile.cpp" />
+    <ClCompile Include="Profile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Admission_Profile.h" />
     <ClInclude Include="console.h" />
+    <ClInclude Include="Date.h" />
     <ClInclude Include="Doubly_Linked_List.h" />
     <ClInclude Include="Entrance_Card.h" />
     <ClInclude Include="Khoi_tao.h" />
     <ClInclude Include="Management.h" />
     <ClInclude Include="Management_Room.h" />
     <ClInclude Include="Management_Student.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Menu_St.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Residency_Profile.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Student.h" />
-    <ClInclude Include="Student_Profile.h" />
+    <ClInclude Include="Profile.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="introduction.txt" />

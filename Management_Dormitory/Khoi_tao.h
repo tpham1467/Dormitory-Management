@@ -6,7 +6,6 @@ using namespace std;
 #include"console.h"
 #include<windows.h>
 #include<conio.h>
-#include"Menu.h"
 #include"Management_Student.h"
 #include<vector>
 typedef pair<int, int > ii;
@@ -30,7 +29,7 @@ void Line(int x, int y, int x1, int y1, int color = 15, bool thang = true);
 void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1, int color);
 void Ve_mot_trang(int y, int color, Doubly_Linked_List<Student>& Database, int j);
 void Ve_nhieu_trang(Doubly_Linked_List<Student>& Database);
-int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database);
+int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database, bool& update, bool& find);
 void To_mau_mot_doi_tuong(Doubly_Linked_List<Student>& Database, int index, int color, int i);
 void Not_Found();
 //vector<string> update();
@@ -287,7 +286,8 @@ void Ve_mot_trang(int y, int color, Doubly_Linked_List<Student>& Database, int j
 	for (i = 15; i < 13 + 2 * y; i += 2)
 	{
 
-		Outstring(51, i - 1, 0, 6, Database[j].Get_Room_Code());
+		Outstring(51, i - 1, 0, 6, Database[j].Get_Student_Code());
+
 		Outstring(72, i - 1, 0, 6, Database[j].Get_Name());
 		Outstring(111, i - 1, 0, 6, (Database[j].Get_Gender() == 1) ? "Nam" : "Nu");
 		Outstring(128, i - 1, 0, 6, Database[j].Get_Address());
@@ -413,7 +413,7 @@ void To_mau_mot_doi_tuong(Doubly_Linked_List<Student>& Database, int index, int 
 	Outstring(128, (index - i) * 2 + 14, color, 6, Database[index].Get_Address());
 
 }
-int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database)
+int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database, bool& update, bool& find)
 {
 	int lenght = Database.Get_Lenght();
 	int so_lan = (int)(lenght / 10) + 1;
@@ -497,6 +497,26 @@ int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database)
 		{
 			return -1;
 			break;
+		}
+		case 85:
+		{
+			update = true;
+			return dem;
+		}
+		case 117:
+		{
+			update = true;
+			return dem;
+		}
+		case 70:
+		{
+			find = true;
+			return dem;
+		}
+		case 102:
+		{
+			find = true;
+			return dem;
 		}
 		}
 		if (Firt == true && check == true)
