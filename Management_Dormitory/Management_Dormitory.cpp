@@ -2,16 +2,20 @@
 #include<string>
 // #include"management_room.h"
 //#include"Management_Student.h"
-//#include"Date.h"
+#include"Date.h"
 //#include"Doubly_Linked_List.h"
 //#include <algorithm>
 using namespace std;
 int main()
 { 
-    /*CDate ns(02, 11, 2021);
+    CDate ns(02, 2, 2020);
+    CDate _time = ns.To_CDate("29/2/2020");
+    cout << _time.Get_String() << endl;
+    cout<<((_time.validDate()==1)?"True":"false") << endl;
     string _data = ns.Get_String();
 
-    cout << ns.Get_String();*/
+    cout << ns.Get_String() << endl;
+   // ns.operator+(1);
     // Mamagement_Room data_r;
     // data_r.Read_File();
     // Doubly_Linked_List<Room> data_f = data_r.Find_Room("huy",Data_s);

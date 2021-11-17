@@ -142,14 +142,15 @@
     <ClCompile Include="Admission_Profile.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Entrance_Card.cpp" />
+    <ClCompile Include="Khoi_tao.cpp" />
     <ClCompile Include="Management.cpp" />
     <ClCompile Include="Management_Dormitory.cpp" />
+    <ClCompile Include="Management_Profile.cpp" />
     <ClCompile Include="Management_Room.cpp" />
     <ClCompile Include="Management_Student.cpp" />
     <ClCompile Include="Residency_Profile.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Student.cpp" />
-    <ClCompile Include="Profile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admission_Profile.h" />
@@ -159,13 +160,13 @@
     <ClInclude Include="Entrance_Card.h" />
     <ClInclude Include="Khoi_tao.h" />
     <ClInclude Include="Management.h" />
+    <ClInclude Include="Management_Profile.h" />
     <ClInclude Include="Management_Room.h" />
     <ClInclude Include="Management_Student.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Residency_Profile.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Student.h" />
-    <ClInclude Include="Profile.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="introduction.txt" />
