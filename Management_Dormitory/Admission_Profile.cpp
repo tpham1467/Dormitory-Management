@@ -4,6 +4,21 @@ Admission_Profile::Admission_Profile(const string& _Profile_Code, const CDate& _
 {
 
 }
+Admission_Profile::Admission_Profile()
+{
+
+}
+Admission_Profile::Admission_Profile(const Admission_Profile& ap)
+{
+	this->Profile_Code = ap.Profile_Code;
+	this->Registration_Date = ap.Registration_Date;
+	this->ID = ap.ID;
+	this->Native_lace = ap.Native_lace;
+	this->Race = ap.Race;
+	this->Expiration_Date = ap.Expiration_Date;
+	this->TTBS = ap.TTBS;
+	this->Confirmation_Status = ap.Confirmation_Status;
+}
 Admission_Profile::~Admission_Profile()
 {
 	this->TTBS.~Doubly_Linked_List();

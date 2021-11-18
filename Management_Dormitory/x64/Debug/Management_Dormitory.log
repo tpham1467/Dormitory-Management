@@ -1,3 +1,4 @@
-﻿  Management_Dormitory.cpp
-D:\PBL2\Management_Dormitory\Date.h(226): warning C4172: returning address of local variable or temporary: _c
+﻿  Management_Profile.cpp
+  Residency_Profile.cpp
+  Generating Code...
   Management_Dormitory.vcxproj -> D:\PBL2\x64\Debug\Management_Dormitory.exe

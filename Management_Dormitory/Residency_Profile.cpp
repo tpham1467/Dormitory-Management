@@ -6,6 +6,19 @@ Residency_Profile::Residency_Profile(const string& _Profile_Code, const CDate& _
 {
 
 }
+Residency_Profile::Residency_Profile()
+{
+
+}
+Residency_Profile::Residency_Profile(const Residency_Profile& rp)
+{
+	this->Profile_Code = rp.Profile_Code;
+	this->Registration_Date = rp.Registration_Date;
+	this->ID = rp.ID;
+	this->Native_lace = rp.Native_lace;
+	this->Race = rp.Race;
+	this->Expiration_Date = rp.Expiration_Date;
+}
 Residency_Profile::~Residency_Profile()
 {
 

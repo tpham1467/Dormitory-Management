@@ -12,7 +12,9 @@ protected:
 	string Race;
 	CDate Expiration_Date;
 public:
+	Residency_Profile();
 	Residency_Profile(const string&, const CDate&, const string&, const string&, const string&, const CDate&);
+	Residency_Profile(const Residency_Profile&);
 	~Residency_Profile();
 	string Get_Profile_Code();
 	void Set_Profile_Code(const string&);

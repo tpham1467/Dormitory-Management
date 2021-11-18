@@ -9,7 +9,9 @@ private:
 	bool Confirmation_Status;
 	Doubly_Linked_List<string> TTBS;
 public:
+	Admission_Profile();
 	Admission_Profile(const string& , const CDate& , const string& , const string& , const string& _Race, const CDate&, Doubly_Linked_List<string>,bool=false );
+	Admission_Profile(const Admission_Profile&);
 	~Admission_Profile();
 	void Add_Infor(const string&);
 	Doubly_Linked_List<string> Get_TTBS();
