@@ -2,8 +2,10 @@
 #include"Khoi_tao.h"
 Management::Management()
 {	
-	this->Data_Room.Read_File();
+	//this->Data_Room.Read_File();
 	this->Data_Student.Read_File();
+	this->Data_Room.Read_File();
+	this->Data_Room.Write_File();
 }
 Management::~Management()
 {

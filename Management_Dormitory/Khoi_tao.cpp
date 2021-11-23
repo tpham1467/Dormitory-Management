@@ -102,7 +102,7 @@ void Xoa_o(int x, int y, int x2, int y2, int color)
 }
 void Khoi_tao()
 {
-	/*SetWindowSize(210, 60);
+	/*SetWindowSize(2, 60);
 	SetScreenBufferSize(200, 50);*/
 	DisableResizeWindow();
 	Khoi_tao_cac_danh_sach();

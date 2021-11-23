@@ -14,7 +14,6 @@ namespace
 //check leap year or not
 #define IS_LEAP_YEAR(year) ((year%400 == 0) || (year%4 == 0 && year%100 != 0))?   true : false
 
-
 class CDate
 {
 private:
@@ -140,6 +139,7 @@ public:
             for (int i = _cdate.year + 1; i < this->year; i++) s += songay(i);
             return(s + d1 + d2);
         }
+
     }
     void operator+(int x)
     {

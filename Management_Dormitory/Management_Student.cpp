@@ -4,6 +4,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include"Date.h"
 using namespace std;
 int Management_Student::N_S = 0;
 Management_Student::Management_Student()
@@ -131,7 +132,7 @@ void Management_Student::Write_File()
 {
     ofstream output;
     output.open("Student.csv", ios::out);
-    if (output.is_open()) cout << " mo";
+    if (output.is_open()) cout << "";
     else cout << "fall";
     Node<Student>* p = this->Database.Get_P_Head();
     this->Database.DeleteAtTail();
@@ -153,14 +154,13 @@ void Management_Student::Read_File()
     if (!input.is_open())
     {
         //throw "Unable to open file Student";
-        cout << 1;
     }
     else
     {
-        input >> this->N_S;
+       /* input >> this->N_S;*/
         while (!input.eof())
         {
-            string name;
+            string name_1;
             string Phone_number;
             string Profile_Code;
             string Room_Code;
@@ -169,8 +169,7 @@ void Management_Student::Read_File()
             string Student_Code;
             string _d_of_b;
             string Address;
-            input.ignore();
-            getline(input, name, '-');
+            getline(input, name_1, '-');
             getline(input, Phone_number, '-');
             getline(input, Profile_Code, '-');
             getline(input, Room_Code, '-');
@@ -180,13 +179,11 @@ void Management_Student::Read_File()
             getline(input, Student_Code, '-');
             getline(input, _d_of_b, '-');
             getline(input, Address, '.');
-
-            //Student _Student(name, Phone_number, Room_Code, Profile_Code, Gender, Student_Code, Email, _d_of_b, Address);
-
-            //this->Database.InsertAtTail(_Student);
-
-
-
+            input.ignore();
+            CDate _d;
+            _d = _d.To_CDate(_d_of_b);
+            Student _Student(name_1, Phone_number, Room_Code, Profile_Code, Gender, Student_Code, Email, _d, Address);
+            this->Database.InsertAtTail(_Student);
         }
         this->Database.DeleteAtTail();
 
@@ -323,4 +320,8 @@ void Management_Student::Menu_update(Student& _student_section)
     Hcn(60, 29, 150, 31);
     string data;
     getline(cin, data);
+}
+void Management_Student::Update_Info(Node<Student>* p,const Student& _student)
+{
+    this->Database.replace(p, _student);
 }

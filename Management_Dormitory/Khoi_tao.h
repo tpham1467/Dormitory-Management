@@ -9,10 +9,11 @@ using namespace std;
 #include"Doubly_Linked_List.h"
 #include"Student.h"
 #include<vector>
-typedef pair<int, int > ii;
-typedef pair<ii, string > list;
+
 namespace
 {
+	typedef pair<int, int > ii;
+	typedef pair<ii, string > list;
 	list arr_1[6];
 	list arr_Student[5];
 	list arr_Room[4];
