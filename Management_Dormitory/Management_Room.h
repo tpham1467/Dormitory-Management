@@ -2,6 +2,12 @@
 #include"Room.h"
 #include"Management_Student.h"
 #include"Doubly_Linked_List.h"
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+#include"Khoi_tao.h"
 class Mamagement_Room
 {
 private:
@@ -20,7 +26,7 @@ public:
     void Draw_a_Page(int, Doubly_Linked_List<Room>&,int);
     int Move_Page(Doubly_Linked_List<Room>&, bool& , bool&);
     void Draw_Object(Doubly_Linked_List<Room>& , int, int , int);
-    void Draw_Info_Object();
+    void Draw_Info_Object(Management_Student&);
 };
 
 

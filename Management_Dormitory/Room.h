@@ -2,7 +2,6 @@
 #include<string>
 #include"Doubly_Linked_List.h"
 #include"Management_Student.h"
-#include"Student.h"
 #include"Date.h"
 #include<vector>
 using namespace std;
@@ -15,10 +14,10 @@ private:
     CDate Han_Dong_Tien_Phi_Sinh_Hoat;
 public:
     Room(const string&,const int&,const bool&,const CDate&);
+    Room(const Room&);
     Room();
-   // Room(const Room&);
     ~Room();
-    Doubly_Linked_List<Student>& Get_List_Student(Management_Student&);
+    Doubly_Linked_List<Student> Get_List_Student(Management_Student&);
     //condition of facilities
     const bool& Get_COF();
     void Set_COF(const bool&);

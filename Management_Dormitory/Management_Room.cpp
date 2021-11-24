@@ -1,10 +1,4 @@
 #include"Management_Room.h"
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <vector>
-#include <algorithm>
-#include"Khoi_tao.h"
 bool flag = false;
 Room _room_section;
 void Mamagement_Room::Read_File()
@@ -462,8 +456,10 @@ void Mamagement_Room::Draw_Object(Doubly_Linked_List<Room>& _Database, int index
     Outstring(102, (index - i) * 2 + 14, color, 6, ((_Database[index].Get_COF() == true) ? "Da Sua Chua" : "Chua Sua Chua"));
     Outstring(137, (index - i) * 2 + 14, color, 6, _Database[index].Get_HDTPSH().Get_String());
 }
-void Mamagement_Room::Draw_Info_Object()
+void Mamagement_Room::Draw_Info_Object(Management_Student& _Data)
 {
+    Mamagement_Room::Read_File();
+    _room_section = this->DataBase[41];
     Xoa_o(48, 10, 170, 36, 0);
     Hcn(48, 9, 60, 11);
     Outstring(50, 10, 2, 0, "Ma Phong");
@@ -479,8 +475,10 @@ void Mamagement_Room::Draw_Info_Object()
     Hcn(146, 13, 165, 15);
     int x1 = 48, x2 = 118;
     int y = 17;
-    //Doubly_Linked_List<Student> = _room_section.Get_List_Student(Data);
-    for (int i = 0; i < 0; i++)
+    Doubly_Linked_List<Student> data = _room_section.Get_List_Student(_Data);
+    Node<Student>* p = data.Get_P_Head();
+
+    for (int i = 0; i < data.Get_Lenght(); i++)
     {
         if (i == 2 || i == 4) y += 4;
         if (i % 2 == 0)
@@ -489,6 +487,7 @@ void Mamagement_Room::Draw_Info_Object()
             Outint(62, y+1, 2, 0, i + 1);
             Hcn(48, y, 65, y+2);
             Hcn(68, y, 112, y+2);
+            Outstring(70, y + 1, 2, 0, p->Get_Data().Get_Name());
         }
         else
         {
@@ -496,17 +495,12 @@ void Mamagement_Room::Draw_Info_Object()
             Outint(132, y+1, 2, 0, i + 1);
             Hcn(118, y, 135, y + 2);
             Hcn(138, y, 165, y+2);
+            Outstring(140, y + 1, 2, 0, p->Get_Data().Get_Name());
         }
+        p = p->Get_Next();
     }
-    //Outstring(65, 10, 9, 0, R.Get_Name());
-    //Outstring(137, 10, 9, 0, (_student_section.Get_Gender() == 0) ? "Nu" : "Nam");
-    //Outstring(62, 14, 9, 0, _student_section.Get_Address());
-    //Outstring(137, 14, 9, 0, _student_section.Get_Date_of_Birth().Get_String());
-    //Outstring(68, 18, 9, 0, _student_section.Get_Student_Code());
-    //Outstring(135, 18, 9, 0, _student_section.Get_Room_Code());
-    //Outstring(63, 22, 9, 0, _student_section.Get_Email());
-    //Outstring(140, 22, 9, 0, _student_section.Get_Phone_number());
-    //Outstring(63, 26, 9, 0, _student_section.Get_Profile_Code());
-    //Outstring(100, 30, 2, 0, "Hoan Tat");
-    //Hcn(60, 29, 150, 31);
+    Outstring(75, 10, 2, 0, _room_section.Get_Room_code());
+    Outint(155, 10, 2, 0, _room_section.Get_NS());
+    Outstring(84, 14, 2, 0,(_room_section.Get_COF()==true)?"Da Sua Chua":"Chua Sua Chua");
+    Outstring(150, 14, 2, 0, _room_section.Get_HDTPSH().Get_String());
 }

@@ -18,8 +18,9 @@ typedef pair<int, string > list;
 int main()
 { 
     Mamagement_Room data;
-    data.Draw_Info_Object();
-
+    Management_Student data_s;
+    data_s.Read_File();
+    data.Draw_Info_Object(data_s);
     return 0;
 }
 
