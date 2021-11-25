@@ -1,7 +1,15 @@
 #include "Student.h"
 Student::Student()
 {
-    cout << 1;
+    this->Room_Code = "";
+    this->Profile_Code = "";
+    this->name = "";
+    this->Phone_number = "";
+    this->Address = "";
+    this->Email = "";
+    this->Gender = 1;
+    this->Date_of_Birth = CDate(0,0,0);
+    this->Student_Code = "";
 }
 
 Student::Student(const string &_name, const string &_Phone_number, const string &_Room_Code, const string &_Profile_Code, const int &_Gender, const string &_Student_Code, const string &_Email, const CDate&_D_of_b, const string &_Address)

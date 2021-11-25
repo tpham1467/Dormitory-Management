@@ -6,7 +6,7 @@ Admission_Profile::Admission_Profile(const string& _Profile_Code, const CDate& _
 }
 Admission_Profile::Admission_Profile()
 {
-
+	cout << 1;
 }
 Admission_Profile::Admission_Profile(const Admission_Profile& ap)
 {

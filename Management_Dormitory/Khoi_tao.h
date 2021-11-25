@@ -6,14 +6,15 @@ using namespace std;
 #include"console.h"
 #include<windows.h>
 #include<conio.h>
-#include"Doubly_Linked_List.h"
-#include"Student.h"
 #include<vector>
-typedef pair<int, int > ii;
-typedef pair<ii, string > list;
 namespace
 {
-	list arr_1[6];
+	typedef pair<int, int > ii;
+	typedef pair<ii, string > list;
+	 list arr_1[6] = {
+		list(ii(15,16),"Quan Li Sinh Vien"),list(ii(17,19),"Quan Li Phong"),list(ii(17,22),"Quan Li Ho So")
+		,list(ii(14,25),"Quan Li The Ra Vao"),list(ii(19,28),"Thong Ke"),list(ii(21,31),"Thoat")
+	};
 	list arr_Student[5];
 	list arr_Room[4];
 	list arr_Profile[6];
@@ -31,10 +32,6 @@ void khung();
 void Hcn(int x, int y, int x1, int y1, int color = 0);
 void Line(int x, int y, int x1, int y1, int color = 15, bool thang = true);
 void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1, int color);
-void Ve_mot_trang(int y, int color, Doubly_Linked_List<Student>& Database, int j);
-void Ve_nhieu_trang(Doubly_Linked_List<Student>& Database);
-int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database, bool& update, bool& find);
-void To_mau_mot_doi_tuong(Doubly_Linked_List<Student>& Database, int index, int color, int i);
 void Not_Found();
 //vector<string> update();
 

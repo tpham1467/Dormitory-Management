@@ -2,8 +2,10 @@
 #include"Khoi_tao.h"
 Management::Management()
 {	
-	this->Data_Room.Read_File();
+	//this->Data_Room.Read_File();
 	this->Data_Student.Read_File();
+	this->Data_Room.Read_File();
+	this->Data_Room.Write_File();
 }
 Management::~Management()
 {
@@ -30,7 +32,7 @@ void Management::Menu_chinh()
 		case 1:
 		{
 			Xoa_o(4, 14, 39, 35);
-			//Menu_Room();
+			this->Data_Room.Menu(this->Data_Student);
 			break;
 		}
 		case 2:

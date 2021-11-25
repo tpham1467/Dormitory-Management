@@ -1,5 +1,5 @@
 #include "Room.h"
-Room::Room(const string &_Room_code, const int &_Number_Student, const bool &COF, const string &HDTPNSH)
+Room::Room(const string &_Room_code, const int &_Number_Student, const bool &COF, const CDate &HDTPNSH)
     : Room_Code(_Room_code), Number_Students(_Number_Student), condition_of_facilities(COF), Han_Dong_Tien_Phi_Sinh_Hoat(HDTPNSH)
 {
 }
@@ -20,11 +20,11 @@ void Room::Set_COF(const bool &COF)
     this->condition_of_facilities = COF;
 }
 //Han_Dong_Tien_Phi Sinh Hoat
-const string &Room::Get_HDTPSH()
+CDate &Room::Get_HDTPSH()
 {
     return this->Han_Dong_Tien_Phi_Sinh_Hoat;
 }
-void Room::Set_HDTPNSH(const string &HDTPSH)
+void Room::Set_HDTPNSH(const CDate &HDTPSH)
 {
     this->Han_Dong_Tien_Phi_Sinh_Hoat = HDTPSH;
 }
@@ -42,7 +42,7 @@ const string &Room::Get_Room_code()
 {
     return this->Room_Code;
 }
-const Doubly_Linked_List<Student> Room::Get_List_Student(Management_Student &Data)
+Doubly_Linked_List<Student> Room::Get_List_Student(Management_Student &Data)
 {
     Node<Student> *p = Data.Get_List_Student().Get_P_Head();
     Doubly_Linked_List<Student> List;

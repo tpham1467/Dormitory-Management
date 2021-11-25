@@ -1,5 +1,6 @@
 #pragma once
 #include"Admission_Profile.h"
+#include"Management_Student.h"
 class Management_Profile
 {
 private:
@@ -13,7 +14,7 @@ public:
 	void Add_Admission_Profile(const Admission_Profile&);
 	void Add_Residency_Profile(const Residency_Profile&);
 	void Extend(string);
-	Doubly_Linked_List< Admission_Profile> Find_Admission_Profile(string);
+	Doubly_Linked_List< Admission_Profile> Find_Admission_Profile(string, Management_Student&);
 	Doubly_Linked_List< Residency_Profile> Find_Residency_Profile(string);
 	int  Pay(string);
 	void Confirm(string);

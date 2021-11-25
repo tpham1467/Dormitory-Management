@@ -106,5 +106,11 @@
     <Text Include="Room.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Residency_Profile.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Admission_Profile.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

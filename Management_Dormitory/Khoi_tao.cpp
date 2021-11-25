@@ -2,12 +2,12 @@
 #include"Khoi_tao.h"
 void Khoi_tao_cac_danh_sach()
 {
-	arr_1[0].first.first = 15; arr_1[0].first.second = 16; arr_1[0].second = "Quan Li Sinh Vien";
+	/*arr_1[0].first.first = 15; arr_1[0].first.second = 16; arr_1[0].second = "Quan Li Sinh Vien";
 	arr_1[1].first.first = 17; arr_1[1].first.second = 19; arr_1[1].second = "Quan Li Phong";
 	arr_1[2].first.first = 17; arr_1[2].first.second = 22; arr_1[2].second = "Quan Li Ho So";
 	arr_1[3].first.first = 14; arr_1[3].first.second = 25; arr_1[3].second = "Quan Li The Ra Vao";
 	arr_1[4].first.first = 19; arr_1[4].first.second = 28; arr_1[4].second = "Thong Ke";
-	arr_1[5].first.first = 21; arr_1[5].first.second = 31; arr_1[5].second = "Thoat";
+	arr_1[5].first.first = 21; arr_1[5].first.second = 31; arr_1[5].second = "Thoat";*/
 	//arr_Student
 	arr_Student[0].first.first = 16; arr_Student[0].first.second = 16; arr_Student[0].second = "Them Sinh Vien";
 	arr_Student[1].first.first = 14; arr_Student[1].first.second = 19; arr_Student[1].second = "Tim Kiem Sinh Vien";
@@ -61,10 +61,6 @@ int bat_su_kien(list arr[], int n)
 		{
 			break;
 		}
-		else if (key == 27)
-		{
-			return (int)key;
-		}
 		Outstring(arr[i].first.first - 2, arr[i].first.second, 2, 0, ">>");
 		Outstring(arr[i].first.first, arr[i].first.second, 2, 0, arr[i].second);
 	}
@@ -102,8 +98,8 @@ void Xoa_o(int x, int y, int x2, int y2, int color)
 }
 void Khoi_tao()
 {
-	/*SetWindowSize(210, 60);
-	SetScreenBufferSize(200, 50);*/
+	SetWindowSize(175, 41);
+	SetScreenBufferSize(175, 41);
 	DisableResizeWindow();
 	Khoi_tao_cac_danh_sach();
 	Cursor(true);
@@ -217,313 +213,7 @@ void Confict_line(int x, int y, int x1, int y1, int _x, int _y, int _x1, int _y1
 		}
 	}
 }
-// ve danh 1 trang
-void Ve_mot_trang(int y, int color, Doubly_Linked_List<Student>& Database, int j)
-{
-	if (j == -1) {
 
-
-		Xoa_o(48, 10, 170, 12, 15);
-		Xoa_o(48, 13, 170, 13 + 1, 6);
-		Outstring(50, 11, 0, 15, "Ma Sinh Vien");
-		Outstring(84, 11, 0, 15, "Ho Va Ten");
-		Outstring(112, 11, 0, 15, "Gioi Tinh");
-		Outstring(140, 11, 0, 15, "Dia Chi");
-		Line(68, 13, 68, 13 + 1, 6);
-		Line(68, 10, 68, 12, 15);
-		Line(108, 13, 108, 13 + 1, 6);
-		Line(108, 10, 108, 12, 15);
-		Line(125, 13, 125, 13 + 1, 6);
-		Line(125, 10, 125, 12, 15);
-		return;
-	}
-	else
-	{
-		Xoa_o(48, 10, 170, 12, 15);
-		Xoa_o(48, 13, 170, 13 + 2 * y, 6);
-		Outstring(50, 11, 0, 15, "Ma Sinh Vien");
-		Outstring(84, 11, 0, 15, "Ho Va Ten");
-		Outstring(112, 11, 0, 15, "Gioi Tinh");
-		Outstring(140, 11, 0, 15, "Dia Chi");
-	}
-	int i;
-
-	for (i = 15; i < 13 + 2 * y; i += 2)
-	{
-
-		Outstring(51, i - 1, 0, 6, Database[j].Get_Student_Code());
-
-		Outstring(72, i - 1, 0, 6, Database[j].Get_Name());
-		Outstring(111, i - 1, 0, 6, (Database[j].Get_Gender() == 1) ? "Nam" : "Nu");
-		Outstring(128, i - 1, 0, 6, Database[j].Get_Address());
-
-		Line(48, i, 170, i, 6, false);
-		j++;
-	}
-	Outstring(51, i - 1, 0, 6, Database[j].Get_Student_Code());
-	Outstring(72, i - 1, 0, 6, Database[j].Get_Name());
-	Outstring(111, i - 1, 0, 6, (Database[j].Get_Gender() == 1) ? "Nam" : "Nu");
-	Outstring(128, i - 1, 0, 6, Database[j].Get_Address());
-
-	Line(68, 13, 68, 13 + 2 * y, 6);
-	Line(68, 10, 68, 12, 15);
-	Line(108, 13, 108, 13 + 2 * y, 6);
-	Line(108, 10, 108, 12, 15);
-	Line(125, 13, 125, 13 + 2 * y, 6);
-	Line(125, 10, 125, 12, 15);
-	for (int i = 15; i < 13 + 2 * y; i += 2)
-	{
-
-		Confict_line(48, i, 170, i, 68, 13, 68, 13 + 2 * y, 6);
-		Confict_line(48, i, 170, i, 125, 13, 125, 13 + 2 * y, 6);
-		Confict_line(48, i, 170, i, 108, 13, 108, 13 + 2 * y, 6);
-
-	}
-
-}
-// ve danh nhieu trang
-void Ve_nhieu_trang(Doubly_Linked_List<Student>& Database)
-{
-	int lenght = Database.Get_Lenght();
-	int so_lan = (int)(lenght / 10) + 1;
-	int i = 0, j = 1; int z = 0;
-	Xoa_o(48, 10, 170, 35, 0);
-	bool Firt = false;
-	if (so_lan == 1)
-	{
-		Ve_mot_trang(lenght, 6, Database, 0);
-		Firt = true;
-	}
-	else
-	{
-		Ve_mot_trang(10, 6, Database, 0);
-		Outstring(101, 13 + 2 * 10 + 1, 2, 0, "<<");
-		Outint(103, 13 + 2 * 10 + 1, 1, 0, j);
-		Outstring(104, 13 + 2 * 10 + 1, 2, 0, ">>");
-		//gotoXY(114, 13 + 2 * 10 + 2);
-		//cout << lenght << " " << so_lan << " " << lenght - (so_lan - 1) * 10;
-		Firt = true;
-	}
-	while (1)
-	{
-		char key = _getch();
-		switch (key)
-		{
-		case 77:
-		{
-			if (j == so_lan) break;
-			else {
-				i += 10;
-				j++;
-			}
-			break;
-		}
-		case 75:
-		{
-			if (i == 0) break;
-			else
-			{
-				i -= 10;
-				j--;
-			}
-			break;
-		}
-		case 27:
-			return;
-			break;
-		}
-		if (Firt == true)
-		{
-			Xoa_o(48, 10, 170, 35, 0);
-			if (j == so_lan || lenght < 10)
-			{
-				if (lenght < 10)
-				{
-					Ve_mot_trang(lenght, 6, Database, i);
-					z = lenght;
-				}
-				else
-				{
-					if (lenght - (so_lan - 1) * 10 == 0)
-					{
-						z = 1;
-						Ve_mot_trang(lenght - (so_lan - 1) * 10, 6, Database, -1);
-					}
-					else
-					{
-						Ve_mot_trang(lenght - (so_lan - 1) * 10, 6, Database, i);
-						z = lenght - (so_lan - 1) * 10;
-					}
-				}
-
-			}
-			else
-			{
-				Ve_mot_trang(10, 6, Database, i);
-				z = 10;
-			}
-			Outstring(101, 13 + 2 * z + 1, 2, 0, "<<");
-			Outint(103, 13 + 2 * z + 1, 1, 0, j);
-			Outstring((j > 9) ? 105 : 104, 13 + 2 * z + 1, 2, 0, ">>");
-		}
-	}
-}
-void To_mau_mot_doi_tuong(Doubly_Linked_List<Student>& Database, int index, int color, int i)
-{
-
-
-	Outstring(51, (index - i) * 2 + 14, color, 6, Database[index].Get_Student_Code());
-	Outstring(72, (index - i) * 2 + 14, color, 6, Database[index].Get_Name());
-	Outstring(111, (index - i) * 2 + 14, color, 6, (Database[index].Get_Gender() == 1) ? "Nam" : "Nu");
-	Outstring(128, (index - i) * 2 + 14, color, 6, Database[index].Get_Address());
-
-}
-int Ve_nhieu_trang_chon(Doubly_Linked_List<Student>& Database, bool& update, bool& find)
-{
-	int lenght = Database.Get_Lenght();
-	int so_lan = (int)(lenght / 10) + 1;
-	int i = 0, j = 1; int z = 0; ; int dem = 0; bool check = false;
-	Xoa_o(48, 10, 170, 35, 0);
-	bool Firt = false;
-	if (so_lan == 1)
-	{
-		Ve_mot_trang(lenght, 6, Database, 0);
-		To_mau_mot_doi_tuong(Database, 0, 4, i);
-		Firt = true;
-	}
-	else
-	{
-		Ve_mot_trang(10, 6, Database, 0);
-		Outstring(101, 13 + 2 * 10 + 1, 2, 0, "<<");
-		Outint(103, 13 + 2 * 10 + 1, 1, 0, j);
-		Outstring(104, 13 + 2 * 10 + 1, 2, 0, ">>");
-		To_mau_mot_doi_tuong(Database, 0, 4, i);
-		Firt = true;
-	}
-	while (1)
-	{
-		char key = _getch();
-		switch (key)
-		{
-		case 77:
-		{
-			if (j == so_lan) i = i;
-			else {
-				i += 10;
-				j++;
-				dem = i;
-				check = true;
-			}
-			break;
-		}
-		case 75:
-		{
-			if (i == 0) break;
-			else
-			{
-				i -= 10;
-				j--;
-				dem = i;
-				check = true;
-			}
-			break;
-		}
-		case 72:
-		{
-			if (dem == i) break;
-			else {
-				To_mau_mot_doi_tuong(Database, dem, 0, i);
-				dem += -1;
-				check = false;
-				To_mau_mot_doi_tuong(Database, dem, 4, i);
-			}
-			break;
-		}
-		case 80:
-		{
-			if (dem == i + 9 || dem == lenght - 1) break;
-			else
-			{
-				To_mau_mot_doi_tuong(Database, dem, 0, i);
-				dem += 1;
-				To_mau_mot_doi_tuong(Database, dem, 4, i);
-				check = false;
-			}
-
-			break;
-		}
-		case 13:
-		{
-
-			return dem;
-			break;
-		}
-		case 27:
-		{
-			return -1;
-			break;
-		}
-		case 85:
-		{
-			update = true;
-			return dem;
-		}
-		case 117:
-		{
-			update = true;
-			return dem;
-		}
-		case 70:
-		{
-			find = true;
-			return dem;
-		}
-		case 102:
-		{
-			find = true;
-			return dem;
-		}
-		}
-		if (Firt == true && check == true)
-		{
-			Xoa_o(48, 10, 170, 35, 0);
-			if (j == so_lan || lenght < 10)
-			{
-				if (lenght < 10)
-				{
-					Ve_mot_trang(lenght, 6, Database, i);
-					To_mau_mot_doi_tuong(Database, lenght, 4, i);
-					z = lenght;
-				}
-				else
-				{
-					if (lenght - (so_lan - 1) * 10 == 0)
-					{
-						z = 1;
-						Ve_mot_trang(lenght - (so_lan - 1) * 10, 6, Database, -1);
-					}
-					else
-					{
-						Ve_mot_trang(lenght - (so_lan - 1) * 10, 6, Database, i);
-						To_mau_mot_doi_tuong(Database, dem, 4, i);
-						z = lenght - (so_lan - 1) * 10;
-					}
-				}
-
-			}
-			else
-			{
-				Ve_mot_trang(10, 6, Database, i);
-				To_mau_mot_doi_tuong(Database, dem, 4, i);
-				z = 10;
-			}
-			Outstring(101, 13 + 2 * z + 1, 2, 0, "<<");
-			Outint(103, 13 + 2 * z + 1, 1, 0, j);
-			Outstring((j > 9) ? 105 : 104, 13 + 2 * z + 1, 2, 0, ">>");
-
-		}
-	}
-}
 void Not_Found()
 {
 	Xoa_o(48, 10, 170, 35, 0);

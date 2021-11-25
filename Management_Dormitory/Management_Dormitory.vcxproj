@@ -169,7 +169,9 @@
     <ClInclude Include="Student.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Admission_Profile.txt" />
     <Text Include="introduction.txt" />
+    <Text Include="Residency_Profile.txt" />
     <Text Include="Room.txt" />
     <Text Include="Student.txt" />
   </ItemGroup>

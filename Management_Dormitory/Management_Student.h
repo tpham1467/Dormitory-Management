@@ -13,13 +13,17 @@ public:
 	void Add_Student(const Student&);
 	void Delete_Student(Student& _student);
 	Doubly_Linked_List<Student> Find_Student(string);
-	//void Update_Info(Node<Student>* p);
+	void Update_Info(Node<Student>* , const Student&);
 	Doubly_Linked_List<Student>& Get_List_Student();
 	Node<Student> *Index_off(string);
 	void Write_File();
 	void Read_File();
 	void Menu_Student();
 	void Menu_update(Student&);
+	void Draw_a_Page(int , int , Doubly_Linked_List<Student>&, int);
+	int Move_Page(Doubly_Linked_List<Student>& , bool& , bool&);
+	void Draw_Object(Doubly_Linked_List<Student>&, int, int, int);
+	void Draw_Info_Object();
 };
 
 
