@@ -98,8 +98,13 @@ void Xoa_o(int x, int y, int x2, int y2, int color)
 }
 void Khoi_tao()
 {
+<<<<<<< HEAD
 	SetWindowSize(175, 41);
 	SetScreenBufferSize(175, 41);
+=======
+	/*SetWindowSize(2, 60);
+	SetScreenBufferSize(200, 50);*/
+>>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
 	DisableResizeWindow();
 	Khoi_tao_cac_danh_sach();
 	Cursor(true);

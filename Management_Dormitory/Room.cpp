@@ -3,10 +3,6 @@ Room::Room(const string &_Room_code, const int &_Number_Student, const bool &COF
     : Room_Code(_Room_code), Number_Students(_Number_Student), condition_of_facilities(COF), Han_Dong_Tien_Phi_Sinh_Hoat(HDTPNSH)
 {
 }
-Room::Room()
-{
-
-}
 Room::~Room()
 {
 }
@@ -53,6 +49,20 @@ Doubly_Linked_List<Student> Room::Get_List_Student(Management_Student &Data)
         p = p->Get_Next();
     }
     return List;
+}
+Room::Room(const Room& R)
+{
+    this->Room_Code = R.Room_Code;
+    this->condition_of_facilities = R.condition_of_facilities;
+    this->Number_Students = R.Number_Students;
+    this->Han_Dong_Tien_Phi_Sinh_Hoat = R.Han_Dong_Tien_Phi_Sinh_Hoat;
+}
+Room::Room()
+{
+    this->Room_Code = "";
+    this->condition_of_facilities = true;
+    this->Number_Students = 0;
+    this->Han_Dong_Tien_Phi_Sinh_Hoat = CDate(0, 0, 0);
 }
 // void Room::Add_Student(Management_Student &,  const string &_Studen_code)
 // {

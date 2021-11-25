@@ -26,8 +26,8 @@ public:
     int Get_Lenght();
     T& Font();
     T& Back();
-    T& at(const int&);
-    T& operator[](const int&);
+    T& at( int);
+    T& operator[](int);
     Doubly_Linked_List<T>& operator=(const Doubly_Linked_List<T>&);
     void replace(const int&, const T&);
     void replace(Node<T>*, const T&);
@@ -201,12 +201,25 @@ T& Doubly_Linked_List<T>::Back()
     return this->Get_P_Tail()->Get_Data();
 }
 template<class T>
-T& Doubly_Linked_List<T>::at(const int& i)
+T& Doubly_Linked_List<T>::at(int i)
 {
-    Node<T>* p = this->Get_P_Head();
-    for (int j = 0; j < i; j++)
+    Node<T>* p;
+    if (i > (this->lenght / 2))
     {
-        p = p->Get_Next();
+        i = this->lenght - i;
+        p = this->Get_P_Tail();
+        for (int j = 0; j < i; j++)
+        {
+            p = p->Get_Prev();
+        }
+    }
+    else 
+    {
+        p = this->Get_P_Head();
+        for (int j = 0; j < i; j++)
+        {
+            p = p->Get_Next();
+        }
     }
     return p->Get_Data();
 }
@@ -223,7 +236,7 @@ void Doubly_Linked_List<T>::Delete_indexoff(const int& i)
 
 }
 template<class T>
-T& Doubly_Linked_List<T>::operator[](const int& i)
+T& Doubly_Linked_List<T>::operator[]( int i)
 {
     return at(i);
 }
