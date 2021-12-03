@@ -31,11 +31,14 @@ public:
     Doubly_Linked_List<T>& operator=(const Doubly_Linked_List<T>&);
     void replace(const int&, const T&);
     void replace(Node<T>*, const T&);
+    void Clear();
+    void Contructor();
 };
 template<class T>
 Doubly_Linked_List<T>::Doubly_Linked_List(const Doubly_Linked_List<T>& db)
 {
     Node<T>* p1 = db.P_Head;
+    Contructor();
     while (p1 != nullptr)
     {
         this->InsertAtTail(p1->Get_Data());
@@ -244,6 +247,7 @@ template<class T>
 Doubly_Linked_List<T>& Doubly_Linked_List<T>::operator=(const Doubly_Linked_List<T>& db)
 {
     Node<T>* p1 = db.P_Head;
+    Clear();
     while (p1 != nullptr)
     {
         this->InsertAtTail(p1->Get_Data());
@@ -265,4 +269,23 @@ template<class T>
 void Doubly_Linked_List<T>::replace( Node<T>* p,const T& val)
 {
     p->Set_Data(val);
+}
+template<class T>
+void Doubly_Linked_List<T>::Clear()
+{
+    Node<T>* p = this->P_Head;
+    while (p != nullptr)
+    {
+        this->P_Head = this->P_Head->Get_Next();
+        delete p;
+        p = this->P_Head;
+    }
+
+}
+template<class T>
+void Doubly_Linked_List<T>::Contructor()
+{
+    this->P_Head = nullptr;
+    this->P_Tail = nullptr;
+    this->lenght = 0;
 }

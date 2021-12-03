@@ -5,7 +5,7 @@ Management::Management()
 	//this->Data_Room.Read_File();
 	this->Data_Student.Read_File();
 	this->Data_Room.Read_File();
-	this->Data_Room.Write_File();
+	this->Data_Profile.Read_File();
 }
 Management::~Management()
 {
@@ -31,14 +31,13 @@ void Management::Menu_chinh()
 		}
 		case 1:
 		{
-			Xoa_o(4, 14, 39, 35);
 			this->Data_Room.Menu(this->Data_Student);
 			break;
 		}
 		case 2:
 		{
 			Xoa_o(4, 14, 39, 35);
-			//Menu_Profile();
+			this->Data_Profile.Menu();
 			break;
 		}
 		case 3:

@@ -7,28 +7,22 @@ using namespace std;
 #include<windows.h>
 #include<conio.h>
 #include<vector>
-<<<<<<< HEAD
-=======
-
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
-namespace
-{
-	typedef pair<int, int > ii;
-	typedef pair<ii, string > list;
-<<<<<<< HEAD
-	 list arr_1[6] = {
-		list(ii(15,16),"Quan Li Sinh Vien"),list(ii(17,19),"Quan Li Phong"),list(ii(17,22),"Quan Li Ho So")
-		,list(ii(14,25),"Quan Li The Ra Vao"),list(ii(19,28),"Thong Ke"),list(ii(21,31),"Thoat")
+typedef pair<int, int > ii;
+typedef pair<ii, string > list;
+namespace {
+	list arr_1[6] = {
+	   list(ii(15,16),"Quan Li Sinh Vien"),list(ii(17,19),"Quan Li Phong"),list(ii(17,22),"Quan Li Ho So")
+	   ,list(ii(19,28),"Thong Ke"),list(ii(21,31),"Thoat")
 	};
-=======
-	list arr_1[6];
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
 	list arr_Student[5];
 	list arr_Room[4];
-	list arr_Profile[6];
+	list arr_Profile[6] =
+	{
+		list(ii(13,16),"Quan Li Ho So Noi Tru"),list(ii(13,19),"Quan Li Ho So Dang Ki")
+	};
 	list arr_Card[5];
 	list arr_find[2];
-}
+};
 int bat_su_kien(list arr[], int n);
 void Introduction();
 void Xoa_o(int x, int y, int x2, int y2, int color = 0);

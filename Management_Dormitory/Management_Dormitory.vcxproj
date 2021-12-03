@@ -151,6 +151,7 @@
     <ClCompile Include="Residency_Profile.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Student.cpp" />
+    <ClCompile Include="Thong_Ke.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admission_Profile.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Residency_Profile.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Student.h" />
+    <ClInclude Include="Thong_Ke.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Admission_Profile.txt" />

@@ -6,13 +6,13 @@
 #include <ctime>
 #include<sstream>
 using namespace std;
-namespace 
-{
+namespace {
     char  month_table[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     char  leap_month_table[] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 }
-//check leap year or not
+    //check leap year or not
 #define IS_LEAP_YEAR(year) ((year%400 == 0) || (year%4 == 0 && year%100 != 0))?   true : false
+
 
 class CDate
 {

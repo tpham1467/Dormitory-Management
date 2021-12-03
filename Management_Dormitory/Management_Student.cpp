@@ -285,10 +285,6 @@ void Management_Student::Menu_update(Student& _student_section)
     string data;
     getline(cin, data);
 }
-void Management_Student::Update_Info(Node<Student>* p,const Student& _student)
-{
-    this->Database.replace(p, _student);
-}
 void Management_Student::Draw_a_Page(int y, int color, Doubly_Linked_List<Student>& Database, int j)
 {
     if (j == -1) {
@@ -397,7 +393,6 @@ void Management_Student::Draw_Info_Object()
     Outstring(63, 22, 9, 0, _student_section.Get_Email());
     Outstring(140, 22, 9, 0, _student_section.Get_Phone_number());
     Outstring(63, 26, 9, 0, _student_section.Get_Profile_Code());
-<<<<<<< HEAD
     _getch();
 }
 int Management_Student::Move_Page(Doubly_Linked_List<Student>& Database, bool& update, bool& find)
@@ -545,14 +540,8 @@ int Management_Student::Move_Page(Doubly_Linked_List<Student>& Database, bool& u
 
         }
     }
-=======
-    Outstring(100, 30, 2, 0, "Hoan Tat");
-    Hcn(60, 29, 150, 31);
-    string data;
-    getline(cin, data);
 }
 void Management_Student::Update_Info(Node<Student>* p,const Student& _student)
 {
     this->Database.replace(p, _student);
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
 }

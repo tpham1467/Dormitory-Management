@@ -22,11 +22,8 @@ public:
     /*void Confirm_Repair();
     void Payment();*/
     void Write_File();  
-<<<<<<< HEAD
     void Menu(Management_Student&);
-=======
     void Menu();
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
     void Draw_a_Page(int, Doubly_Linked_List<Room>&,int);
     int Move_Page(Doubly_Linked_List<Room>&, bool& , bool&);
     void Draw_Object(Doubly_Linked_List<Room>& , int, int , int);

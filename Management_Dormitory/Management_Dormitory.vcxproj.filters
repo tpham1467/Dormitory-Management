@@ -51,6 +51,9 @@
     <ClCompile Include="Management_Profile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Thong_Ke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Doubly_Linked_List.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Management_Profile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Thong_Ke.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

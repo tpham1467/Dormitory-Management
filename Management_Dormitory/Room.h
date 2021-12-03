@@ -2,10 +2,7 @@
 #include<string>
 #include"Doubly_Linked_List.h"
 #include"Management_Student.h"
-<<<<<<< HEAD
 #include"Student.h"
-=======
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
 #include"Date.h"
 #include<vector>
 using namespace std;
@@ -18,10 +15,7 @@ private:
     CDate Han_Dong_Tien_Phi_Sinh_Hoat;
 public:
     Room(const string&,const int&,const bool&,const CDate&);
-<<<<<<< HEAD
-=======
     Room(const Room&);
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
     Room();
     ~Room();
     Doubly_Linked_List<Student> Get_List_Student(Management_Student&);

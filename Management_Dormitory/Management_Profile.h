@@ -14,8 +14,8 @@ public:
 	void Add_Admission_Profile(const Admission_Profile&);
 	void Add_Residency_Profile(const Residency_Profile&);
 	void Extend(string);
-	Doubly_Linked_List< Admission_Profile> Find_Admission_Profile(string, Management_Student&);
-	Doubly_Linked_List< Residency_Profile> Find_Residency_Profile(string);
+	Doubly_Linked_List< Admission_Profile> Find_Admission_Profile(string, Management_Student);
+	Doubly_Linked_List< Residency_Profile> Find_Residency_Profile(string, Management_Student);
 	int  Pay(string);
 	void Confirm(string);
 	void Update_Admission_Profile(string);
@@ -25,5 +25,26 @@ public:
 	void Delete_RP(string);
 	void Delete_AP(string);
 	void Set_Room(string);
+	//
+	void Menu();
+	void Read_File();
+	void Write_File();
+	//RP
+	void Menu_RP();
+	// AP
+	void Menu_AP();
+	// graphisc
+	void Draw_a_Page_RP(int, Doubly_Linked_List<Residency_Profile>, int);
+	int Move_Page_RP(Doubly_Linked_List<Residency_Profile>, bool&, bool&);
+	void Draw_Object_RP(Doubly_Linked_List<Residency_Profile>&, int, int, int);
+	void Draw_Info_Object_RP(Management_Profile&);
+
+	//
+	void Draw_a_Page_AP(int, Doubly_Linked_List<Residency_Profile>, int);
+	int Move_Page_AP(Doubly_Linked_List<Residency_Profile>, bool&, bool&);
+	void Draw_Object_AP(Doubly_Linked_List<Residency_Profile>&, int, int, int);
+	void Draw_Info_Object_AP(Management_Profile&);
+
+
 };
 

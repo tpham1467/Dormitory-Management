@@ -1,13 +1,10 @@
 #include"Management_Room.h"
-<<<<<<< HEAD
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
 #include <algorithm>
 #include"Khoi_tao.h"
-=======
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
 bool flag = false;
 Room _room_section;
 void Mamagement_Room::Read_File()
@@ -161,7 +158,6 @@ void Mamagement_Room::Write_File()
     }
     output.close();
 }
-<<<<<<< HEAD
 void Mamagement_Room::Menu(Management_Student& data_student)
 {
     //bool check_del = true;
@@ -248,95 +244,8 @@ void Mamagement_Room::Menu(Management_Student& data_student)
         }
 
     }
-=======
-void Mamagement_Room::Menu()
-{
-    //Room _stud_section;
-    ////bool check_del = true;
-    //int index = 0;
-    //while (1)
-    //{
-    //ds:
-    //    bool update = false;
-    //    bool find = false;
-    //    index = Ve_nhieu_trang_chon(this->Database, update, find);
-
-    //    if (index == -1)
-    //    {
-    //        Xoa_o(48, 10, 170, 36, 0);
-    //        return;
-    //    }
-
-    //    else
-    //        _student_section = this->Database.at(index);
-
-    //    if (update == true)
-    //    {
-    //    updae_info:
-    //        gotoXY(3, 21);
-    //        Management_Student::Menu_update(_student_section);
-    //        //hien thi update
-    //    }
-    //    else if (find == true)
-    //    {
-    //    find:
-    //        gotoXY(3, 21);
-    //        cout << 2;
-    //        Xoa_o(48, 10, 170, 36, 0);
-    //        Hcn(50, 20, 100, 22);
-    //        Hcn(103, 20, 113, 22);
-    //        Outstring(103, 21, 0, 103, "Tim Kiem");
-    //        setBackgroundColor(0);
-    //        setColor(15);
-    //        gotoXY(52, 21);
-    //        Cursor(true);
-    //        string data;
-    //        getline(cin, data);
-    //        Cursor(false);
-    //        Doubly_Linked_List<Student> _data_find = Management_Student::Find_Student(data);
-    //        if (_data_find.Get_Lenght() == 0)
-    //        {
-    //            Not_Found();
-    //        }
-    //        else
-    //        {
-    //            index = Ve_nhieu_trang_chon(_data_find, update, find);
-    //            if (index == -1)
-    //            {
-    //                goto ds;
-    //            }
-
-    //            else
-    //            {
-
-    //                _student_section = _data_find.at(index);
-
-    //            }
-    //            if (update == true)
-    //            {
-    //                goto updae_info;
-    //            }
-    //            else if (find == true)
-    //            {
-    //                goto find;
-    //            }
-    //            else
-    //            {
-    //                goto hien_thi;
-    //            }
-    //        }
-
-    //    }
-    //    else
-    //    {
-    //    hien_thi:
-    //        Management_Student::Menu_update(_student_section);
-    //        Xoa_o(45, 9, 170, 36, 0);
-    //    }
-
-    //}
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
 }
+
 void Mamagement_Room::Draw_a_Page(int y, Doubly_Linked_List<Room>& _Data ,int j)
 {
     if (j == -1) {
@@ -380,13 +289,9 @@ void Mamagement_Room::Draw_a_Page(int y, Doubly_Linked_List<Room>& _Data ,int j)
     }
     Outstring(50, i - 1, 0, 6, _Data[j].Get_Room_code());
     Outint(75, i - 1, 0, 6, _Data[j].Get_NS());
-<<<<<<< HEAD
     Outstring(102, i - 1, 0, 6, (_Data[j].Get_COF()==true)?"Da Sua Chua":"Chua Sua Chua");
-=======
     Outstring(102, i - 1, 0, 6, (_Data[j].Get_COF()==0)?"Da Sua Chua":"Chua Sua Chua");
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
     Outstring(137, i - 1, 0, 6, _Data[j].Get_HDTPSH().Get_String());
-
     Line(61, 13, 61, 13 + 2 * y, 6);
     Line(61, 10, 61, 12, 15);
     Line(95, 13, 95, 13 + 2 * y, 6);
@@ -558,21 +463,13 @@ void Mamagement_Room::Draw_Object(Doubly_Linked_List<Room>& _Database, int index
     Outstring(102, (index - i) * 2 + 14, color, 6, ((_Database[index].Get_COF() == true) ? "Da Sua Chua" : "Chua Sua Chua"));
     Outstring(137, (index - i) * 2 + 14, color, 6, _Database[index].Get_HDTPSH().Get_String());
 }
-<<<<<<< HEAD
-void Mamagement_Room::Draw_Info_Object(Management_Student& Data)
-{
-    //_room_section = this->DataBase.at(0);
-=======
 void Mamagement_Room::Draw_Info_Object(Management_Student& _Data)
 {
-    Mamagement_Room::Read_File();
-    _room_section = this->DataBase[41];
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
     Xoa_o(48, 10, 170, 36, 0);
     Hcn(48, 9, 60, 11);
     Outstring(50, 10, 2, 0, "Ma Phong");
     Hcn(63, 9, 112, 11);
-    Outstring(120, 10, 2, 0,"So Luong Sinh Vien");
+    Outstring(120, 10, 2, 0, "So Luong Sinh Vien");
     Hcn(118, 9, 140, 11);
     Hcn(143, 9, 165, 11);
     Outstring(50, 14, 2, 0, "Tinh Trang Sua Chua");
@@ -583,52 +480,33 @@ void Mamagement_Room::Draw_Info_Object(Management_Student& _Data)
     Hcn(146, 13, 165, 15);
     int x1 = 48, x2 = 118;
     int y = 17;
-<<<<<<< HEAD
-    Doubly_Linked_List<Student> data = _room_section.Get_List_Student(Data);
-=======
     Doubly_Linked_List<Student> data = _room_section.Get_List_Student(_Data);
     Node<Student>* p = data.Get_P_Head();
-
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
     for (int i = 0; i < data.Get_Lenght(); i++)
     {
         if (i == 2 || i == 4) y += 4;
         if (i % 2 == 0)
         {
-            Outstring(50, y+1, 2, 0, "Sinh Vien :");
-            Outint(62, y+1, 2, 0, i + 1);
-            Hcn(48, y, 65, y+2);
-            Hcn(68, y, 112, y+2);
-<<<<<<< HEAD
-            Outstring(69, y+1, 9, 0, data[i].Get_Name());
-=======
-            Outstring(70, y + 1, 2, 0, p->Get_Data().Get_Name());
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
+            Outstring(50, y + 1, 2, 0, "Sinh Vien :");
+            Outint(62, y + 1, 2, 0, i + 1);
+            Hcn(48, y, 65, y + 2);
+            Hcn(68, y, 112, y + 2);
+            Outstring(70, y + 1, 9, 0, p->Get_Data().Get_Name());
         }
         else
         {
-            Outstring(120, y+1, 2, 0, "Sinh Vien :");
-            Outint(132, y+1, 2, 0, i + 1);
+            Outstring(120, y + 1, 2, 0, "Sinh Vien :");
+            Outint(132, y + 1, 2, 0, i + 1);
             Hcn(118, y, 135, y + 2);
-            Hcn(138, y, 165, y+2);
-<<<<<<< HEAD
-            Outstring(139, y + 1, 9, 0, data[i].Get_Name());
-        }
-    }
-    Outstring(64, 10, 9, 0, _room_section.Get_Room_code());
-    Outint(147, 10, 9, 0, _room_section.Get_NS());
-    Outstring(80, 14, 9, 0, ((_room_section.Get_COF()==true)?"Da Sua Chua":"Chua Sua Chua"));
-    Outstring(150, 14, 9, 0, _room_section.Get_HDTPSH().Get_String());
-    _getch();
-    //Hcn(60, 29, 150, 31);
-=======
-            Outstring(140, y + 1, 2, 0, p->Get_Data().Get_Name());
+            Hcn(138, y, 165, y + 2);
+            Outstring(139, y + 1, 9, 0, p->Get_Data().Get_Name());
         }
         p = p->Get_Next();
     }
-    Outstring(75, 10, 2, 0, _room_section.Get_Room_code());
-    Outint(155, 10, 2, 0, _room_section.Get_NS());
-    Outstring(84, 14, 2, 0,(_room_section.Get_COF()==true)?"Da Sua Chua":"Chua Sua Chua");
-    Outstring(150, 14, 2, 0, _room_section.Get_HDTPSH().Get_String());
->>>>>>> 719b41b9401dc152faff1cb55369e2c10e7f101d
+    Outstring(64, 10, 9, 0, _room_section.Get_Room_code());
+    Outint(147, 10, 9, 0, _room_section.Get_NS());
+    Outstring(80, 14, 9, 0, ((_room_section.Get_COF() == true) ? "Da Sua Chua" : "Chua Sua Chua"));
+    Outstring(150, 14, 9, 0, _room_section.Get_HDTPSH().Get_String());
+    _getch();
+    //Hcn(60, 29, 150, 31);
 }
