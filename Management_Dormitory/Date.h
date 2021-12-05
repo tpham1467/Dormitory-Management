@@ -95,8 +95,8 @@ public:
         tm* ltm = localtime(&now);
         CDate _Date;
         _Date.year = 1900 + ltm->tm_year;
-        _Date.month = 1 + ltm->tm_mon;
-        _Date.day = ltm->tm_mday;
+        _Date.day = 1 + ltm->tm_mon;
+        _Date.month = ltm->tm_mday;
         return _Date;
     }
     CDate& operator=(const CDate& _cdate)
@@ -208,7 +208,7 @@ public:
             }
         } while (k > 0);
     }
-    CDate& To_CDate(string s)
+    CDate To_CDate(string s)
     {
         CDate _c;
         for (int i = 0; i < s.size(); i++)
@@ -226,5 +226,43 @@ public:
         return _c;
 
    }
-   
+    bool operator>(const CDate& _cdate)
+    {
+        if (_cdate.year == this->year)
+        {
+            if (_cdate.month == this->month)
+            {
+                if (_cdate.day == this->day)
+                {
+                    return true;
+                }
+                else if (_cdate.day > this->day)
+                {
+                    return false;
+                }
+                else
+                {
+                   
+                    return true;
+                }
+            }
+            else if (_cdate.month > this->month)
+            {
+                return false;
+            }
+            else
+            {
+                
+                return true;
+            }
+        }
+        else if (_cdate.year > this->year)
+        {
+            return false;
+        }
+        else 
+        {
+            return true;
+        }
+    }
 };

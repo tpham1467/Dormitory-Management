@@ -103,9 +103,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="introduction.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="Student.txt">
       <Filter>Resource Files</Filter>
     </Text>
@@ -118,5 +115,13 @@
     <Text Include="Admission_Profile.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="introduction.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

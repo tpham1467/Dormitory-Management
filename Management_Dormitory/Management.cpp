@@ -2,7 +2,6 @@
 #include"Khoi_tao.h"
 Management::Management()
 {	
-	//this->Data_Room.Read_File();
 	this->Data_Student.Read_File();
 	this->Data_Room.Read_File();
 	this->Data_Profile.Read_File();
@@ -20,8 +19,8 @@ void Management::Menu_chinh()
 	while (1)
 	{
 
-		Hien_thi_danh_sach(arr_1, 5);
-		int a = bat_su_kien(arr_1, 5);
+		Hien_thi_danh_sach(arr_1, 4);
+		int a = bat_su_kien(arr_1, 4);
 		switch (a)
 		{
 		case 0:
@@ -40,18 +39,14 @@ void Management::Menu_chinh()
 			this->Data_Profile.Menu();
 			break;
 		}
+		
 		case 3:
 		{
 			Xoa_o(4, 14, 39, 35);
-			//Menu_Card();
+			this->tk.Menu(this->Data_Room,this->Data_Student,this->Data_Profile);
 			break;
 		}
 		case 4:
-		{
-			//Menu_Tk();
-			break;
-		}
-		case 5:
 		{
 			Xoa_o(0, 0, 175, 40);
 			exit(0);

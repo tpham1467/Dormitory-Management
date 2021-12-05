@@ -16,7 +16,7 @@ void Room::Set_COF(const bool &COF)
     this->condition_of_facilities = COF;
 }
 //Han_Dong_Tien_Phi Sinh Hoat
-CDate &Room::Get_HDTPSH()
+CDate Room::Get_HDTPSH()
 {
     return this->Han_Dong_Tien_Phi_Sinh_Hoat;
 }

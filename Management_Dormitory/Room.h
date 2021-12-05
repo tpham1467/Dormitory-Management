@@ -23,7 +23,7 @@ public:
     const bool& Get_COF();
     void Set_COF(const bool&);
     //Han_Dong_Tien_Phi Sinh Hoat
-    CDate& Get_HDTPSH();
+    CDate Get_HDTPSH();
     void Set_HDTPNSH(const CDate&);
     //Number Student
     const int& Get_NS();

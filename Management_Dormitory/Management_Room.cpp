@@ -52,7 +52,7 @@ Mamagement_Room::~Mamagement_Room()
 {
 	this->DataBase.~Doubly_Linked_List();
 }
-Doubly_Linked_List<Room> Mamagement_Room::Get_List_Room()
+Doubly_Linked_List<Room>& Mamagement_Room::Get_List_Room()
 {
 	return this->DataBase;
 }
@@ -71,10 +71,10 @@ Doubly_Linked_List<Room> Mamagement_Room::Find_Room(const string& data,Managemen
         while (pp != nullptr)
         {
             token = pp->Get_Data();
-            Room _room = this->Get_Room(token);
+            Node<Room>* _room = this->Get_Room(token);
             if (flag == false)
             {
-                data_Room.InsertAtTail(_room);
+                data_Room.InsertAtTail(_room->Get_Data());
             }
             else
             {
@@ -99,7 +99,6 @@ Doubly_Linked_List<Room> Mamagement_Room::Find_Room(const string& data,Managemen
                 Node<Student>* p = _Data_Student.Get_P_Head();
                 while (p!=nullptr){
                 
-                    cout << p->Get_Data().Get_Name() << p->Get_Data().Get_Room_Code() << endl;
                     List_rCode.push_back(p->Get_Data().Get_Room_Code());
                     p = p->Get_Next();
                 }
@@ -111,10 +110,8 @@ Doubly_Linked_List<Room> Mamagement_Room::Find_Room(const string& data,Managemen
 
         while (List_rCode.size() != 0)
         {
-            Room _r = this->Get_Room(List_rCode.back());
-            cout << _r.Get_Room_code() << 1;
-            data_Room.InsertAtTail(_r);
-
+            Node<Room>* _r = this->Get_Room(List_rCode.back());;
+            data_Room.InsertAtTail(_r->Get_Data());
             List_rCode.pop_back();
         }
 
@@ -126,7 +123,7 @@ Doubly_Linked_List<Room> Mamagement_Room::Find_Room(const string& data,Managemen
         return data_Room;
     }
 }
-const Room Mamagement_Room::Get_Room(string& _Room_code)
+Node<Room>* Mamagement_Room::Get_Room(string& _Room_code)
 {   
     transform(_Room_code.begin(), _Room_code.end(), _Room_code.begin(), toupper);
      Node<Room>* p = this->DataBase.Get_P_Head();
@@ -135,11 +132,11 @@ const Room Mamagement_Room::Get_Room(string& _Room_code)
   
          string Room_Code_2 = p->Get_Data().Get_Room_code();
          transform(Room_Code_2.begin(), Room_Code_2.end(), Room_Code_2.begin(), toupper);
-         if (_Room_code == Room_Code_2) return p->Get_Data();
+         if (_Room_code == Room_Code_2) return p;
          p = p->Get_Next();
      }
     flag = true;
-    return Room(" ", 0, 0, CDate(0,0,0));
+    return nullptr;
 }
 void Mamagement_Room::Write_File()
 {
@@ -158,7 +155,7 @@ void Mamagement_Room::Write_File()
     }
     output.close();
 }
-void Mamagement_Room::Menu(Management_Student& data_student)
+void Mamagement_Room::Menu(Management_Student& data_student,bool flag)
 {
     //bool check_del = true;
     int index = 0;
@@ -167,7 +164,8 @@ void Mamagement_Room::Menu(Management_Student& data_student)
     ds:
         bool update = false;
         bool find = false;
-        index = Move_Page(this->DataBase, update, find);
+        bool change = false;
+        index = Move_Page(this->DataBase, update, find, change);
 
         if (index == -1)
         {
@@ -177,12 +175,12 @@ void Mamagement_Room::Menu(Management_Student& data_student)
 
         else
             _room_section = this->DataBase.at(index);
-
         if (update == true)
         {
         updae_info:
+            if (flag == false) goto ds;
             gotoXY(3, 21);
-            Draw_Info_Object(data_student);
+            Update(data_student);
             Xoa_o(46, 9, 170, 36, 0);
             //hien thi update
         }
@@ -209,7 +207,8 @@ void Mamagement_Room::Menu(Management_Student& data_student)
             }
             else
             {
-                index = Move_Page(_data_find, update, find);
+                update = false; find = false; change = false;
+                index = Move_Page(_data_find, update, find,change);
                 if (index == -1)
                 {
                     goto ds;
@@ -236,10 +235,44 @@ void Mamagement_Room::Menu(Management_Student& data_student)
             }
 
         }
+        else if (change == true)
+        {
+            if (flag == false) goto ds;
+            Xoa_o(4, 14, 39, 35);
+            Hien_thi_danh_sach(arr_Menu_r ,1);
+            int a = bat_su_kien(arr_Menu_r,1);
+            if (a == 0)
+            {
+                Outstring(90, 37, 0, 103, "Chon Sinh Vien Can Chuyen Phong");
+                Node<Student>* p = data_student.Move_Room();
+                room_full:
+                Outstring(90, 37, 0, 103, "      Chon Phong Chuyen Den    ");
+                Menu(data_student,false);
+                string rc = _room_section.Get_Room_code();
+                if (_room_section.Get_NS() == 6)
+                {
+                    Room_Full();
+                    goto room_full;
+                }
+                p->Get_Data().Set_Room_Code(rc);
+                Node<Room>* p1 = Get_Room(rc);
+                p1->Get_Data().Set_NS(p1->Get_Data().Get_NS() + 1);
+                Outstring(90, 37, 0, 0, "Chon Sinh Vien Can Chuyen Phong");
+                Add_Success(0);
+            }
+            else
+            {
+                Add_Success(1);
+            }
+            Xoa_o(48, 10, 170, 36, 0);
+            Hien_thi_danh_sach(arr_1, 4);
+        }
         else
         {
         hien_thi:
+            if (flag == false) return;
             Draw_Info_Object(data_student);
+            _getch();
             Xoa_o(46, 9, 170, 36, 0);
         }
 
@@ -290,7 +323,6 @@ void Mamagement_Room::Draw_a_Page(int y, Doubly_Linked_List<Room>& _Data ,int j)
     Outstring(50, i - 1, 0, 6, _Data[j].Get_Room_code());
     Outint(75, i - 1, 0, 6, _Data[j].Get_NS());
     Outstring(102, i - 1, 0, 6, (_Data[j].Get_COF()==true)?"Da Sua Chua":"Chua Sua Chua");
-    Outstring(102, i - 1, 0, 6, (_Data[j].Get_COF()==0)?"Da Sua Chua":"Chua Sua Chua");
     Outstring(137, i - 1, 0, 6, _Data[j].Get_HDTPSH().Get_String());
     Line(61, 13, 61, 13 + 2 * y, 6);
     Line(61, 10, 61, 12, 15);
@@ -307,7 +339,7 @@ void Mamagement_Room::Draw_a_Page(int y, Doubly_Linked_List<Room>& _Data ,int j)
 
     }
 }
-int Mamagement_Room::Move_Page(Doubly_Linked_List<Room>& _data, bool& update, bool& find)
+int Mamagement_Room::Move_Page(Doubly_Linked_List<Room>& _data, bool& update, bool& find,bool& change)
 {
     int lenght = _data.Get_Lenght();
     int so_lan = (int)(lenght / 10) + 1;
@@ -380,6 +412,11 @@ int Mamagement_Room::Move_Page(Doubly_Linked_List<Room>& _data, bool& update, bo
             }
 
             break;
+        }
+        case 109:
+        {
+            change = true;
+            return dem;
         }
         case 13:
         {
@@ -507,6 +544,76 @@ void Mamagement_Room::Draw_Info_Object(Management_Student& _Data)
     Outint(147, 10, 9, 0, _room_section.Get_NS());
     Outstring(80, 14, 9, 0, ((_room_section.Get_COF() == true) ? "Da Sua Chua" : "Chua Sua Chua"));
     Outstring(150, 14, 9, 0, _room_section.Get_HDTPSH().Get_String());
-    _getch();
     //Hcn(60, 29, 150, 31);
+}
+void Mamagement_Room::Update(Management_Student& Data_Student)
+{
+    Quay_lai :
+    Draw_Info_Object(Data_Student);
+    Outstring(50, 30, 2, 0, "Xac Nhan Sua Chua");
+    Hcn(48, 29, 67,31);
+    Outstring(120, 30, 2, 0, "Dong Tien Dien Nuoc");
+    Hcn(118, 29, 140, 31);
+    int i = 1;
+    while (1)
+    {
+        char key = ' ';
+        key = _getch();
+        if(i==1)
+          Outstring(50, 30, 2, 0, "Xac Nhan Sua Chua");
+        else 
+            Outstring(120, 30, 2, 0, "Dong Tien Dien Nuoc");
+        if (key == 75)
+        {
+            if (i == 2) i--;
+
+        }
+        else if (key == 77)
+        {
+            if (i == 1) i++;
+
+        }
+        else if (key == 13)
+        {
+            if (i == 1)
+            {
+                if (_room_section.Get_COF() == false)
+                {
+                    _room_section.Set_COF(true);
+                    Confirm(0);
+                }
+                else
+                {
+                    Confirm(1);
+                    char Key=_getch();
+                    if (Key == 'Y' || Key == 'y')
+                    {
+                        _room_section.Set_COF(false);
+                    }
+                    Outstring(80, 33, 0, 0, "                                                        ");
+                    Outstring(80, 34, 0, 0, "                                                        ");
+                }
+            }
+            else
+            {
+                Payment_Success(1);
+                CDate d;
+                d = d.Get_time();
+                d.operator+(1);
+                _room_section.Set_HDTPNSH(d);
+            }
+            goto Quay_lai;
+        }
+        else if (key == 27)
+        {
+            string rc = _room_section.Get_Room_code();
+            Node<Room>* p = Get_Room(rc);
+            this->DataBase.replace(p, _room_section);
+            break;
+        }
+        if (i == 1)
+            Outstring(50, 30, 4, 0, "Xac Nhan Sua Chua");
+        else
+            Outstring(120, 30, 4, 0, "Dong Tien Dien Nuoc");
+    }
 }

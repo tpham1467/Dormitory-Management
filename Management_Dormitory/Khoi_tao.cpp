@@ -2,38 +2,7 @@
 #include"Khoi_tao.h"
 void Khoi_tao_cac_danh_sach()
 {
-	/*arr_1[0].first.first = 15; arr_1[0].first.second = 16; arr_1[0].second = "Quan Li Sinh Vien";
-	arr_1[1].first.first = 17; arr_1[1].first.second = 19; arr_1[1].second = "Quan Li Phong";
-	arr_1[2].first.first = 17; arr_1[2].first.second = 22; arr_1[2].second = "Quan Li Ho So";
-	arr_1[3].first.first = 14; arr_1[3].first.second = 25; arr_1[3].second = "Quan Li The Ra Vao";
-	arr_1[4].first.first = 19; arr_1[4].first.second = 28; arr_1[4].second = "Thong Ke";
-	arr_1[5].first.first = 21; arr_1[5].first.second = 31; arr_1[5].second = "Thoat";*/
-	//arr_Student
-	arr_Student[0].first.first = 16; arr_Student[0].first.second = 16; arr_Student[0].second = "Them Sinh Vien";
-	arr_Student[1].first.first = 14; arr_Student[1].first.second = 19; arr_Student[1].second = "Tim Kiem Sinh Vien";
-	arr_Student[2].first.first = 17; arr_Student[2].first.second = 22; arr_Student[2].second = "Xoa Sinh Vien";
-	arr_Student[3].first.first = 9; arr_Student[3].first.second = 25; arr_Student[3].second = "Cap nhap thong Tin Sinh Vien";
-	arr_Student[4].first.first = 14; arr_Student[4].first.second = 28; arr_Student[4].second = "Hien Thi Danh Sach";
-	//Room
-	arr_Room[0].first.first = 11; arr_Room[0].first.second = 16; arr_Room[0].second = "Hien Thi Thong Tin Phong";
-	arr_Room[1].first.first = 11; arr_Room[1].first.second = 19; arr_Room[1].second = "Thanh Toan Tien Dien Nuoc";
-	arr_Room[2].first.first = 16; arr_Room[2].first.second = 22; arr_Room[2].second = "Tim Kiem Phong";
-	arr_Room[3].first.first = 15; arr_Room[3].first.second = 25; arr_Room[3].second = "Xac Nhan Sua Chua";
-	//Profile
-	arr_Profile[0].first.first = 12; arr_Profile[0].first.second = 16; arr_Profile[0].second = "Hien Thi Thong Tin Ho So";
-	arr_Profile[1].first.first = 16; arr_Profile[1].first.second = 19; arr_Profile[1].second = "Tim Kiem Ho So";
-	arr_Profile[2].first.first = 19; arr_Profile[2].first.second = 22; arr_Profile[2].second = "Xoa Ho So";
-	arr_Profile[3].first.first = 16; arr_Profile[3].first.second = 25; arr_Profile[3].second = "Phe Duyet Ho So";
-	arr_Profile[4].first.first = 20; arr_Profile[4].first.second = 28; arr_Profile[4].second = "Gia Han";
-	arr_Profile[5].first.first = 14; arr_Profile[5].first.second = 31; arr_Profile[5].second = "Chinh Sua Thong Tin";
-	//Card
-	arr_Card[0].first.first = 9; arr_Card[0].first.second = 16; arr_Card[0].second = "Hien Thi Thong Tin The Ra Vao";
-	arr_Card[1].first.first = 14; arr_Card[1].first.second = 19; arr_Card[1].second = "Tim Kiem The Ra Vao";
-	arr_Card[2].first.first = 16; arr_Card[2].first.second = 22; arr_Card[2].second = "Xoa The Ra Vao";
-	arr_Card[3].first.first = 9; arr_Card[3].first.second = 25; arr_Card[3].second = "Chinh Sua Thong Tin The Ra Vao";
-	// Find
-	arr_find[0].first.first = 6; arr_find[0].first.second = 16; arr_find[0].second = "Tim Kiem Bang Canh Nhap Thong Tin";
-	arr_find[1].first.first = 11; arr_find[1].first.second = 19; arr_find[1].second = "Tim Kiem Trong Danh Sach";
+
 }
 int bat_su_kien(list arr[], int n)
 {
@@ -226,5 +195,69 @@ void Not_Found()
 	/*Xoa_o(100, 24, 120, 25, 4);*/
 	Outstring(102, 24, 0, 4, "      Khong Tim Thay     ");
 	Outstring(102, 25, 0, 4, " Nhan Bat Ki De Tiep Tuc ");
+	_getch();
+}
+void Not_Change()
+{
+	Outstring(102, 28, 0, 4, "      Du Lieu Khong Duoc Thay Doi      ");
+	Outstring(102, 29, 0, 4, "       Nhan Bat Ki De Tiep Tuc         ");
+	_getch();
+	Outstring(102, 28, 0, 0, "                                       ");
+	Outstring(102, 29, 0, 0, "                                       ");
+}
+void Input_Error()
+{
+	Outstring(102, 28, 0, 4, "      Du Lieu Khong Hop Le Vui Long Nhap Lai     ");
+	Outstring(102, 29, 0, 4, "            Nhan Bat Ki De Tiep Tuc              ");
+	_getch();
+	Outstring(102, 28, 0, 0, "                                                 ");
+	Outstring(102, 29, 0, 0, "                                                 ");
+}
+void Payment_Success(int i)
+{
+		Outstring(80, 33, 0, 4, "      Thanh Toan Thanh Cong         ");
+		Outstring(80, 34, 0, 4, "      Nhan Bat Ki De Tiep Tuc       ");
+		_getch();
+		Outstring(80, 33, 0, 0, "                                    ");
+		Outstring(80, 34, 0, 0, "                                    ");
+}
+void Confirm(int i)
+{
+	if (i == 0)
+	{
+		Outstring(80, 33, 0, 4, "      Xac Nhan Sua Chua Thanh Cong         ");
+		Outstring(80, 34, 0, 4, "        Nhan Bat Ki De Tiep Tuc            ");
+		_getch();
+		Outstring(80, 33, 0, 0, "                                           ");
+		Outstring(80, 34, 0, 0, "                                           ");
+	}
+	else
+	{
+		Outstring(80, 33, 0, 4, "           Phong Nay Khong Can Sua Chua                 ");
+		Outstring(80, 34, 0, 4, "      Nhan Y/N Neu Ban Muon Dang Ki Sua Chua            ");
+	}
+}
+void Add_Success(int i)
+{
+	if (i == 0)
+	{
+		Xoa_o(48, 10, 170, 35, 0);
+		Outstring(90, 20, 0, 4, "      Chuyen Phong Thanh Cong     ");
+		Outstring(90, 21, 0, 4, "      Nhan Bat Ki De Tiep Tuc     ");
+		_getch();
+	}
+	else
+	{
+		Xoa_o(48, 10, 170, 35, 0);
+		Outstring(90, 20, 0, 4, "       Them Phong Thanh Cong      ");
+		Outstring(90, 21, 0, 4, "      Nhan Bat Ki De Tiep Tuc     ");
+		_getch();
+	}
+}
+void Room_Full()
+{
+	Xoa_o(48, 10, 170, 35, 0);
+	Outstring(90, 20, 0, 4, "      Phong Da Day Vui Long Chon Lai     ");
+	Outstring(90, 21, 0, 4, "           Nhan Bat Ki De Tiep Tuc       ");
 	_getch();
 }

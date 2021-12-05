@@ -1,30 +1,35 @@
 ﻿#include <iostream>
 #include<string>
-#include <cstdlib>
-#include <ctime>
+//#include <cstdlib>
+//#include <ctime>
 // #include"management_room.h"
 //#include"management_student.h"
-//#include"Date.h"
+//#include"date.h"
 //#include <fstream>
-//#include"Management.h"
-////#include"Doubly_Linked_List.h"
+//#include"management.h"
+////#include"doubly_linked_list.h"
 ////#include <algorithm>
-////#include"Management.h"
-////#include"Doubly_Linked_List.h"
+////#include"management.h"
+////#include"doubly_linked_list.h"
 ////#include <algorithm>
-//#include"Management_Room.h"
+//#include"management_room.h"
 //#include<sstream>
 //#include<vector>
 #include"Thong_Ke.h"
+#include "Management.h"
+#include"Date.h"
 using namespace std;
 int main()
 {
-   
+   /*
     Thong_Ke tk;
     Khoi_tao();
-    vector<int> v1 = {100,50,20,100,200,700};
-    vector<string> v2 = { "CNTT","Hoa","QLDA","Dien Tu","Dien Lanh","Dien Tu Vien Thong"};
-    tk.Draw_Column_Chart(v1,v2,"Bieu Do Cot Danh Sach Sinh Vien Cac Khoa","So Sinh Vien","Khoa");
+    vector<int> v1 = {100,100,100,100,100,100};
+    vector<string> v2 = { "cntt","hoa","qlda","dien tu","dien lanh","dien tu vien thong"};
+    tk.Draw_Column_Chart(v1,v2,"Bieu do cot danh sach sinh vien cac khoa","So sinh vien","Khoa");*/
+    Management data;
+    data.Menu_chinh();
+  
     _getch();
     return 0;
 }

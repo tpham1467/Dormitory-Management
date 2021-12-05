@@ -107,6 +107,11 @@ Doubly_Linked_List<Student>&  Management_Student::Get_List_Student()
 {
     return this->Database;
 }
+Node<Student>* Management_Student::Move_Room()
+{
+    Menu_Student(false);
+    return Index_off(_student_section.Get_Student_Code());
+}
 void Management_Student::Delete_Student( Student& _student)
 {
 
@@ -120,6 +125,7 @@ Node<Student>* Management_Student::Index_off(string _student_code)
         if (p->Get_Data().Get_Student_Code() == _student_code) return p;
         p = p->Get_Next();
     }
+    return nullptr;
 }
 //void Management_Student::Update_Info(Node<Student>* p)
 //{
@@ -191,7 +197,7 @@ void Management_Student::Read_File()
         input.close();
     }
 }
-void Management_Student::Menu_Student()
+void Management_Student::Menu_Student(bool flag)
 {
     //bool check_del = true;
     int index = 0;
@@ -201,7 +207,6 @@ void Management_Student::Menu_Student()
         bool update = false;
         bool find = false;
         index = Move_Page(this->Database, update, find);
-
         if (index == -1)
         {
             Xoa_o(48, 10, 170, 36, 0);
@@ -210,14 +215,12 @@ void Management_Student::Menu_Student()
 
         else
             _student_section = this->Database.at(index);
-
         if (update == true)
         {
         updae_info:
-            gotoXY(3, 21);
-            Management_Student::Menu_update(_student_section);
+            if (flag == false) goto ds;
+            Update();
             Xoa_o(46, 9, 170, 36, 0);
-            //hien thi update
         }
         else if (find == true)
         {
@@ -242,6 +245,8 @@ void Management_Student::Menu_Student()
             }
             else
             {
+                find = false;
+                update = false;
                 index = Move_Page(_data_find, update, find);
                 if (index == -1)
                 {
@@ -272,7 +277,9 @@ void Management_Student::Menu_Student()
         else
         {
         hien_thi:
+            if (flag == false) return;
             Management_Student::Draw_Info_Object();
+            _getch();
             Xoa_o(46, 9, 170, 36, 0);
         }
 
@@ -393,13 +400,15 @@ void Management_Student::Draw_Info_Object()
     Outstring(63, 22, 9, 0, _student_section.Get_Email());
     Outstring(140, 22, 9, 0, _student_section.Get_Phone_number());
     Outstring(63, 26, 9, 0, _student_section.Get_Profile_Code());
-    _getch();
+    
 }
 int Management_Student::Move_Page(Doubly_Linked_List<Student>& Database, bool& update, bool& find)
 {
     int lenght = Database.Get_Lenght();
     int so_lan = (int)(lenght / 10) + 1;
-    int i = 0, j = 1; int z = 0; ; int dem = 0; bool check = false;
+     int i = 0;
+     int j = 1;
+    int z = 0; ; int dem = 0; bool check = false;
     Xoa_o(48, 10, 170, 35, 0);
     bool Firt = false;
     if (so_lan == 1)
@@ -541,7 +550,212 @@ int Management_Student::Move_Page(Doubly_Linked_List<Student>& Database, bool& u
         }
     }
 }
-void Management_Student::Update_Info(Node<Student>* p,const Student& _student)
+void Management_Student::Update_DataBase(Node<Student>* p)
 {
-    this->Database.replace(p, _student);
+    this->Database.replace(p, _student_section);
+}
+void Management_Student::Update()
+{
+    Management_Student::Draw_Info_Object();
+    int i = 1;
+    while (1)
+    {
+        char key=' ';
+        key = _getch();
+        Doi_Mau(i, 9);
+       if(key== 80)
+        {
+            if (i == 9)
+            {
+                i = 1;
+            }
+            else
+            {
+                i++;
+            }
+            
+        }
+       else if(key==72)
+        {
+            if (i == 1)
+            {
+                i = 9;
+            }
+            else
+            {
+                i--;
+            }
+           
+        }
+       else if (key == 75)
+       {
+           if (i >= 6)
+           {
+               i -= 5;
+           }
+
+       }
+        else if (key == 77)
+        {
+            if (i < 6)
+            {
+                if (i == 5)
+                {
+                    i = 9;
+                }
+                else
+                {
+
+
+                    i += 5;
+                }
+            }
+            
+        }
+        else if (key == 13)
+        {
+           Updata_Info(i);
+        }
+        else if (key == 27)
+        {
+           Node<Student>* p = Index_off(_student_section.Get_Student_Code());
+           Update_DataBase(p);
+           break;
+        }
+       Doi_Mau(i, 4);
+    }
+}
+void Management_Student::Updata_Info(int i)
+{
+    int color = 0;
+    Cursor(true);
+    if (i == 1)
+    {
+        Outstring(65, 10, color, 0, _student_section.Get_Name());
+        gotoXY(65, 10);
+        Outchar(32, 170, 15, 0, ' ');
+        string data;
+        getline(cin, data);
+        _student_section.Set_Name(data);
+        Outstring(65, 10, 0, 0,data+" ");
+    }
+    else if (i == 2)
+    {
+        Outstring(62, 14, color, 0, _student_section.Get_Address());
+        gotoXY(62, 14);
+        Outchar(32, 170, 15, 0, ' ');
+        string data;
+        getline(cin, data);
+        _student_section.Set_Address(data);
+        Outstring(62, 14, 0, 0, data+" ");
+    }
+    else if (i == 3)
+    {
+        Outstring(68, 18, color, 0, _student_section.Get_Student_Code());
+        Not_Change();
+    }
+    else if (i == 4)
+    {
+        Outstring(63, 22, color, 0, _student_section.Get_Email());
+        gotoXY(63,22);
+        Outchar(32, 170, 15, 0, ' ');
+        string data;
+        getline(cin, data);
+        _student_section.Set_Email(data);
+        Outstring(63, 22, 0, 0, data+" ");
+    }
+    else if (i == 5)
+    {
+        Outstring(63, 26, 4, 0, _student_section.Get_Profile_Code());
+        Not_Change();
+    }
+    else if (i == 6)
+    {
+        Outstring(137, 10, color, 0, (_student_section.Get_Gender() == 0) ? "Nu" : "Nam");
+        gotoXY(137, 10);
+        string data;
+        Outchar(32, 170, 15, 0, ' ');
+        getline(cin, data);
+        if (data.size() > 2)
+            _student_section.Set_Gender(1);
+        else
+            _student_section.Set_Gender(0);
+        Outstring(137, 10, 0, 0, data+" ");
+    }
+    else if (i == 7)
+    {
+        quaylai:
+        Outstring(137, 14, color, 0, _student_section.Get_Date_of_Birth().Get_String());
+        gotoXY(137, 14);
+        string data;
+        Outchar(32, 170, 15, 0, ' ');
+        getline(cin, data);
+        CDate d;
+        d = d.To_CDate(data);
+        if (d.validDate() == false)
+        {
+            Outstring(137, 14, 0, 0, data + " ");
+            Input_Error();
+            goto quaylai;
+        }
+        _student_section.Set_Date_of_Birth(d);
+        Outstring(137, 14, 0, 0, data+" ");
+    }
+    else if (i == 8)
+    {
+        Outstring(135, 18, color, 0, _student_section.Get_Room_Code());
+        Not_Change();
+    }
+    else if (i == 9)
+    {
+        Outstring(140, 22, color, 0, _student_section.Get_Phone_number());
+        gotoXY(140,22);
+        string data;
+        Outchar(32, 170, 15, 0, ' ');
+        getline(cin, data);
+        _student_section.Set_Phone_number(data);
+        Outstring(140,22, 0, 0, data+" ");
+    }
+    Cursor(false);
+}
+void Management_Student::Doi_Mau(int i,int color)
+{
+    if (i == 1)
+    {
+        Outstring(65, 10, color, 0, _student_section.Get_Name());
+    }
+    else if (i == 2)
+    {
+        Outstring(62, 14, color, 0, _student_section.Get_Address());
+    }
+    else if (i == 3)
+    {
+        Outstring(68, 18, color, 0, _student_section.Get_Student_Code());
+
+    }
+    else if (i == 4)
+    {
+        Outstring(63, 22, color, 0, _student_section.Get_Email());
+    }
+    else if (i == 5)
+    {
+        Outstring(63, 26, color, 0, _student_section.Get_Profile_Code());
+
+    }
+    else if (i == 6)
+    {
+        Outstring(137, 10, color, 0, (_student_section.Get_Gender() == 0) ? "Nu" : "Nam");
+    }
+    else if (i == 7)
+    {
+        Outstring(137, 14, color, 0, _student_section.Get_Date_of_Birth().Get_String());
+    }
+    else if (i == 8)
+    {
+        Outstring(135, 18, color, 0, _student_section.Get_Room_Code());
+    }
+    else if (i == 9)
+    {
+        Outstring(140, 22, color, 0, _student_section.Get_Phone_number());
+    }
 }

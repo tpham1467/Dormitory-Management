@@ -172,10 +172,13 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Admission_Profile.txt" />
-    <Text Include="introduction.txt" />
     <Text Include="Residency_Profile.txt" />
     <Text Include="Room.txt" />
     <Text Include="Student.txt" />
+    <Text Include="introduction.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

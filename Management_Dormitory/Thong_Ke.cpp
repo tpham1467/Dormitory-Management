@@ -3,7 +3,7 @@
 #include<string>
 void Thong_Ke::Draw_Column_Chart(vector<int> value,vector<string> value_s,string name,string name_col,string name_row)
 {
-	int k = 5;
+	int k = 6;
 	vector<int>::iterator min = min_element(begin(value), end(value));
 	vector<int>::iterator max = max_element(begin(value), end(value));
 	int next;
@@ -30,17 +30,11 @@ void Thong_Ke::Draw_Column_Chart(vector<int> value,vector<string> value_s,string
 		Outchar(i, 29, 15, 0, (char)196);
 	}
 	Outchar(60, 29, 15, 0, (char)192);
-	int v = stoi(max_s);
-	while (v > 3000)
-	{
-		k--;
-		v -= 1000;
-	}
-	while (v > 400)
-	{
-		k--;
-		v -= 100;
-	}
+	int v = stoi(max_s) / next;
+	if (v >= 4 && v < 6) k = 3;
+	else if (v >= 6 && v < 8) k = 3;
+	else if (v >= 8 && v <= 10) k =2;
+	else if (v <= 3 && v >= 2) k = 5;
 	for (int i = 1; i <= stoi(max_s) / next; i++)
 	{
 		Outchar(60, 29 - i * k, 15, 0, (char)197);
@@ -64,13 +58,72 @@ void Thong_Ke::Draw_Column_Chart(vector<int> value,vector<string> value_s,string
 	int x = 59;
 	for(int i=0;i<name_col.size();i++)
 	{
-		Outchar(x--, 11 , 15, 0, name_col[name_col.size()-i-1]);
+		Outchar(x--, 10 , 15, 0, name_col[name_col.size()-i-1]);
 	}
 	x = 160;
 	for (int i = 0; i < name_row.size(); i++)
 	{
 		Outchar(x--, 30, 15, 0, name_row[name_row.size() - i - 1]);
 	}
-	Outstring(68, 31, 15, 0, name_row);
+	//Outstring(68, 31, 15, 0, name_row);
 }
-	
+void Thong_Ke::Menu(Mamagement_Room Data_Room,Management_Student Data_Student,Management_Profile Data_Profile)
+{
+	while (1)
+	{
+
+		Hien_thi_danh_sach(arr_tk, 3);
+		int a = bat_su_kien(arr_tk,3);
+		switch (a)
+		{
+		case 0:
+		{
+			
+			break;
+		}
+		case 1:
+		{
+			Thong_Ke_Phi_Sinh_Hoat(Data_Room);
+			break;
+		}
+		case 2:
+		{
+			
+			break;
+		}
+
+		case 3:
+		{
+
+			break;
+		}
+		default:
+		{
+			break;
+		}
+
+		}
+	}
+}
+void Thong_Ke::Thong_Ke_Phi_Sinh_Hoat(Mamagement_Room Data_Room)
+{
+	Node<Room>* p = Data_Room.Get_List_Room().Get_P_Head();
+	CDate time;
+	time = time.Get_time();
+	vector<string> name = { "Da Dong Phi"," Chua Dong Phi" };
+	vector<int>  value = {0,0};
+	while (p != nullptr)
+	{
+		CDate d1 = p->Get_Data().Get_HDTPSH();
+		if (time > d1)
+		{
+			value[0]++;
+		}
+		else
+		{
+			value[1]++;
+		}
+		p = p->Get_Next();
+	}
+	Draw_Column_Chart(value, name, "Bieu Do Cot Ve Tinh Trang Dong Phi o cac Phong", "So Phong", " ");
+}
