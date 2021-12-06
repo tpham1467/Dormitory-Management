@@ -17,6 +17,8 @@ public:
 	}
 	void Menu(Mamagement_Room, Management_Student, Management_Profile);
 	void Thong_Ke_Phi_Sinh_Hoat(Mamagement_Room);
+	void Thong_Ke_Phi_Noi_Tru(Management_Profile);
+	void Thong_Ke_Tinh_Trang_Vat_Chat(Mamagement_Room);
 	void Draw_Column_Chart(vector<int>,  vector<string>,string name, string , string );
 };
 

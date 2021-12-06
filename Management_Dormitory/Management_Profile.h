@@ -9,8 +9,8 @@ private:
 public:
 	Management_Profile();
 	~Management_Profile();
-	Doubly_Linked_List<Admission_Profile> Get_Data_AP();
-	Doubly_Linked_List<Residency_Profile> Get_Data_RP();
+	Doubly_Linked_List<Admission_Profile>& Get_Data_AP();
+	Doubly_Linked_List<Residency_Profile>& Get_Data_RP();
 	void Add_Admission_Profile(const Admission_Profile&);
 	void Add_Residency_Profile(const Residency_Profile&);
 	void Extend(string);
@@ -26,11 +26,11 @@ public:
 	void Delete_AP(string);
 	void Set_Room(string);
 	//
-	void Menu();
+	void Menu(Management_Student);
 	void Read_File();
 	void Write_File();
 	//RP
-	void Menu_RP();
+	void Menu_RP(Management_Student);
 	// AP
 	void Menu_AP();
 	// graphisc

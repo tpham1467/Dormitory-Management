@@ -36,14 +36,18 @@ void Management::Menu_chinh()
 		case 2:
 		{
 			Xoa_o(4, 14, 39, 35);
-			this->Data_Profile.Menu();
+			this->Data_Profile.Menu(Data_Student);
+			Xoa_o(46, 9, 170, 36, 0);
+			Xoa_o(4, 14, 39, 35);
 			break;
 		}
 		
 		case 3:
 		{
 			Xoa_o(4, 14, 39, 35);
-			this->tk.Menu(this->Data_Room,this->Data_Student,this->Data_Profile);
+			this->tk.Menu(this->Data_Room, this->Data_Student, this->Data_Profile);
+			Xoa_o(46, 9, 170, 36, 0);
+			Xoa_o(4, 14, 39, 35);
 			break;
 		}
 		case 4:

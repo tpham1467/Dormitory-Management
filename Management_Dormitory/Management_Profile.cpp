@@ -17,11 +17,11 @@ Management_Profile:: ~Management_Profile()
 {
 
 }
-Doubly_Linked_List<Admission_Profile> Management_Profile::Get_Data_AP()
+Doubly_Linked_List<Admission_Profile>& Management_Profile::Get_Data_AP()
 {
 	return this->Data_AP;
 }
-Doubly_Linked_List<Residency_Profile> Management_Profile::Get_Data_RP()
+Doubly_Linked_List<Residency_Profile>& Management_Profile::Get_Data_RP()
 {
 	return this->Data_RP;
 }
@@ -97,40 +97,42 @@ Doubly_Linked_List< Residency_Profile> Management_Profile::Find_Residency_Profil
 		_data_Token.InsertAtTail(token);
 	}
 	//find
-	Node<Admission_Profile>* p = this->Data_AP.Get_P_Head();
+	Node<Residency_Profile>* p = this->Data_RP.Get_P_Head();
+	bool check = false;
 	while (p != nullptr)
 	{
-
-		bool check = false;
+		check = false;
 		Node<string>* pp = _data_Token.Get_P_Head();
 		while (pp != nullptr && check == false)
 		{
 			token = pp->Get_Data();
 			string _profile_code = p->Get_Data().Get_Profile_Code();
-			if (_profile_code.find(token) >= 0 || _profile_code.find(token) <= _profile_code.length())
+			if (_profile_code==token)
 			{
 				data_RP.InsertAtTail(p->Get_Data());
 				check = true;
 			}
 			if (check == true) break;
-			if (check == false)
-			{
-				Doubly_Linked_List<Student> data_Student = Database_Student.Find_Student(token);
-				if (data_Student.Get_Lenght() != 0)
-				{
-					Node<Student>* p1 = data_Student.Get_P_Head();
-					while (p1 != nullptr)
-					{
-						Node<Admission_Profile>* p2 = Indexoff(p->Get_Data().Get_Profile_Code());
-						data_RP.InsertAtTail(p2->Get_Data());
-					}
-					check = true;
-				}
-			}
 			pp = pp->Get_Next();
 		}
 
 		p = p->Get_Next();
+	}
+	if (check == false)
+	{
+		Doubly_Linked_List<Student> data_Student = Database_Student.Find_Student(data);
+		if (data_Student.Get_Lenght() != 0)
+		{
+			Node<Student>* p1 = data_Student.Get_P_Head();
+			while (p1 != nullptr)
+			{
+				string sc = p1->Get_Data().Get_Profile_Code();
+				Node<Residency_Profile>* p2 = Indexoff(sc, 1);
+				if(p2!=nullptr)
+				data_RP.InsertAtTail(p2->Get_Data());
+				p1 = p1->Get_Next();
+			}
+		}
 	}
 	return data_RP;
 }
@@ -184,7 +186,7 @@ void Management_Profile::Delete_AP(string _profile_code)
 
 
 }
-void Management_Profile::Menu()
+void Management_Profile::Menu(Management_Student Data_Student)
 {
 	bool flag = true;
 	while (flag)
@@ -197,7 +199,7 @@ void Management_Profile::Menu()
 		case 0:
 		{
 			bool find, update;
-			Move_Page_RP(this->Data_RP,find,update);
+			Menu_RP(Data_Student);
 			break;
 		}
 		case 1:
@@ -294,92 +296,93 @@ void Management_Profile::Write_File()
 {
 
 }
-void Management_Profile::Menu_RP()
+void Management_Profile::Menu_RP(Management_Student Data_Student)
 {
-	//Residency_Profile _RP_section;
-	////bool check_del = true;
-	//int index = 0;
-	//while (1)
-	//{
-	//ds:
-	//    bool update = false;
-	//    bool find = false;
-	//    index = Move_Page_RP(this->Data_RP, update, find);
+	Residency_Profile _RP_section;
+	int index = 0;
+	while (1)
+	{
+	ds:
+	    bool update = false;
+	    bool find = false;
+	    index = Move_Page_RP(this->Data_RP, update, find);
 
-	//    if (index == -1)
-	//    {
-	//        Xoa_o(48, 10, 170, 36, 0);
-	//        return;
-	//    }
+		if (index == -1)
+		{
+			Xoa_o(48, 10, 170, 36, 0);
+			return;
+		}
 
-	//    else
-	//		_RP_section = this->Database.at(index);
+		else
+			_RP_section = this->Data_RP.at(index);
 
-	//    if (update == true)
-	//    {
-	//    updae_info:
-	//        gotoXY(3, 21);
-	//        
-	//        //hien thi update
-	//    }
-	//    else if (find == true)
-	//    {
-	//    find:
-	//        gotoXY(3, 21);
-	//        cout << 2;
-	//        Xoa_o(48, 10, 170, 36, 0);
-	//        Hcn(50, 20, 100, 22);
-	//        Hcn(103, 20, 113, 22);
-	//        Outstring(103, 21, 0, 103, "Tim Kiem");
-	//        setBackgroundColor(0);
-	//        setColor(15);
-	//        gotoXY(52, 21);
-	//        Cursor(true);
-	//        string data;
-	//        getline(cin, data);
-	//        Cursor(false);
-	//        Doubly_Linked_List<Residency_Profile> _data_find = find(data);
-	//        if (_data_find.Get_Lenght() == 0)
-	//        {
-	//            Not_Found();
-	//        }
-	//        else
-	//        {
-	//            index = Ve_nhieu_trang_chon(_data_find, update, find);
-	//            if (index == -1)
-	//            {
-	//                goto ds;
-	//            }
+	    if (update == true)
+	    {
+	    updae_info:
+	        gotoXY(3, 21);
+	        
+	        //hien thi update
+	    }
+	    else if (find == true)
+	    {
+	    find:
+	        gotoXY(3, 21);
+	        cout << 2;
+	        Xoa_o(48, 10, 170, 36, 0);
+	        Hcn(50, 20, 100, 22);
+	        Hcn(103, 20, 113, 22);
+	        Outstring(103, 21, 0, 103, "Tim Kiem");
+	        setBackgroundColor(0);
+	        setColor(15);
+	        gotoXY(52, 21);
+	        Cursor(true);
+	        string data;
+	        getline(cin, data);
+	        Cursor(false);
+			Doubly_Linked_List<Residency_Profile> _data_find = Find_Residency_Profile(data, Data_Student);
+	        if (_data_find.Get_Lenght() == 0)
+	        {
+	            Not_Found();
+	        }
+	        else
+	        {
+				bool update = false;
+				bool find = false;
+	            index = Move_Page_RP(_data_find, update, find);
+	            if (index == -1)
+	            {
+	                goto ds;
+	            }
 
-	//            else
-	//            {
+	            else
+	            {
 
-	//                _student_section = _data_find.at(index);
+					_RP_section = _data_find.at(index);
 
-	//            }
-	//            if (update == true)
-	//            {
-	//                goto updae_info;
-	//            }
-	//            else if (find == true)
-	//            {
-	//                goto find;
-	//            }
-	//            else
-	//            {
-	//                goto hien_thi;
-	//            }
-	//        }
+	            }
+	            if (update == true)
+	            {
+	                goto updae_info;
+	            }
+	            else if (find == true)
+	            {
+	                goto find;
+	            }
+	            else
+	            {
+	                goto hien_thi;
+	            }
+	        }
 
-	//    }
-	//    else
-	//    {
-	//    hien_thi:
-	//        Management_Student::Menu_update(_student_section);
-	//        Xoa_o(45, 9, 170, 36, 0);
-	//    }
+	    }
+	    else
+	    {
+	    hien_thi:
+	        
+	        Xoa_o(46, 9, 170, 36, 0);
+	    }
 
-	//}
+	}
 }
 void Management_Profile::Draw_a_Page_RP(int y, Doubly_Linked_List<Residency_Profile> _Data, int j)
 {
