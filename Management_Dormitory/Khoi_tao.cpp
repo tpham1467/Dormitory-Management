@@ -102,9 +102,9 @@ void huong_dan()
 	Outstring(3, 4, 11, 0, "Nut Enter         :De Chon");
 	Outstring(3, 5, 11, 0, "Nut Esc           :De Tro Lai");
 	Outstring(3, 6, 11, 0, "Nut U  :De Thay Doi Thong Tin");
-	Outstring(3, 7, 11, 0, "Nut F           :De Tim Kiem ");
+	Outstring(3, 7, 11, 0, "Nut F  :De Tim Kiem ");
 	Outstring(3, 8, 11, 0, "Nut M  :De Dung Chuc Nang Mo Rong ");
-	Outstring(3, 9, 11, 0, "Nut S       :De Sap Xep Danh Sach ");
+	Outstring(3, 9, 11, 0, "Nut S  :De Sap Xep Danh Sach ");
 }
 void khung_chon()
 {

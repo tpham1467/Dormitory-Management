@@ -95,7 +95,6 @@ void Thong_Ke::Menu(Mamagement_Room Data_Room,Management_Student Data_Student,Ma
 
 		case 3:
 		{
-
 			break;
 		}
 		default:

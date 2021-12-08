@@ -1,4 +1,2 @@
-﻿  Management_Profile.cpp
-D:\PBL2\Management_Dormitory\Management_Profile.cpp(201,15): warning C4101: 'update': unreferenced local variable
-D:\PBL2\Management_Dormitory\Management_Profile.cpp(201,9): warning C4101: 'find': unreferenced local variable
+﻿  Khoi_tao.cpp
   Management_Dormitory.vcxproj -> D:\PBL2\x64\Debug\Management_Dormitory.exe
