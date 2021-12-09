@@ -1,6 +1,4 @@
 #include "Thong_Ke.h"
-#include<cmath>
-#include<string>
 void Thong_Ke::Draw_Column_Chart(vector<int> value,vector<string> value_s,string name,string name_col,string name_row)
 {
 	Xoa_o(46, 9, 170, 36, 0);
@@ -95,6 +93,7 @@ void Thong_Ke::Menu(Mamagement_Room Data_Room,Management_Student Data_Student,Ma
 
 		case 3:
 		{
+			Thong_Ke_Ho_So_Dang_Ki(Data_Profile);
 			break;
 		}
 		default:
@@ -168,4 +167,26 @@ void Thong_Ke::Thong_Ke_Tinh_Trang_Vat_Chat(Mamagement_Room Data_Room)
 		p = p->Get_Next();
 	}
 	Draw_Column_Chart(value, name, "Bieu Do Cot Ve Tinh Trang Vat Chat", "Phong", "Tinh Trang");
+}
+void Thong_Ke::Thong_Ke_Ho_So_Dang_Ki(Management_Profile Data_Profile)
+{
+	Node<Admission_Profile>* p = Data_Profile.Get_Data_AP().Get_P_Head();
+	CDate time;
+	time = time.Get_time();
+	vector<string> name = { "Da Phe Duyet"," Chua Phe Duyet" };
+	vector<int>  value = { 0,0 };
+	while (p != nullptr)
+	{
+		bool d1 = p->Get_Data().Get_Confirmation_Status();
+		if (d1==1)
+		{
+			value[0]++;
+		}
+		else
+		{
+			value[1]++;
+		}
+		p = p->Get_Next();
+	}
+	Draw_Column_Chart(value, name, "Bieu Do Cot Ve Trang Thai Ho So Dang Ki", "Ho So", "Tinh Trang");
 }

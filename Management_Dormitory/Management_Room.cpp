@@ -10,22 +10,19 @@ Room _room_section;
 void Mamagement_Room::Read_File()
 {
     ifstream input;
-    input.open("Room.csv", ios::in);
+    input.open("Room.txt", ios::in);
     if (!input.is_open())
     {
         //throw "Unable to open file Student";
     }
     else
     {
-        int n; char z;
-        input >> n >> z;
-        int i = 0;
-        while (n>i)
+        char z;
+        while (!input.eof())
         {
             string Room_Code;
             int Number_Student;
             int COF;
-            input.ignore();
             string Han_Dong_Tien_Phi_Sinh_Hoat;
             getline(input, Room_Code, ',');
             input >> Number_Student>>z;
@@ -36,9 +33,9 @@ void Mamagement_Room::Read_File()
             _c = _c.To_CDate(Han_Dong_Tien_Phi_Sinh_Hoat);
             Room _Room(Room_Code, Number_Student, (COF == 1) ? true : false, _c);
             this->DataBase.InsertAtTail(_Room);
-            i++;
-          /*  cout << _Room.Get_Room_code() << " " << _Room.Get_NS() << " " << _Room.Get_COF() << " " << _Room.Get_HDTPSH() << endl;*/
+            input.ignore();
         }
+        this->DataBase.DeleteAtTail();
         input.close();
     }
  
@@ -141,9 +138,23 @@ Node<Room>* Mamagement_Room::Get_Room(string& _Room_code)
 void Mamagement_Room::Write_File()
 {
     ofstream output;
-    output.open("Room_Excel.csv", ios::out);
+    output.open("Room.txt", ios::out);
     if (output.is_open()) cout << " mo";
     else cout << "fall";
+    Node<Room>* p = this->DataBase.Get_P_Head();
+    output << "Ma Phong" << ',' << "So Luong Sinh Vien Trong Phong" << ','
+        << "Tinh Trang Sua Chua" << ',' << "Han Dong Tien Nuoc" << ',' << endl;
+    while (p != nullptr)
+    {
+        output << p->Get_Data().Get_Room_code() << ',' << p->Get_Data().Get_NS() << ','
+            << p->Get_Data().Get_COF() << ',' << p->Get_Data().Get_HDTPSH().Get_String() << ',' << endl;
+        p = p->Get_Next();
+    }
+    output.close();
+}
+void Mamagement_Room::Export_File_Excel()
+{
+    ofstream output = Save_File();
     Node<Room>* p = this->DataBase.Get_P_Head();
     output << "Ma Phong" << ',' << "So Luong Sinh Vien Trong Phong" << ','
         << "Tinh Trang Sua Chua" << ',' << "Han Dong Tien Nuoc" << ',' << endl;
@@ -172,7 +183,11 @@ void Mamagement_Room::Menu(Management_Student& data_student,bool flag)
             Xoa_o(48, 10, 170, 36, 0);
             return;
         }
-
+        if (index == -2)
+        {
+            Export_File_Excel();
+             _getch();
+        }
         else
             _room_section = this->DataBase.at(index);
         if (update == true)
@@ -448,6 +463,10 @@ int Mamagement_Room::Move_Page(Doubly_Linked_List<Room>& _data, bool& update, bo
         {
             find = true;
             return dem;
+        }
+        case 120:
+        {
+            return -2;
         }
         }
         if (Firt == true && check == true)

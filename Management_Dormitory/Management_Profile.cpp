@@ -4,9 +4,10 @@
 #include<vector>
 namespace
 {
-	list TTBS[5] = {
+	list TTBS[6] = {
 	   list(ii(1,1),"Ban Photo Chung Minh"),list(ii(2,2),"Ban Photo Ho Khau"),list(ii(3,3),"Giay Chung Nhan Ho Ngheo")
-	   ,list(ii(4,4),"Giay Chung Nhan Ho Can Ngheo"),list(ii(5,5),"Giay Chung Nhan Con Thuong Binh Liet Si")
+	   ,list(ii(4,4),"Giay Chung Nhan Ho Can Ngheo"),list(ii(5,5),"Giay Chung Nhan Con Thuong Binh Liet Si"),
+		list(ii(6,6),"Giay Chung Nhan Khuyet Tat")
 	};
 }
 Management_Profile::Management_Profile()
@@ -117,6 +118,30 @@ Doubly_Linked_List< Residency_Profile> Management_Profile::Find_Residency_Profil
 		}
 
 		p = p->Get_Next();
+	}
+	if (check == false)
+	{
+		Node<Residency_Profile>* p = this->Data_RP.Get_P_Head();
+		bool check = false;
+		while (p != nullptr)
+		{
+			check = false;
+			Node<string>* pp = _data_Token.Get_P_Head();
+			while (pp != nullptr && check == false)
+			{
+				token = pp->Get_Data();
+				string _id = p->Get_Data().Get_ID();
+				if (_id == token)
+				{
+					data_RP.InsertAtTail(p->Get_Data());
+					check = true;
+				}
+				if (check == true) break;
+				pp = pp->Get_Next();
+			}
+
+			p = p->Get_Next();
+		}
 	}
 	if (check == false)
 	{
@@ -268,6 +293,7 @@ void Management_Profile::Read_File()
 			string Race;
 			string Expiration_Date;
 			string TTBS_s;
+			int cof;
 			getline(input, Profile_Code, ',');
 			getline(input, Registration_Date, ',');
 			getline(input, Expiration_Date, ',');
@@ -275,6 +301,8 @@ void Management_Profile::Read_File()
 			getline(input, Race, ',');
 			getline(input, ID, ',');
 			getline(input, TTBS_s, ',');
+			char z;
+			input >> cof >> z;
 			input.ignore();
 			CDate d1, d2;
 			d1 = d1.To_CDate(Registration_Date);
@@ -282,11 +310,24 @@ void Management_Profile::Read_File()
 			Doubly_Linked_List<string> Data_TTBS;
 			for (int i = 0; i < TTBS_s.size(); i++)
 			{
-				int index = int(TTBS_s[i]) - 49;
-				Data_TTBS.InsertAtTail(TTBS[index].second);
+				int index = int(TTBS_s[i]) - 48;
+				Data_TTBS.InsertAtTail(TTBS[index - 1].second);
 			}
-			Admission_Profile r3(Profile_Code, d1, ID, Native_lace, Race, d2,Data_TTBS);
+			Admission_Profile r3(Profile_Code, d1, ID, Native_lace, Race, d2,Data_TTBS,cof);
 			this->Data_AP.InsertAtTail(r3);
+			//cout /*<< Profile_Code << " " << Registration_Date << " " << Expiration_Date << " " << Native_lace
+			//	<< " " << Race << " " << ID << " "*/ << TTBS_s<<" ";
+			//for (int i = 0; i < TTBS_s.size(); i++)
+			//{
+			//	cout << Data_TTBS[i]<<" /";
+			//}
+			//cout << endl;
+			//for (int i = 0; i < TTBS_s.size(); i++)
+			//{
+			//	cout << r3.Get_TTBS()[i] << " /";
+			//}
+			//cout << endl;
+			//cout << 1;
 		}
 		this->Data_AP.DeleteAtTail();
 		input.close();
@@ -305,7 +346,7 @@ void Management_Profile::Menu_RP(Management_Student Data_Student)
 	ds:
 	    bool update = false;
 	    bool find = false;
-	    index = Move_Page_RP(this->Data_RP, update, find);
+	    index = Move_Page_RP(this->Data_RP, update, find, Data_Student);
 
 		if (index == -1)
 		{
@@ -348,7 +389,7 @@ void Management_Profile::Menu_RP(Management_Student Data_Student)
 	        {
 				bool update = false;
 				bool find = false;
-	            index = Move_Page_RP(_data_find, update, find);
+	            index = Move_Page_RP(_data_find, update, find, Data_Student);
 	            if (index == -1)
 	            {
 	                goto ds;
@@ -384,7 +425,7 @@ void Management_Profile::Menu_RP(Management_Student Data_Student)
 
 	}
 }
-void Management_Profile::Draw_a_Page_RP(int y, Doubly_Linked_List<Residency_Profile> _Data, int j)
+void Management_Profile::Draw_a_Page_RP(int y, Doubly_Linked_List<Residency_Profile> _Data, int j,Management_Student Data_Student)
 {
 	if (j == -1) {
 
@@ -408,7 +449,7 @@ void Management_Profile::Draw_a_Page_RP(int y, Doubly_Linked_List<Residency_Prof
 		Xoa_o(48, 10, 170, 12, 15);
 		Xoa_o(48, 13, 170, 13 + 2 * y, 6);
 		Outstring(50, 11, 0, 15, "Ma Ho So");
-		Outstring(72, 11, 0, 15, "Ngay Dang Ki");
+		Outstring(75, 11, 0, 15, "Ho Va Ten");
 		Outstring(102, 11, 0, 15, "So Chung Minh");
 		Outstring(135, 11, 0, 15, "Ngay Het Han");
 	}
@@ -418,14 +459,14 @@ void Management_Profile::Draw_a_Page_RP(int y, Doubly_Linked_List<Residency_Prof
 	{
 
 		Outstring(50, i - 1, 0, 6, _Data[j].Get_Profile_Code());
-		Outstring(75, i - 1, 0, 6, _Data[j].Get_Registration_Date().Get_String());
+		Outstring(69, i - 1, 0, 6, _Data[j].Get_Student(Data_Student)->Get_Data().Get_Name());
 		Outstring(102, i - 1, 0, 6, _Data[j].Get_ID());
 		Outstring(137, i - 1, 0, 6, _Data[j].Get_Expiration_Date().Get_String());
 		Line(48, i, 170, i, 6, false);
 		j++;
 	}
 	Outstring(50, i - 1, 0, 6, _Data[j].Get_Profile_Code());
-	Outstring(75, i - 1, 0, 6, _Data[j].Get_Registration_Date().Get_String());
+	Outstring(69, i - 1, 0, 6, _Data[j].Get_Student(Data_Student)->Get_Data().Get_Name());
 	Outstring(102, i - 1, 0, 6, _Data[j].Get_ID());
 	Outstring(137, i - 1, 0, 6, _Data[j].Get_Expiration_Date().Get_String());
 	Line(65, 13, 65, 13 + 2 * y, 6);
@@ -443,7 +484,7 @@ void Management_Profile::Draw_a_Page_RP(int y, Doubly_Linked_List<Residency_Prof
 
 	}
 }
-int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data, bool& update, bool& find)
+int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data, bool& update, bool& find,Management_Student Data_Student)
 {
 	int lenght = _data.Get_Lenght();
 	int so_lan = (int)(lenght / 10) + 1;
@@ -452,17 +493,17 @@ int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data
 	bool Firt = false;
 	if (so_lan == 1)
 	{
-		Draw_a_Page_RP(lenght, _data, 0);
-		Draw_Object_RP(_data, 0, 4, i);
+		Draw_a_Page_RP(lenght, _data, 0, Data_Student);
+		Draw_Object_RP(_data[0], 0, 4, i, Data_Student);
 		Firt = true;
 	}
 	else
 	{
-		Draw_a_Page_RP(10, _data, 0);
+		Draw_a_Page_RP(10, _data, 0, Data_Student);
 		Outstring(101, 13 + 2 * 10 + 1, 2, 0, "<<");
 		Outint(103, 13 + 2 * 10 + 1, 1, 0, j);
 		Outstring(104, 13 + 2 * 10 + 1, 2, 0, ">>");
-		Draw_Object_RP(_data, 0, 4, i);
+		Draw_Object_RP(_data[0], 0, 4, i, Data_Student);
 		Firt = true;
 	}
 	while (1)
@@ -497,10 +538,10 @@ int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data
 		{
 			if (dem == i) break;
 			else {
-				Draw_Object_RP(_data, dem, 0, i);
+				Draw_Object_RP(_data[dem], dem, 0, i, Data_Student);
 				dem += -1;
 				check = false;
-				Draw_Object_RP(_data, dem, 4, i);
+				Draw_Object_RP(_data[dem], dem, 4, i, Data_Student);
 			}
 			break;
 		}
@@ -509,9 +550,9 @@ int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data
 			if (dem == i + 9 || dem == lenght - 1) break;
 			else
 			{
-				Draw_Object_RP(_data, dem, 0, i);
+				Draw_Object_RP(_data[dem], dem, 0, i, Data_Student);
 				dem += 1;
-				Draw_Object_RP(_data, dem, 4, i);
+				Draw_Object_RP(_data[dem], dem, 4, i, Data_Student);
 				check = false;
 			}
 
@@ -556,8 +597,8 @@ int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data
 			{
 				if (lenght < 10)
 				{
-					Draw_a_Page_RP(lenght, _data, i);
-					Draw_Object_RP(_data, lenght, 4, i);
+					Draw_a_Page_RP(lenght, _data, i, Data_Student);
+					Draw_Object_RP(_data[dem], lenght, 4, i, Data_Student);
 					z = lenght;
 				}
 				else
@@ -565,12 +606,12 @@ int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data
 					if (lenght - (so_lan - 1) * 10 == 0)
 					{
 						z = 1;
-						Draw_a_Page_RP(lenght - (so_lan - 1) * 10, _data, -1);
+						Draw_a_Page_RP(lenght - (so_lan - 1) * 10, _data, -1, Data_Student);
 					}
 					else
 					{
-						Draw_a_Page_RP(lenght - (so_lan - 1) * 10, _data, i);
-						Draw_Object_RP(_data, dem, 4, i);
+						Draw_a_Page_RP(lenght - (so_lan - 1) * 10, _data, i, Data_Student);
+						Draw_Object_RP(_data[dem], dem, 4, i, Data_Student);
 						z = lenght - (so_lan - 1) * 10;
 					}
 				}
@@ -578,8 +619,8 @@ int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data
 			}
 			else
 			{
-				Draw_a_Page_RP(10, _data, i);
-				Draw_Object_RP(_data, dem, 4, i);
+				Draw_a_Page_RP(10, _data, i, Data_Student);
+				Draw_Object_RP(_data[dem], dem, 4, i, Data_Student);
 				z = 10;
 			}
 			Outstring(101, 13 + 2 * z + 1, 2, 0, "<<");
@@ -590,13 +631,13 @@ int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data
 	}
 	return 0;
 }
-void Management_Profile::Draw_Object_RP(Doubly_Linked_List<Residency_Profile>& _Database, int index, int color, int i)
+void Management_Profile::Draw_Object_RP(Residency_Profile RP, int index, int color, int i,Management_Student Data_Student)
 {
 
-	Outstring(50, (index - i) * 2 + 14, color, 6, _Database[index].Get_Profile_Code());
-	Outstring(75, (index - i) * 2 + 14, color, 6, _Database[index].Get_Registration_Date().Get_String());
-	Outstring(102, (index - i) * 2 + 14, color, 6, _Database[index].Get_ID());
-	Outstring(137, (index - i) * 2 + 14, color, 6, _Database[index].Get_Expiration_Date().Get_String());
+	Outstring(50, (index - i) * 2 + 14, color, 6, RP.Get_Profile_Code());
+	Outstring(69, (index - i) * 2 + 14, color, 6, RP.Get_Student(Data_Student)->Get_Data().Get_Name());
+	Outstring(102, (index - i) * 2 + 14, color, 6, RP.Get_ID());
+	Outstring(137, (index - i) * 2 + 14, color, 6, RP.Get_Expiration_Date().Get_String());
 }
 void Management_Profile::Draw_Info_Object_RP(Management_Profile&)
 {

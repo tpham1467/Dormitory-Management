@@ -207,23 +207,11 @@ template<class T>
 T& Doubly_Linked_List<T>::at(int i)
 {
     Node<T>* p;
-    if (i > (this->lenght / 2))
-    {
-        i = this->lenght - i;
-        p = this->Get_P_Tail();
-        for (int j = 0; j < i; j++)
-        {
-            p = p->Get_Prev();
-        }
-    }
-    else 
-    {
         p = this->Get_P_Head();
         for (int j = 0; j < i; j++)
         {
             p = p->Get_Next();
         }
-    }
     return p->Get_Data();
 }
 template<class T>

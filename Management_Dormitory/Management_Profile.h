@@ -34,9 +34,9 @@ public:
 	// AP
 	void Menu_AP();
 	// graphisc
-	void Draw_a_Page_RP(int, Doubly_Linked_List<Residency_Profile>, int);
-	int Move_Page_RP(Doubly_Linked_List<Residency_Profile>, bool&, bool&);
-	void Draw_Object_RP(Doubly_Linked_List<Residency_Profile>&, int, int, int);
+	void Draw_a_Page_RP(int, Doubly_Linked_List<Residency_Profile>, int, Management_Student);
+	int Move_Page_RP(Doubly_Linked_List<Residency_Profile>, bool&, bool&,Management_Student);
+	void Draw_Object_RP(Residency_Profile, int, int, int, Management_Student);
 	void Draw_Info_Object_RP(Management_Profile&);
 
 	//

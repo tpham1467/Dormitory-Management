@@ -82,3 +82,14 @@ void Residency_Profile::Extend()
 	this->Registration_Date = this->Expiration_Date;
 	this->Expiration_Date.operator+(6);
 }
+Node<Student>* Residency_Profile::Get_Student(Management_Student& Data_Student)
+{
+	Node<Student>* p = Data_Student.Get_List_Student().Get_P_Head();
+	while (p != nullptr)
+	{
+		if (p->Get_Data().Get_Profile_Code() == this->Profile_Code) return p;
+		p = p->Get_Next();
+	}
+	return nullptr;
+
+}

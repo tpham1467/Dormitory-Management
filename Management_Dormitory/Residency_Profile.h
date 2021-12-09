@@ -1,6 +1,7 @@
 #pragma once
 #include"Date.h"
 #include<string>
+#include"Management_Student.h"
 using namespace std;
 class Residency_Profile
 {
@@ -30,5 +31,6 @@ public:
 	void Set_Expiration_Date(const CDate&);
 	void Extend();
 	int  Pay();
+	Node<Student>* Get_Student(Management_Student&);
 };
 

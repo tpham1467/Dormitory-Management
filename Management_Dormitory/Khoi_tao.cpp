@@ -265,3 +265,23 @@ void Room_Full()
 	Outstring(90, 21, 0, 4, "           Nhan Bat Ki De Tiep Tuc       ");
 	_getch();
 }
+ofstream Save_File()
+{
+	OPENFILENAME ofn;
+
+	char szFileName[MAX_PATH] = "";
+
+	ZeroMemory(&ofn, sizeof(ofn));
+
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = NULL;
+	ofn.lpstrFilter = (LPCWSTR)L"CSV Files (*.csv)\0*.csv\0All Files (*.*)\0*.*\0";
+	ofn.lpstrFile = (LPWSTR)szFileName;
+	ofn.nMaxFile = MAX_PATH;
+	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+	ofn.lpstrDefExt = (LPCWSTR)L"csv";
+	GetSaveFileName(&ofn);
+	ofstream open;
+	open.open(ofn.lpstrFile, ios::out);
+	return open;
+}

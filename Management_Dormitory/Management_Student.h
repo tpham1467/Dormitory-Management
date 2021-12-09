@@ -19,6 +19,7 @@ public:
 	Node<Student>* Move_Room();
 	void Write_File();
 	void Read_File();
+	void Export_File_Excel();
 	void Menu_Student(bool=true);
 	void Menu_update(Student&);
 	void Draw_a_Page(int , int , Doubly_Linked_List<Student>&, int);

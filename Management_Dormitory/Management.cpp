@@ -8,9 +8,9 @@ Management::Management()
 }
 Management::~Management()
 {
-	this->Data_Room.~Mamagement_Room();
-	this->Data_Student.Write_File();
-	this->Data_Student.~Management_Student();
+	//this->Data_Room.~Mamagement_Room();
+	//this->Data_Student.Write_File();
+	//this->Data_Student.~Management_Student();
 }
 void Management::Menu_chinh()
 {

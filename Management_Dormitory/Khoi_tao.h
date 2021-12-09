@@ -48,5 +48,6 @@ void Payment_Success(int);
 void Confirm(int);
 void Add_Success(int);
 void Room_Full();
+ofstream Save_File();
 //vector<string> update();
 

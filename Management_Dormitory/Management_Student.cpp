@@ -197,6 +197,22 @@ void Management_Student::Read_File()
         input.close();
     }
 }
+void Management_Student::Export_File_Excel()
+{
+    ofstream output = Save_File();
+    Node<Student>* p = this->Database.Get_P_Head();
+    this->Database.DeleteAtTail();
+    output << "Ho Va Ten," << "So Dien Thoai," << "Ma Ho So," << "Ma Phong," << "Gioi Tinh," << "Email," << "Ma Sinh Vien," << "Ngay Sinh," << "Dia Chi" << endl;
+    while (p != nullptr)
+    {
+        output << p->Get_Data().Get_Name() << ',' << p->Get_Data().Get_Phone_number() << ','
+            << p->Get_Data().Get_Profile_Code() << ',' << p->Get_Data().Get_Room_Code() << ','
+            << ((p->Get_Data().Get_Gender() == 1) ? "Nam" : "Nu") << ',' << p->Get_Data().Get_Email() << ',' << p->Get_Data().Get_Student_Code() << ','
+            << p->Get_Data().Get_Date_of_Birth().Get_String() << ',' << p->Get_Data().Get_Address() << endl;
+        p = p->Get_Next();
+    }
+    output.close();
+}
 void Management_Student::Menu_Student(bool flag)
 {
     //bool check_del = true;
@@ -212,7 +228,11 @@ void Management_Student::Menu_Student(bool flag)
             Xoa_o(48, 10, 170, 36, 0);
             return;
         }
-
+        if (index == -2)
+        {
+            Export_File_Excel();
+            _getch();
+        }
         else
             _student_section = this->Database.at(index);
         if (update == true)
@@ -508,6 +528,10 @@ int Management_Student::Move_Page(Doubly_Linked_List<Student>& Database, bool& u
         {
             find = true;
             return dem;
+        }
+        case 120:
+        {
+            return -2;
         }
         }
         if (Firt == true && check == true)
