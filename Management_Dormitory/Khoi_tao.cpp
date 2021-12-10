@@ -105,6 +105,7 @@ void huong_dan()
 	Outstring(3, 7, 11, 0, "Nut F  :De Tim Kiem ");
 	Outstring(3, 8, 11, 0, "Nut M  :De Dung Chuc Nang Mo Rong ");
 	Outstring(3, 9, 11, 0, "Nut S  :De Sap Xep Danh Sach ");
+	Outstring(3, 10, 11, 0, "Nut X  :De Xuat Danh Sach ");
 }
 void khung_chon()
 {
@@ -124,7 +125,7 @@ void khung_chon()
 	{
 		Outchar(41, i, 11, 0, (char)219);
 	}
-	Outstring(21, 13, 5, 0, "Menu");
+	Outstring(21, 14, 5, 0, "MENU");
 }
 void khung()
 {
@@ -138,7 +139,7 @@ void khung()
 	}
 	for (int i = 0; i < 45; i++)
 	{
-		Outchar(i, 10, 15, 0, (char)219);
+		Outchar(i, 11, 15, 0, (char)219);
 	}
 	for (int i = 46; i < 175; i++)
 	{
@@ -280,7 +281,7 @@ void Pay_Tb(int i,int t)
 		Outstring(80, 33, 0, 4, "     Thanh Toan Thanh Cong                ");
 		Outstring(80, 34, 0, 4, "    Nhan Bat Ki De Tiep Tuc               ");
 		Outstring(80, 34, 0, 4, "    So Tien Du la:                        ");
-		Outint(100, 36, 0, 4, t);
+		Outint(100, 34, 0, 4, t);
 	}
 	else
 	{
