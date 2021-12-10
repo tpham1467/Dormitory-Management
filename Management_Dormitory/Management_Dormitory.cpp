@@ -30,6 +30,8 @@ int main()
    // vector<int> v1 = {100,100,100,100,100,100};
    // vector<string> v2 = { "cntt","hoa","qlda","dien tu","dien lanh","dien tu vien thong"};
    // tk.Draw_Column_Chart(v1,v2,"Bieu do cot danh sach sinh vien cac khoa","So sinh vien","Khoa");*/
+    /*Management data;
+    data.Menu_chinh();*/
     Management data;
     data.Menu_chinh();
     return 0;

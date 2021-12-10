@@ -31,19 +31,17 @@ public:
 	void Write_File();
 	//RP
 	void Menu_RP(Management_Student);
-	// AP
-	void Menu_AP();
-	// graphisc
 	void Draw_a_Page_RP(int, Doubly_Linked_List<Residency_Profile>, int, Management_Student);
 	int Move_Page_RP(Doubly_Linked_List<Residency_Profile>, bool&, bool&,Management_Student);
 	void Draw_Object_RP(Residency_Profile, int, int, int, Management_Student);
-	void Draw_Info_Object_RP(Management_Profile&);
-
-	//
-	void Draw_a_Page_AP(int, Doubly_Linked_List<Residency_Profile>, int);
-	int Move_Page_AP(Doubly_Linked_List<Residency_Profile>, bool&, bool&);
-	void Draw_Object_AP(Doubly_Linked_List<Residency_Profile>&, int, int, int);
-	void Draw_Info_Object_AP(Management_Profile&);
+	void Draw_Info_Object_RP(Management_Student&);
+	void Update_RP(Management_Student&);
+	void Doi_Mau(int , int , Management_Student&);
+	void Update_Info(int);
+	//AP
+	void Menu_AP(Management_Student);
+	int Move_Page_AP(Doubly_Linked_List<Admission_Profile>, bool&, bool&, Management_Student);
+	void Draw_Info_Object_AP();
 
 
 };

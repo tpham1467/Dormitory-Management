@@ -49,5 +49,7 @@ void Confirm(int);
 void Add_Success(int);
 void Room_Full();
 ofstream Save_File();
+void Extend_tb();
+void Pay_Tb(int, int );
 //vector<string> update();
 

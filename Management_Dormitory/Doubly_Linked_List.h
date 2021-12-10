@@ -235,7 +235,7 @@ template<class T>
 Doubly_Linked_List<T>& Doubly_Linked_List<T>::operator=(const Doubly_Linked_List<T>& db)
 {
     Node<T>* p1 = db.P_Head;
-    Clear();
+    Contructor();
     while (p1 != nullptr)
     {
         this->InsertAtTail(p1->Get_Data());

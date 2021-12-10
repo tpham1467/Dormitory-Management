@@ -2,6 +2,8 @@
 #include <algorithm>
 #include<sstream>
 #include<vector>
+Residency_Profile _Profile_section;
+Admission_Profile _Profile_add;
 namespace
 {
 	list TTBS[6] = {
@@ -50,41 +52,70 @@ Doubly_Linked_List< Admission_Profile> Management_Profile::Find_Admission_Profil
         _data_Token.InsertAtTail(token);
     }
     //find
+	bool   check = false;
     Node<Admission_Profile>* p = this->Data_AP.Get_P_Head();
     while (p != nullptr)
     {
-
-        bool check = false;
-        Node<string>* pp = _data_Token.Get_P_Head();
-        while (pp != nullptr && check == false)
-        {
-			token = pp->Get_Data();
-			string _profile_code = p->Get_Data().Get_Profile_Code();
-			if (_profile_code.find(token) >= 0 || _profile_code.find(token) <= _profile_code.length())
+		while (p != nullptr)
+		{
+			check = false;
+			Node<string>* pp = _data_Token.Get_P_Head();
+			while (pp != nullptr && check == false)
 			{
-				data_AP.InsertAtTail(p->Get_Data());
-				check = true;
-			}
-			if (check == true) break;
-			if (check == false)
-			{
-				Doubly_Linked_List<Student> data_Student = Database_Student.Find_Student(token);
-				if (data_Student.Get_Lenght() != 0)
+				token = pp->Get_Data();
+				string _profile_code = p->Get_Data().Get_Profile_Code();
+				if (_profile_code == token)
 				{
-					Node<Student>* p1 = data_Student.Get_P_Head();
-					while (p1 != nullptr)
-					{
-						Node<Admission_Profile>* p2 = Indexoff(p->Get_Data().Get_Profile_Code());
-						data_AP.InsertAtTail(p2->Get_Data());
-					}
+					data_AP.InsertAtTail(p->Get_Data());
 					check = true;
 				}
+				if (check == true) break;
+				pp = pp->Get_Next();
 			}
-			pp = pp->Get_Next();
-        }
-		
-        p = p->Get_Next();
+
+			p = p->Get_Next();
+		}
     }
+	if (check == false)
+	{
+		Node<Admission_Profile>* p = this->Data_AP.Get_P_Head();
+		bool check = false;
+		while (p != nullptr)
+		{
+			check = false;
+			Node<string>* pp = _data_Token.Get_P_Head();
+			while (pp != nullptr && check == false)
+			{
+				token = pp->Get_Data();
+				string _id = p->Get_Data().Get_ID();
+				if (_id == token)
+				{
+					data_AP.InsertAtTail(p->Get_Data());
+					check = true;
+				}
+				if (check == true) break;
+				pp = pp->Get_Next();
+			}
+
+			p = p->Get_Next();
+		}
+	}
+	if (check == false)
+	{
+		Doubly_Linked_List<Student> data_Student = Database_Student.Find_Student(data);
+		if (data_Student.Get_Lenght() != 0)
+		{
+			Node<Student>* p1 = data_Student.Get_P_Head();
+			while (p1 != nullptr)
+			{
+				string sc = p1->Get_Data().Get_Profile_Code();
+				Node<Admission_Profile>* p2 = Indexoff(sc);
+				if (p2 != nullptr)
+					data_AP.InsertAtTail(p2->Get_Data());
+				p1 = p1->Get_Next();
+			}
+		}
+	}
 	return data_AP;
 }
 Doubly_Linked_List< Residency_Profile> Management_Profile::Find_Residency_Profile(string data,Management_Student Database_Student)
@@ -223,13 +254,12 @@ void Management_Profile::Menu(Management_Student Data_Student)
 		{
 		case 0:
 		{
-			bool find, update;
 			Menu_RP(Data_Student);
 			break;
 		}
 		case 1:
 		{
-			Xoa_o(4, 14, 39, 35);
+			Menu_AP(Data_Student);
 			break;
 		}
 		case 27:
@@ -339,7 +369,6 @@ void Management_Profile::Write_File()
 }
 void Management_Profile::Menu_RP(Management_Student Data_Student)
 {
-	Residency_Profile _RP_section;
 	int index = 0;
 	while (1)
 	{
@@ -355,14 +384,13 @@ void Management_Profile::Menu_RP(Management_Student Data_Student)
 		}
 
 		else
-			_RP_section = this->Data_RP.at(index);
+			_Profile_section = this->Data_RP.at(index);
 
 	    if (update == true)
 	    {
 	    updae_info:
 	        gotoXY(3, 21);
-	        
-	        //hien thi update
+			Update_RP(Data_Student);
 	    }
 	    else if (find == true)
 	    {
@@ -398,7 +426,7 @@ void Management_Profile::Menu_RP(Management_Student Data_Student)
 	            else
 	            {
 
-					_RP_section = _data_find.at(index);
+					_Profile_section = _data_find.at(index);
 
 	            }
 	            if (update == true)
@@ -419,7 +447,8 @@ void Management_Profile::Menu_RP(Management_Student Data_Student)
 	    else
 	    {
 	    hien_thi:
-	        
+			Draw_Info_Object_RP(Data_Student);
+			_getch();
 	        Xoa_o(46, 9, 170, 36, 0);
 	    }
 
@@ -639,25 +668,353 @@ void Management_Profile::Draw_Object_RP(Residency_Profile RP, int index, int col
 	Outstring(102, (index - i) * 2 + 14, color, 6, RP.Get_ID());
 	Outstring(137, (index - i) * 2 + 14, color, 6, RP.Get_Expiration_Date().Get_String());
 }
-void Management_Profile::Draw_Info_Object_RP(Management_Profile&)
+void Management_Profile::Draw_Info_Object_RP(Management_Student& Data)
 {
-
+	Xoa_o(48, 10, 170, 36, 0);
+	Hcn(48, 9, 61, 11);
+	Outstring(50, 10, 2, 0, "Ma Ho So");
+	Hcn(64, 9, 112, 11);
+	Outstring(120, 10, 2, 0, "Ho Va Ten");
+	Hcn(118, 9, 132, 11);
+	Hcn(135, 9, 165, 11);
+	Outstring(50, 14, 2, 0, "Ngay Het Han");
+	Hcn(48, 13, 63, 15);
+	Hcn(66, 13, 112, 15);
+	Outstring(120, 14, 2, 0, "Que Quan");
+	Hcn(118, 13, 130, 15);
+	Hcn(133, 13, 165, 15);
+	Outstring(50, 18, 2, 0, "Dan Toc");
+	Hcn(48, 17, 59, 19);
+	Hcn(62, 17, 112, 19);
+	Outstring(120, 18, 2, 0, "So Chung Minh");
+	Hcn(118, 17, 136, 19);
+	Hcn(139, 17, 165, 19);
+	Outstring(50, 22, 2, 0, "Ngay Dang Ki");
+	Hcn(48, 21, 65, 23);
+	Hcn(68, 21, 112, 23);
+	Outstring(65, 10, 9, 0, _Profile_section.Get_Profile_Code());
+	Outstring(137, 10, 9, 0, _Profile_section.Get_Student(Data)->Get_Data().Get_Name());
+	Outstring(68, 14, 9, 0, _Profile_section.Get_Expiration_Date().Get_String());
+	Outstring(135, 14, 9, 0, _Profile_section.Get_Native_lace());
+	Outstring(141, 18, 9, 0, _Profile_section.Get_ID());
+	Outstring(64, 18, 9, 0, _Profile_section.Get_Race());
+	Outstring(70, 22, 9, 0, _Profile_section.Get_Registration_Date().Get_String());
 }
-//
-// 
-//void Management_Profile::Draw_a_Page_AP(int, Doubly_Linked_List<Residency_Profile>, int)
-//{
-//
-//}
-//int Management_Profile::Move_Page_AP(Doubly_Linked_List<Residency_Profile>, bool&, bool&)
-//{
-//
-//}
-//void Management_Profile::Draw_Object_AP(Doubly_Linked_List<Residency_Profile>&, int, int, int)
-//{
-//
-//}
-//void Management_Profile::Draw_Info_Object_AP(Management_Profile&)
-//{
-//
-//}
+void Management_Profile::Update_RP(Management_Student& Data)
+{
+	Draw_Info_Object_RP(Data);
+	int i = 1;
+	Outstring(90, 26, 2, 0, "Gia Han");
+	Hcn(88, 25, 99, 27);
+	Outstring(120, 26, 2, 0, "Ket Thuc Hop Dong");
+	Hcn(118, 25, 139, 27);
+	while (1)
+	{
+		char key = ' ';
+		key = _getch();
+		Doi_Mau(i, 9, Data);
+		if (key == 80)
+		{
+			if (i ==9)
+			{
+				i = 1;
+			}
+			else
+			{
+				i++;
+			}
+
+		}
+		else if (key == 72)
+		{
+			if (i == 1)
+			{
+				i = 9;
+			}
+			else
+			{
+				i--;
+			}
+
+		}
+		else if (key == 75)
+		{
+			if (i >= 6)
+			{
+				i -= 5;
+			}
+
+		}
+		else if (key == 77)
+		{
+			if (i < 6)
+			{
+				if (i == 5)
+				{
+					i = 9;
+				}
+				else
+				{
+
+
+					i += 5;
+				}
+			}
+
+		}
+		else if (key == 13)
+		{
+			Update_Info(i);
+			if (i == 9 && _Profile_section.Get_Profile_Code() == "0") return;
+		}
+		else if (key == 27)
+		{
+			Node<Residency_Profile>* p = Indexoff(_Profile_section.Get_Profile_Code(),1);
+			this->Data_RP.replace(p, _Profile_section);
+			break;
+		}
+		Doi_Mau(i, 4,Data);
+	}
+}
+void Management_Profile::Doi_Mau(int i,int color,Management_Student& Data)
+{
+	if (i == 1)
+	{
+		Outstring(65, 10, color, 0, _Profile_section.Get_Profile_Code());
+	}
+	else if (i == 2)
+	{
+		Outstring(68, 14, color, 0, _Profile_section.Get_Expiration_Date().Get_String());
+	}
+	else if (i == 3)
+	{
+		Outstring(64, 18, color, 0, _Profile_section.Get_Race());
+
+	}
+	else if (i == 4)
+	{
+		Outstring(70, 22, color, 0, _Profile_section.Get_Registration_Date().Get_String());
+	}
+	else if (i == 5)
+	{
+		Outstring(90, 26, color, 0, "Gia Han");
+	}
+	else if (i == 6)
+	{
+		Outstring(137, 10, color, 0, _Profile_section.Get_Student(Data)->Get_Data().Get_Name());
+	}
+	else if (i == 7)
+	{
+		Outstring(135, 14, color, 0, _Profile_section.Get_Native_lace());
+	}
+	else if (i == 8)
+	{
+		Outstring(141, 18, color, 0, _Profile_section.Get_ID());
+	}
+	else if (i == 9)
+	{
+		Outstring(120, 26, color, 0, "Ket Thuc Hop Dong");
+	}
+}
+void Management_Profile::Update_Info(int i)
+{
+	int color = 0;
+	if (i == 1)
+	{
+		Outstring(65, 10, color, 0, _Profile_section.Get_Profile_Code());
+		Not_Change();
+	}
+	else if (i == 2)
+	{
+		Outstring(68, 14, color, 0, _Profile_section.Get_Expiration_Date().Get_String());
+		Not_Change();
+	}
+	else if (i == 3)
+	{
+		Outstring(64, 18, color, 0, _Profile_section.Get_Race());
+		gotoXY(64, 18);
+		Outchar(32, 170, 15, 0, ' ');
+		string data;
+		getline(cin, data);
+		_Profile_section.Set_Race(data);
+		Outstring(64, 18, 0, 0, data + " ");
+	}
+	else if (i == 4)
+	{
+		Outstring(70, 22, color, 0, _Profile_section.Get_Registration_Date().Get_String());
+		Not_Change();
+	}
+	else if (i == 5)
+	{
+		_Profile_section.Extend();
+		Extend_tb();
+		Outstring(68, 14, 9, 0, "                        ");
+		Outstring(68, 14, 9, 0, _Profile_section.Get_Expiration_Date().Get_String());
+	}
+	else if (i == 6)
+	{
+		Not_Change();
+	}
+	else if (i == 7)
+	{
+		Outstring(135, 14, color, 0, _Profile_section.Get_Native_lace());
+		gotoXY(135, 14);
+		Outchar(32, 170, 15, 0, ' ');
+		string data;
+		getline(cin, data);
+		_Profile_section.Set_Native_lace(data);
+		Outstring(135, 14, 0, 0, data + " ");
+	}
+	else if (i == 8)
+	{
+		Outstring(141, 18, color, 0, _Profile_section.Get_ID());
+		Not_Change();
+	}
+	else if (i == 9)
+	{
+		int So_tien=_Profile_section.Pay();
+		if (So_tien < 0)
+		{
+			Pay_Tb(1, So_tien);
+			char key = _getch();
+			if (key == 89)
+			{
+				Outstring(80, 33, 0, 4, "     Thanh Toan Thanh Cong  ");
+				Outstring(80, 34, 0, 4, "    Nhan Bat Ki De Tiep Tuc  ");
+				_getch();
+				Outstring(80, 33, 0, 0, "                                           ");
+				Outstring(80, 34, 0, 0, "                                           ");
+				//this->Data_RP.Delete_indexoff(Indexoff(_Profile_section.Get_Profile_Code(), 1));
+			}
+		}
+		else
+		{
+			Pay_Tb(0, So_tien);
+			//this->Data_RP.Delete_indexoff(Indexoff(_Profile_section.Get_Profile_Code(), 1));
+			//_Profile_section.Set_Profile_Code("0");
+		}
+	}
+}
+int Management_Profile::Move_Page_AP(Doubly_Linked_List<Admission_Profile> _data, bool& update, bool& find,Management_Student Data_Student)
+{
+	Doubly_Linked_List<Residency_Profile> _Data_Rp;
+	Node<Admission_Profile>* p = _data.Get_P_Head();
+	while (p != nullptr)
+	{
+		_Data_Rp.InsertAtTail(p->Get_Data());
+		p = p->Get_Next();
+	}
+	return Move_Page_RP(_Data_Rp, update, find, Data_Student);
+}
+void Management_Profile::Draw_Info_Object_AP()
+{
+	Outstring(50, 26, 2, 0, "Thong Tin Can Bo Sung");
+	Hcn(48, 25, 71, 27);
+	int x = 76, y = 26;
+	Doubly_Linked_List<string> _ttbs = _Profile_add.Get_TTBS();
+	for (int i = 0; i < _ttbs.Get_Lenght(); i++)
+	{
+		if (x >= 175||(x + _ttbs[i].size() >= 175))
+		{
+			Outstring(x -2, y, 0, 0, "  ");
+			Hcn(74, 25, x, 27);
+			x = 50;
+			y = 30;
+		}
+		Outstring(x, y, 9, 0, _ttbs[i]);
+		x += _ttbs[i].size();
+		Outstring(x+1, y, 2, 0, ",");
+		x+=3;
+	}
+	Outstring(x - 2, y, 0, 0, "  ");
+	Hcn(((y==30)?48:74), y-1, x, y+1);
+}
+void Management_Profile::Menu_AP(Management_Student Data_Student)
+{
+	int index = 0;
+	while (1)
+	{
+	ds:
+		bool update = false;
+		bool find = false;
+		index = Move_Page_AP(this->Data_AP, update, find, Data_Student);
+
+		if (index == -1)
+		{
+			Xoa_o(48, 10, 170, 36, 0);
+			return;
+		}
+
+		else
+		{
+			_Profile_section = this->Data_AP.at(index);
+			_Profile_add = this->Data_AP.at(index);
+		}
+		if (update == true)
+		{
+		updae_info:
+			gotoXY(3, 21);
+
+		}
+		else if (find == true)
+		{
+		find:
+			gotoXY(3, 21);
+			cout << 2;
+			Xoa_o(48, 10, 170, 36, 0);
+			Hcn(50, 20, 100, 22);
+			Hcn(103, 20, 113, 22);
+			Outstring(103, 21, 0, 103, "Tim Kiem");
+			setBackgroundColor(0);
+			setColor(15);
+			gotoXY(52, 21);
+			Cursor(true);
+			string data;
+			getline(cin, data);
+			Cursor(false);
+			Doubly_Linked_List<Admission_Profile> _data_find = Find_Admission_Profile(data, Data_Student);
+			if (_data_find.Get_Lenght() == 0)
+			{
+				Not_Found();
+			}
+			else
+			{
+				bool update = false;
+				bool find = false;
+				index = Move_Page_AP(_data_find, update, find, Data_Student);
+				if (index == -1)
+				{
+					goto ds;
+				}
+
+				else
+				{
+					_Profile_section = _data_find.at(index);
+					_Profile_add = this->Data_AP.at(index);
+				}
+				if (update == true)
+				{
+					goto updae_info;
+				}
+				else if (find == true)
+				{
+					goto find;
+				}
+				else
+				{
+					goto hien_thi;
+				}
+			}
+
+		}
+		else
+		{
+		hien_thi:
+			Draw_Info_Object_RP(Data_Student);
+			Draw_Info_Object_AP();
+			_getch();
+			Xoa_o(46, 9, 170, 36, 0);
+		}
+
+	}
+}

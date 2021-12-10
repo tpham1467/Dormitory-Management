@@ -18,5 +18,6 @@ public:
 	//void Set_Room();
 	void Set_Confirmation_Status(bool);
 	bool Get_Confirmation_Status();
+	Admission_Profile& operator=(const Admission_Profile&);
 };
 

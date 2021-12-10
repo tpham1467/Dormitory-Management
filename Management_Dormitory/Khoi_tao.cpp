@@ -265,6 +265,35 @@ void Room_Full()
 	Outstring(90, 21, 0, 4, "           Nhan Bat Ki De Tiep Tuc       ");
 	_getch();
 }
+void Extend_tb()
+{
+	Outstring(80, 33, 0, 4, "      Gia Han Thanh Cong     ");
+	Outstring(80, 34, 0, 4, "    Nhan Bat Ki De Tiep Tuc  ");
+	_getch();
+	Outstring(80, 33, 0, 0, "                                           ");
+	Outstring(80, 34, 0, 0, "                                           ");
+}
+void Pay_Tb(int i,int t)
+{
+	if (i == 0)
+	{  
+		Outstring(80, 33, 0, 4, "     Thanh Toan Thanh Cong                ");
+		Outstring(80, 34, 0, 4, "    Nhan Bat Ki De Tiep Tuc               ");
+		Outstring(80, 34, 0, 4, "    So Tien Du la:                        ");
+		Outint(100, 36, 0, 4, t);
+	}
+	else
+	{
+		Outstring(80, 33, 0, 4, "     Thanh Toan Khong Thanh cong                  ");
+		Outstring(80, 34, 0, 4, "     So Tien Con No La:                           ");
+		Outint(104, 34, 0, 4, t);
+		Outstring(80, 35, 0, 4, "     Nhan Y/N De Tra Not So Tien Con No           ");
+	}
+	_getch();
+	Outstring(80, 33, 0, 0, "                                           ");
+	Outstring(80, 34, 0, 0, "                                           ");
+	Outstring(80, 35, 0, 0, "                                                  ");
+}
 ofstream Save_File()
 {
 	OPENFILENAME ofn;

@@ -73,13 +73,13 @@ void Residency_Profile::Set_Expiration_Date(const CDate& _Expiration_Date)
 }
 int  Residency_Profile::Pay()
 {
-	 CDate _time = this->Registration_Date.Get_time();
-	 int day = _time-Registration_Date;
+	 CDate _time = this->Get_Expiration_Date().Get_time();
+	 int day = Expiration_Date -_time;
+	 if (_time > this->Expiration_Date) return -day * Price_D;
      return day * Price_D;
 }
 void Residency_Profile::Extend()
 {
-	this->Registration_Date = this->Expiration_Date;
 	this->Expiration_Date.operator+(6);
 }
 Node<Student>* Residency_Profile::Get_Student(Management_Student& Data_Student)
