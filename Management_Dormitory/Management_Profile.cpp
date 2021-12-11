@@ -250,8 +250,8 @@ void Management_Profile::Menu(Management_Student& Data_Student, Mamagement_Room&
 	while (flag)
 	{
 
-		Hien_thi_danh_sach(arr_Profile, 1);
-		int a = bat_su_kien(arr_Profile, 1);
+		Hien_thi_danh_sach(arr_Profile, 2);
+		int a = bat_su_kien(arr_Profile, 2);
 		switch (a)
 		{
 		case 0:
@@ -264,6 +264,13 @@ void Management_Profile::Menu(Management_Student& Data_Student, Mamagement_Room&
 			Menu_AP(Data_Student,Data_Room);
 			break;
 		}
+		case 2:
+		{
+			Xoa_o(46, 9, 170, 36, 0);
+			Add_Profile(Data_Student);
+			Xoa_o(46, 9, 170, 36, 0);
+			break;
+		}
 		case 27:
 		{
 			flag = false;
@@ -273,6 +280,144 @@ void Management_Profile::Menu(Management_Student& Data_Student, Mamagement_Room&
 
 		}
 	}
+}
+void Management_Profile::Add_Profile(Management_Student& Data_Student)
+{
+	Cursor(true);
+	Student _Student;
+	Admission_Profile ap;
+	CDate d;
+	d = d.Get_time();
+	ap.Set_Registration_Date(d);
+	d.operator+(6);
+	ap.Set_Expiration_Date(d);
+	Xoa_o(48, 10, 170, 36, 0);
+	Hcn(48, 9, 60, 11);
+	Outstring(50, 10, 2, 0, "Ho Va Ten");
+	Hcn(63, 9, 112, 11);
+	Outstring(120, 10, 2, 0, "Gioi Tinh");
+	Hcn(118, 9, 132, 11);
+	Hcn(135, 9, 165, 11);
+	Outstring(50, 14, 2, 0, "Dia Chi");
+	Hcn(48, 13, 58, 15);
+	Hcn(61, 13, 112, 15);
+	Outstring(120, 14, 2, 0, "Ngay Sinh");
+	Hcn(118, 13, 132, 15);
+	Hcn(135, 13, 165, 15);
+	Outstring(50, 18, 2, 0, "Ma Sinh Vien");
+	Hcn(48, 17, 63, 19);
+	Hcn(66, 17, 112, 19);
+	Outstring(120, 18, 2, 0, "Ma Phong");
+	Hcn(118, 17, 130, 19);
+	Hcn(133, 17, 165, 19);
+	Outstring(50, 22, 2, 0, "Email");
+	Hcn(48, 21, 58, 23);
+	Hcn(61, 21, 112, 23);
+	Outstring(120, 22, 2, 0, "So Dien Thoai");
+	Hcn(118, 21, 135, 23);
+	Hcn(138, 21, 165, 23);
+	Outstring(50, 26, 2, 0, "Ma Ho So");
+	Hcn(48, 25, 58, 27);
+	Hcn(61, 25, 112, 27);
+	Outstring(120, 26, 2, 0, "Ngay Het Han");
+	Hcn(118, 25, 134, 27);
+	Hcn(137, 25, 165, 27);
+	Outstring(50, 30, 2, 0, "Que Quan");
+	Hcn(48, 29, 60, 31);
+	Hcn(63, 29, 112, 31);
+	Outstring(120, 30, 2, 0, "Dan Toc");
+	Hcn(118, 29, 129, 31);
+	Hcn(132, 29, 165,31);
+	Outstring(50, 34, 2, 0, "So Chung Minh");
+	Hcn(48, 33, 65, 35);
+	Hcn(68, 33, 112, 35);
+	Outstring(120, 34, 2, 0, "Ngay Dang Ki");
+	Hcn(118, 33, 134, 35);
+	Hcn(137, 33, 165, 35);
+	Outstring(135, 18, 9, 0, "NULL");
+	int mssv = rand() % (999999999 - 100000000 + 1) + 100000000;
+	string _Profile_Code = "HS"+to_string(mssv);
+	Outstring(63, 26, 9, 0, _Profile_Code);
+	Outstring(68, 18, 9, 0, to_string(mssv));
+	Outstring(139, 26, 9, 0, ap.Get_Expiration_Date().Get_String());
+	Outstring(139, 34, 9, 0, ap.Get_Registration_Date().Get_String());
+	string data;
+	gotoXY(65, 10);
+	getline(cin, data);
+	_Student.Set_Name(data);
+	gotoXY(63, 14);
+	getline(cin, data);
+	_Student.Set_Address(data);
+	gotoXY(63, 22);
+	getline(cin, data);
+	_Student.Set_Email(data);
+	gotoXY(65, 30);
+	getline(cin, data);
+	ap.Set_Native_lace(data);
+	gotoXY(70, 34);
+	getline(cin, data);
+	ap.Set_ID(data);
+	gotoXY(137, 10);
+	getline(cin, data);
+	if(data.size()>2) 
+	_Student.Set_Gender(1);
+	else _Student.Set_Gender(1);
+quaylai:
+	Outstring(137, 14, 0, 0, "                ");
+	gotoXY(137, 14);
+	Outstring(137, 14, 9, 0, "");
+	getline(cin, data);
+	d = d.To_CDate(data);
+	if (d.validDate() == false) goto quaylai;
+	_Student.Set_Date_of_Birth(d);
+	gotoXY(140, 22);
+	getline(cin, data);
+	_Student.Set_Phone_number(data);
+	gotoXY(134, 30);
+	getline(cin, data);
+	ap.Set_Race(data);
+	_Student.Set_Profile_Code(_Profile_Code);
+	_Student.Set_Student_Code(to_string(mssv));
+	_Student.Set_Room_Code("NULL");
+	ap.Set_Profile_Code(_Profile_Code);
+	while (1)
+	{
+		Xoa_o(46, 9, 170, 36, 0);
+		_Profile_add = ap;
+		Draw_Info_Object_AP();
+		Hien_thi_danh_sach(arr_ttbs, 5);
+		int a = bat_su_kien(arr_ttbs, 5);
+		if (a == 27) break;
+		Node<string>* p = _Profile_add.Get_TTBS().Get_P_Head();
+		while (p != nullptr)
+		{
+			if (arr_ttbs[a].second == "Giay Chung Nhan Ho Ngheo" && p->Get_Data() == "Giay Chung Nhan Ho Can Ngheo")
+			{
+				Them_Giay_To(1);
+				break;
+			}
+			if (p->Get_Data() == "Giay Chung Nhan Ho Ngheo" && arr_ttbs[a].second == "Giay Chung Nhan Ho Can Ngheo")
+			{
+				Them_Giay_To(1);
+				break;
+			}
+			if (arr_ttbs[a].second == p->Get_Data())
+			{
+				Them_Giay_To(1);
+				break;
+			}
+			p = p->Get_Next();
+		}
+		if (p == nullptr)
+		{
+			Them_Giay_To(0);
+			ap.Get_TTBS().InsertAtTail(arr_ttbs[a].second);
+		}
+	}
+	Xoa_o(46, 8, 170, 36, 0);
+	Data_Student.Get_List_Student().InsertAtTail(_Student);
+	this->Data_AP.InsertAtTail(ap);
+	Cursor(false);
 }
 void Management_Profile::Read_File()
 {
@@ -340,6 +485,7 @@ void Management_Profile::Read_File()
 			d1 = d1.To_CDate(Registration_Date);
 			d2 = d2.To_CDate(Expiration_Date);
 			Doubly_Linked_List<string> Data_TTBS;
+			if(TTBS_s!="NULL")
 			for (int i = 0; i < TTBS_s.size(); i++)
 			{
 				int index = int(TTBS_s[i]) - 48;
@@ -347,19 +493,6 @@ void Management_Profile::Read_File()
 			}
 			Admission_Profile r3(Profile_Code, d1, ID, Native_lace, Race, d2,Data_TTBS,cof);
 			this->Data_AP.InsertAtTail(r3);
-			//cout /*<< Profile_Code << " " << Registration_Date << " " << Expiration_Date << " " << Native_lace
-			//	<< " " << Race << " " << ID << " "*/ << TTBS_s<<" ";
-			//for (int i = 0; i < TTBS_s.size(); i++)
-			//{
-			//	cout << Data_TTBS[i]<<" /";
-			//}
-			//cout << endl;
-			//for (int i = 0; i < TTBS_s.size(); i++)
-			//{
-			//	cout << r3.Get_TTBS()[i] << " /";
-			//}
-			//cout << endl;
-			//cout << 1;
 		}
 		this->Data_AP.DeleteAtTail();
 		input.close();
@@ -1081,7 +1214,7 @@ void Management_Profile::Update_AP(Management_Student& Data, Mamagement_Room& Da
 				Outstring(120, 26, 2, 0, "Bo Sung Thong Tin");
 				Hcn(118, 25, 139, 27);
 			}
-			if (i == 9)
+			if (i == 5)
 			{
 				Delete_AP(_Profile_add.Get_Profile_Code());
 				return;
@@ -1171,23 +1304,33 @@ void Management_Profile::Update_Info_AP(int i, Management_Student& Data_Student,
 	}
 	else if (i == 5)
 	{
-	room_full:
-		Xoa_o(46, 8, 170, 36, 0);
-		Outstring(90, 37, 0, 103, "      Vui Long Chon Phong  ");
-		Data_Room.Menu(Data_Student, false);
-		Room _room_section = Data_Room.Get_Room_Section();
-		string rc = _room_section.Get_Room_code();
-		if (_room_section.Get_NS() == 6)
+		bool cf = _Profile_add.Get_Confirmation_Status();
+		if (cf == false)
 		{
-			Room_Full();
-			goto room_full;
+			Chua_Duoc_Xac_Nhan();
 		}
-		Data_Room.Add_Student(rc);
-		string st_code = _Profile_add.Get_Student(Data_Student)->Get_Data().Get_Student_Code();
-		Node<Student>* p = Data_Student.Index_off(st_code);
-		p->Get_Data().Set_Room_Code(rc);
-		Delete_AP(_Profile_add.Get_Profile_Code());
-		Xoa_o(46, 8, 170, 36, 0);
+		else
+		{
+
+
+		room_full:
+			Xoa_o(46, 8, 170, 36, 0);
+			Outstring(90, 37, 0, 103, "      Vui Long Chon Phong  ");
+			Data_Room.Menu(Data_Student, false);
+			Room _room_section = Data_Room.Get_Room_Section();
+			string rc = _room_section.Get_Room_code();
+			if (_room_section.Get_NS() == 6)
+			{
+				Room_Full();
+				goto room_full;
+			}
+			Data_Room.Add_Student(rc);
+			string st_code = _Profile_add.Get_Student(Data_Student)->Get_Data().Get_Student_Code();
+			Node<Student>* p = Data_Student.Index_off(st_code);
+			p->Get_Data().Set_Room_Code(rc);
+			Xoa_o(46, 8, 170, 36, 0);
+			Outstring(90, 37, 0, 0, "                           ");
+		}
 	}
 	else if (i == 6)
 	{
@@ -1211,7 +1354,12 @@ void Management_Profile::Update_Info_AP(int i, Management_Student& Data_Student,
 	else if (i == 9)
 	{
 		bool cf = _Profile_add.Get_Confirmation_Status();
-		if (cf == true)
+		int n = _Profile_add.Get_TTBS().Get_Lenght();
+		if (n != 0)
+		{
+			Chua_Du_Thong_Tin();
+		}
+		else if (cf == true)
 		{
 			Phe_Duyet(1);
 		}

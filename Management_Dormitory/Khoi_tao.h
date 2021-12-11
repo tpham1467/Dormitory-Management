@@ -26,7 +26,7 @@ namespace {
 	};
 	list arr_Profile[6] =
 	{
-		list(ii(13,16),"Quan Ly Ho So Noi Tru"),list(ii(13,19),"Quan Ly Ho So Dang Ki")
+		list(ii(13,16),"Quan Ly Ho So Noi Tru"),list(ii(13,19),"Quan Ly Ho So Dang Ki"),list(ii(18,22),"Them Ho So")
 	};
 	list arr_ttbs[6] =
 	{
@@ -59,5 +59,8 @@ void Extend_tb();
 void Pay_Tb(int, int );
 void Phe_Duyet(int);
 void Bo_Sung(int);
+void Chua_Duoc_Xac_Nhan();
+void Chua_Du_Thong_Tin();
+void Them_Giay_To(int);
 //vector<string> update();
 

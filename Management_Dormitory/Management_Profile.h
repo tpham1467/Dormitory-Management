@@ -46,7 +46,8 @@ public:
 	void Update_AP(Management_Student&, Mamagement_Room&);
 	void Doi_Mau_AP(int, int, Management_Student&);
 	void Update_Info_AP(int, Management_Student&, Mamagement_Room&);
-
+	//
+	void Add_Profile(Management_Student& );
 
 };
 

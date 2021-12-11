@@ -71,8 +71,8 @@ void Xoa_o(int x, int y, int x2, int y2, int color)
 }
 void Khoi_tao()
 {
-	SetWindowSize(175, 41);
-	SetScreenBufferSize(175, 41);
+	/*SetWindowSize(175, 41);
+	SetScreenBufferSize(175, 41);*/
 	/*SetWindowSize(2, 60);
 	SetScreenBufferSize(200, 50);*/
 	DisableResizeWindow();
@@ -329,14 +329,43 @@ void Bo_Sung(int i)
 	Outstring(80, 33, 0, 0, "                                                     ");
 	Outstring(80, 34, 0, 0, "                                                     ");
 }
+void Chua_Duoc_Xac_Nhan()
+{
+	Outstring(80, 33, 0, 4, "    Ho So Chua Duoc Xac Nhan . Vui Long Xac Nhan       ");
+	Outstring(80, 34, 0, 4, "                Nhan Bat Ki De Tiep Tuc                ");
+	_getch();
+	Outstring(80, 33, 0, 0, "                                                        ");
+	Outstring(80, 34, 0, 0, "                                                        ");
+}
+void Chua_Du_Thong_Tin()
+{
+	Outstring(80, 33, 0, 4, "      Ho So Con Thieu Giay To Di Kem         ");
+	Outstring(80, 34, 0, 4, "         Nhan Bat Ki De Tiep Tuc             ");
+	_getch();
+	Outstring(80, 33, 0, 0, "                                                        ");
+	Outstring(80, 34, 0, 0, "                                                        ");
+}
+void Them_Giay_To(int i)
+{
+	if (i == 0)
+	{
+		Outstring(80, 33, 0, 4, "     Bo Sung Thong Tin Thanh Cong       ");
+		Outstring(80, 34, 0, 4, "       Nhan Bat Ki De Tiep Tuc          ");
+	}
+	else
+	{
+		Outstring(80, 33, 0, 4, "       Giay To nay Da Duoc Bo Sung        ");
+		Outstring(80, 34, 0, 4, "         Nhan Bat Ki De Tiep Tuc          ");
+	}
+	_getch();
+	Outstring(80, 33, 0, 0, "                                                     ");
+	Outstring(80, 34, 0, 0, "                                                     ");
+}
 ofstream Save_File()
 {
 	OPENFILENAME ofn;
-
 	char szFileName[MAX_PATH] = "";
-
 	ZeroMemory(&ofn, sizeof(ofn));
-
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFilter = (LPCWSTR)L"CSV Files (*.csv)\0*.csv\0All Files (*.*)\0*.*\0";

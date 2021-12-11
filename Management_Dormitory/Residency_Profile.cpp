@@ -45,7 +45,7 @@ string Residency_Profile::Get_ID()
 }
 void Residency_Profile::Set_ID(const string& _ID)
 {
-
+	this->ID = _ID;
 }
 string Residency_Profile::Get_Native_lace()
 {

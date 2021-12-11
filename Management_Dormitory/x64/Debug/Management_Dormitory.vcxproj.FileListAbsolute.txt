@@ -1,2 +1,0 @@
-D:\PBL2\Management_Dormitory\x64\Debug\ManagementDormitory.Resource.resources
-D:\PBL2\Management_Dormitory\x64\Debug\Management_Dormitory.vcxproj.GenerateResource.cache

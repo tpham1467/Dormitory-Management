@@ -142,8 +142,6 @@ void Mamagement_Room::Write_File()
     if (output.is_open()) cout << " mo";
     else cout << "fall";
     Node<Room>* p = this->DataBase.Get_P_Head();
-    output << "Ma Phong" << ',' << "So Luong Sinh Vien Trong Phong" << ','
-        << "Tinh Trang Sua Chua" << ',' << "Han Dong Tien Nuoc" << ',' << endl;
     while (p != nullptr)
     {
         output << p->Get_Data().Get_Room_code() << ',' << p->Get_Data().Get_NS() << ','

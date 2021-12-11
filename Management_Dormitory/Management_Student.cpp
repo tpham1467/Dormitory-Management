@@ -138,18 +138,16 @@ Management_Student::~Management_Student()
 void Management_Student::Write_File()
 {
     ofstream output;
-    output.open("Student.csv", ios::out);
+    output.open("Student.txt", ios::out);
     if (output.is_open()) cout << "";
     else cout << "fall";
     Node<Student>* p = this->Database.Get_P_Head();
-    this->Database.DeleteAtTail();
-    output << "Ho Va Ten," << "So Dien Thoai," << "Ma Ho So," << "Ma Phong," << "Gioi Tinh," << "Email," << "Ma Sinh Vien," << "Ngay Sinh," << "Dia Chi" << endl;
     while (p != nullptr)
     {
-        output << p->Get_Data().Get_Name() << ',' << p->Get_Data().Get_Phone_number() << ',' 
-       << p->Get_Data().Get_Profile_Code() << ',' << p->Get_Data().Get_Room_Code() << ',' 
-       << ((p->Get_Data().Get_Gender() == 1) ? "Nam" : "Nu") << ',' <<p->Get_Data().Get_Email()<<','<< p->Get_Data().Get_Student_Code() << ','
-      << p->Get_Data().Get_Date_of_Birth().Get_String() << ',' << p->Get_Data().Get_Address() << endl;
+        output << p->Get_Data().Get_Name() << '-' << p->Get_Data().Get_Phone_number() << '-' 
+       << p->Get_Data().Get_Profile_Code() << '-' << p->Get_Data().Get_Room_Code() << '-' 
+       << p->Get_Data().Get_Gender() << '-' <<p->Get_Data().Get_Email()<<'-'<< p->Get_Data().Get_Student_Code() << '-'
+      << p->Get_Data().Get_Date_of_Birth().Get_String() << '-' << p->Get_Data().Get_Address() <<'.'<< endl;
         p = p->Get_Next();
     }
     output.close();
@@ -246,7 +244,6 @@ void Management_Student::Menu_Student(bool flag)
         {
         find:
             gotoXY(3, 21);
-            cout << 2;
             Xoa_o(48, 10, 170, 36, 0);
             Hcn(50, 20, 100, 22);
             Hcn(103, 20, 113, 22);

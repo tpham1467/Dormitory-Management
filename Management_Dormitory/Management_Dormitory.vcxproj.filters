@@ -119,9 +119,4 @@
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resource.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-  </ItemGroup>
 </Project>

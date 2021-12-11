@@ -177,9 +177,6 @@
     <Text Include="Student.txt" />
     <Text Include="introduction.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resource.resx" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
