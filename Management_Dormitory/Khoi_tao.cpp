@@ -282,18 +282,52 @@ void Pay_Tb(int i,int t)
 		Outstring(80, 34, 0, 4, "    Nhan Bat Ki De Tiep Tuc               ");
 		Outstring(80, 34, 0, 4, "    So Tien Du la:                        ");
 		Outint(100, 34, 0, 4, t);
+		Outstring(80, 34, 0, 4, "    So Tien Du la:                        ");
+		Outint(100, 34, 0, 4, t);
 	}
 	else
 	{
-		Outstring(80, 33, 0, 4, "     Thanh Toan Khong Thanh cong                  ");
-		Outstring(80, 34, 0, 4, "     So Tien Con No La:                           ");
+		Outstring(80, 33, 0, 4, "     Thanh Toan Khong Thanh cong                      ");
+		Outstring(80, 34, 0, 4, "     So Tien Con No La:                               ");
 		Outint(104, 34, 0, 4, t);
-		Outstring(80, 35, 0, 4, "     Nhan Y/N De Tra Not So Tien Con No           ");
+		Outstring(80, 35, 0, 4, "    Vui Long Thanh Toan Not So Tien Con Lai           ");
 	}
 	_getch();
-	Outstring(80, 33, 0, 0, "                                           ");
-	Outstring(80, 34, 0, 0, "                                           ");
+	Outstring(80, 33, 0, 0, "                                                     ");
+	Outstring(80, 34, 0, 0, "                                                      ");
 	Outstring(80, 35, 0, 0, "                                                  ");
+}
+void Phe_Duyet(int i)
+{
+	if (i == 0)
+	{
+		Outstring(80, 33, 0, 4, "     Phe Duyet Thanh  Thanh Cong          ");
+		Outstring(80, 34, 0, 4, "       Nhan Bat Ki De Tiep Tuc            ");
+	}
+	else
+	{
+		Outstring(80, 33, 0, 4, "       Ho So Da Duoc Phe Duyet          ");
+		Outstring(80, 34, 0, 4, "       Nhan Bat Ki De Tiep Tuc          ");
+	}
+	_getch();
+	Outstring(80, 33, 0, 0, "                                                     ");
+	Outstring(80, 34, 0, 0, "                                                      ");
+}
+void Bo_Sung(int i)
+{
+	if (i == 0)
+	{
+		Outstring(80, 33, 0, 4, "     Bo Sung Thong Tin Thanh Cong       ");
+		Outstring(80, 34, 0, 4, "       Nhan Bat Ki De Tiep Tuc          ");
+	}
+	else
+	{
+		Outstring(80, 33, 0, 4, "       Khong Can Giay To nay            ");
+		Outstring(80, 34, 0, 4, "       Nhan Bat Ki De Tiep Tuc          ");
+	}
+	_getch();
+	Outstring(80, 33, 0, 0, "                                                     ");
+	Outstring(80, 34, 0, 0, "                                                     ");
 }
 ofstream Save_File()
 {

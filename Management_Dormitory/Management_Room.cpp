@@ -636,3 +636,17 @@ void Mamagement_Room::Update(Management_Student& Data_Student)
             Outstring(120, 30, 4, 0, "Dong Tien Dien Nuoc");
     }
 }
+void Mamagement_Room::Delete_Student(string Room_Code)
+{
+    Node<Room>* p = Get_Room(Room_Code);
+    p->Get_Data().Set_NS(p->Get_Data().Get_NS() - 1);
+}
+void Mamagement_Room::Add_Student(string Room_Code)
+{
+    Node<Room>* p = Get_Room(Room_Code);
+    p->Get_Data().Set_NS(p->Get_Data().Get_NS() + 1);
+}
+Room Mamagement_Room::Get_Room_Section()
+{
+    return _room_section;
+}

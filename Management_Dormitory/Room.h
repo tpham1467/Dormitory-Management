@@ -2,7 +2,6 @@
 #include<string>
 #include"Doubly_Linked_List.h"
 #include"Management_Student.h"
-#include"Student.h"
 #include"Date.h"
 #include<vector>
 using namespace std;

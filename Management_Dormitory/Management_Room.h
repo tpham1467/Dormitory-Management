@@ -27,7 +27,9 @@ public:
     void Draw_Object(Doubly_Linked_List<Room>& , int, int , int);
     void Draw_Info_Object(Management_Student&);
     void Update(Management_Student&);
-    friend Management_Student;
+    void Delete_Student(string);
+    void Add_Student(string);
+    Room Get_Room_Section();
 };
 
 

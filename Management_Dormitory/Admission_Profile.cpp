@@ -22,11 +22,11 @@ Admission_Profile::~Admission_Profile()
 {
 	this->TTBS.~Doubly_Linked_List();
 }
-void Admission_Profile::Add_Infor(const string& infor)
+void Admission_Profile::Add_Infor(Node<string>* p)
 {
-	this->TTBS.InsertAtTail(infor);
+	this->TTBS.Delete_indexoff(p);
 }
-Doubly_Linked_List<string> Admission_Profile::Get_TTBS()
+Doubly_Linked_List<string>& Admission_Profile::Get_TTBS()
 {
 	return this->TTBS;
 }

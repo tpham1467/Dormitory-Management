@@ -1,2 +1,3 @@
-﻿  Khoi_tao.cpp
+﻿  Management_Profile.cpp
+D:\PBL2\Management_Dormitory\Management_Profile.cpp(919,23): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   Management_Dormitory.vcxproj -> D:\PBL2\x64\Debug\Management_Dormitory.exe

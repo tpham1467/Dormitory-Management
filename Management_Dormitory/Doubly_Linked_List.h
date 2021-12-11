@@ -185,6 +185,7 @@ void Doubly_Linked_List<T>::Delete_indexoff( Node<T>* p)
     {
         prev->Set_Next(Next);
         Next->Set_Prev(prev);
+        delete p;
         this->lenght--;
     }
 }

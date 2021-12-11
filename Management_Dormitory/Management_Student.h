@@ -29,6 +29,7 @@ public:
 	void Update();
 	void Updata_Info(int);
 	void Doi_Mau(int,int);
+	void Delete(string);
 };
 
 

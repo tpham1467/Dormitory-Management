@@ -783,3 +783,8 @@ void Management_Student::Doi_Mau(int i,int color)
         Outstring(140, 22, color, 0, _student_section.Get_Phone_number());
     }
 }
+void Management_Student::Delete(string _Student_Code)
+{
+    Node<Student>* p = Index_off(_Student_Code);
+    this->Database.Delete_indexoff(p);
+}
