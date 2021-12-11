@@ -49,7 +49,12 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
             transform(token.begin(), token.end(), token.begin(), toupper);
             int index =name.find(token)-1;
             int size_token = token.size();
-            if (name.find(token) >= 0 && name.find(token) <= name.length())
+            if (token == name)
+            {
+                data_Student.InsertAtTail(p->Get_Data());
+                check = true;
+            }
+            if (name.find(token) >= 0 && name.find(token) <= name.length()&&check==false)
             {   
                 if (index==-1 || (index + size_token + 1) == name.size())
                 {

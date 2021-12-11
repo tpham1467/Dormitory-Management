@@ -1008,6 +1008,7 @@ void Management_Profile::Update_Info(int i,Management_Student& Data_Student, Mam
 	}
 	else if (i == 9)
 	{
+		this->Data_RP.replace(Indexoff(_Profile_section.Get_Profile_Code(), 1), _Profile_section);
 		int So_tien = Pay(_Profile_section.Get_Profile_Code(),Data_Student);
 		Delete_RP(_Profile_section.Get_Profile_Code(), Data_Student,Data_Room);
 		if (So_tien < 0)
@@ -1017,7 +1018,6 @@ void Management_Profile::Update_Info(int i,Management_Student& Data_Student, Mam
 		else
 		{
 			Pay_Tb(0, So_tien);
-			Delete_RP(_Profile_section.Get_Profile_Code(), Data_Student, Data_Room);
 		}
 		return;
 	}

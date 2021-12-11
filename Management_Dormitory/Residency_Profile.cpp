@@ -75,7 +75,7 @@ int  Residency_Profile::Pay()
 {
 	 CDate _time = this->Get_Expiration_Date().Get_time();
 	 int day = Expiration_Date -_time;
-	 if (_time > this->Expiration_Date) return -day * Price_D;
+	 if ((_time > this->Expiration_Date)==true) return -day * Price_D;
      return day * Price_D;
 }
 void Residency_Profile::Extend()
