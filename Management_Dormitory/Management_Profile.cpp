@@ -1082,7 +1082,7 @@ void Management_Profile::Draw_Info_Object_AP()
 		Outstring(x+1, y, 2, 0, ",");
 		x+=3;
 	}
-	Outstring(x - 2, y, 0, 0, "  ");
+	Outstring(x - 2, y, 0 , 0, "  ");
 	Hcn(((y==30)?48:74), y-1, x, y+1);
 	Xoa_o(47, 33, 84, 35);
 }
