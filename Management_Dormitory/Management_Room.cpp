@@ -262,11 +262,12 @@ void Mamagement_Room::Menu(Management_Student& data_student,bool flag)
                 Outstring(90, 37, 0, 103, "      Chon Phong Chuyen Den    ");
                 Menu(data_student,false);
                 string rc = _room_section.Get_Room_code();
-                if (_room_section.Get_NS() == 6)
+                if (_room_section.Get_NS() == 6|| _room_section.Get_Room_code()== p->Get_Data().Get_Room_Code())
                 {
                     Room_Full();
                     goto room_full;
                 }
+                Delete_Student(p->Get_Data().Get_Room_Code());
                 p->Get_Data().Set_Room_Code(rc);
                 Node<Room>* p1 = Get_Room(rc);
                 p1->Get_Data().Set_NS(p1->Get_Data().Get_NS() + 1);
@@ -561,6 +562,16 @@ void Mamagement_Room::Draw_Info_Object(Management_Student& _Data)
     Outint(147, 10, 9, 0, _room_section.Get_NS());
     Outstring(80, 14, 9, 0, ((_room_section.Get_COF() == true) ? "Da Sua Chua" : "Chua Sua Chua"));
     Outstring(150, 14, 9, 0, _room_section.Get_HDTPSH().Get_String());
+    CDate d; d = d.Get_time();
+    if (d > _room_section.Get_HDTPSH())
+    {
+        Outstring(50, 34, 2, 0, "Phong Qua Han Dong Phi Sinh Hoat");
+        Hcn(48, 33, 84, 35);
+    }
+    else
+    {
+        Xoa_o(47, 33, 84, 35);
+    }
     //Hcn(60, 29, 150, 31);
 }
 void Mamagement_Room::Update(Management_Student& Data_Student)

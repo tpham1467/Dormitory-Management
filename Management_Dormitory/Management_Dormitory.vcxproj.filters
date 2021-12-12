@@ -18,9 +18,6 @@
     <ClCompile Include="Management_Dormitory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Entrance_Card.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Management_Student.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -57,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Doubly_Linked_List.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entrance_Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Management_Student.h">
