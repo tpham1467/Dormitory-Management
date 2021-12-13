@@ -6,7 +6,6 @@
 #include <algorithm>
 #include"Date.h"
 using namespace std;
-int Management_Student::N_S = 0;
 Student _student_section;
 Management_Student::Management_Student()
 {
@@ -16,7 +15,6 @@ Management_Student::Management_Student()
 void Management_Student::Add_Student(const Student &_Student)
 {
     this->Database.InsertAtTail(_Student);
-    Management_Student::N_S++;
 }
 Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
 {
@@ -24,6 +22,7 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
     Doubly_Linked_List<string> _data_Token;
     Doubly_Linked_List<Student> data_Student;
     string token;
+    //split string into token 
     while (_data >> token){
 
         _data_Token.InsertAtTail(token);
@@ -35,6 +34,7 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
       
          bool check = false;
          Node<string> *pp=_data_Token.Get_P_Head();
+         // Find  students by token
         while (pp!=nullptr&&check==false)
         {
             string name = p->Get_Data().Get_Name();
@@ -49,6 +49,7 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
             transform(token.begin(), token.end(), token.begin(), toupper);
             int index =name.find(token)-1;
             int size_token = token.size();
+            // Find By name
             if (token == name)
             {
                 data_Student.InsertAtTail(p->Get_Data());
@@ -86,16 +87,19 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
                     check = true;
                 }
             }
+            // Find By PhoneNumber
             if (check == false && Phone_Number.find(token) >= 0 && Phone_Number.find(token) <= Phone_Number.length()&& Phone_Number.length()==token.size())
             {
                 data_Student.InsertAtTail(p->Get_Data());
                 check = true;
             }
+            // Find By Email
            if (check == false && Email.find(token) >= 0 && Email.find(token) <= Email.length()&&token.size()== Email.length())
             {
                 data_Student.InsertAtTail(p->Get_Data());
                 check = true;
             }
+           // Find By Student_Code
             if (check == false && Student_code.find(token) >= 0 && Student_code.find(token) <= Student_code.length())
             {
                 data_Student.InsertAtTail(p->Get_Data());
@@ -112,6 +116,7 @@ Doubly_Linked_List<Student>&  Management_Student::Get_List_Student()
 {
     return this->Database;
 }
+// Hiển Thị màn Hình Để chọn sinh viên cần xóa
 Node<Student>* Management_Student::Move_Room()
 {
     Menu_Student(false);
@@ -119,9 +124,11 @@ Node<Student>* Management_Student::Move_Room()
 }
 void Management_Student::Delete_Student( Student& _student)
 {
-
-    //this->Database.Delete_indexoff(Index_off(_student.Get_Student_Code()));
+    Node<Student>* p = Index_off(_student.Get_Student_Code());
+    if(p!=nullptr)
+    this->Database.Delete_indexoff(p);
 }
+// Trả về con trỏ đang trỏ đến sinh viên
 Node<Student>* Management_Student::Index_off(string _student_code)
 {
     Node<Student>* p = this->Database.Get_P_Head();
@@ -132,14 +139,11 @@ Node<Student>* Management_Student::Index_off(string _student_code)
     }
     return nullptr;
 }
-//void Management_Student::Update_Info(Node<Student>* p)
-//{
-//    
-//}
 Management_Student::~Management_Student()
 {
     this->Database.~Doubly_Linked_List();
 }
+// Lưu lại dữ liệu
 void Management_Student::Write_File()
 {
     ofstream output;
@@ -149,14 +153,18 @@ void Management_Student::Write_File()
     Node<Student>* p = this->Database.Get_P_Head();
     while (p != nullptr)
     {
-        output << p->Get_Data().Get_Name() << '-' << p->Get_Data().Get_Phone_number() << '-' 
-       << p->Get_Data().Get_Profile_Code() << '-' << p->Get_Data().Get_Room_Code() << '-' 
-       << p->Get_Data().Get_Gender() << '-' <<p->Get_Data().Get_Email()<<'-'<< p->Get_Data().Get_Student_Code() << '-'
-      << p->Get_Data().Get_Date_of_Birth().Get_String() << '-' << p->Get_Data().Get_Address() <<'.'<< endl;
-        p = p->Get_Next();
+        if (p->Get_Data().Get_Name() != "")
+        {
+            output << p->Get_Data().Get_Name() << '-' << p->Get_Data().Get_Phone_number() << '-'
+                << p->Get_Data().Get_Profile_Code() << '-' << p->Get_Data().Get_Room_Code() << '-'
+                << p->Get_Data().Get_Gender() << '-' << p->Get_Data().Get_Email() << '-' << p->Get_Data().Get_Student_Code() << '-'
+                << p->Get_Data().Get_Date_of_Birth().Get_String() << '-' << p->Get_Data().Get_Address() << '.' << endl;
+            p = p->Get_Next();
+        }
     }
     output.close();
 }
+// đọc dữ liệu từ file
 void Management_Student::Read_File()
 {
     ifstream input;
@@ -193,13 +201,14 @@ void Management_Student::Read_File()
             CDate _d;
             _d = _d.To_CDate(_d_of_b);
             Student _Student(name_1, Phone_number, Room_Code, Profile_Code, Gender, Student_Code, Email, _d, Address);
+            if(_Student.Get_Name()!="")
             this->Database.InsertAtTail(_Student);
         }
-        this->Database.DeleteAtTail();
 
         input.close();
     }
 }
+// xuất file Excel
 void Management_Student::Export_File_Excel()
 {
     ofstream output = Save_File();
@@ -218,7 +227,6 @@ void Management_Student::Export_File_Excel()
 }
 void Management_Student::Menu_Student(bool flag)
 {
-    //bool check_del = true;
     int index = 0;
     while (1)
     {
@@ -307,13 +315,6 @@ void Management_Student::Menu_Student(bool flag)
 
     }
 }
-void Management_Student::Menu_update(Student& _student_section)
-{
-    Outstring(100, 30, 2, 0, "Hoan Tat");
-    Hcn(60, 29, 150, 31);
-    string data;
-    getline(cin, data);
-}
 void Management_Student::Draw_a_Page(int y, int color, Doubly_Linked_List<Student>& Database, int j)
 {
     if (j == -1) {
@@ -343,23 +344,23 @@ void Management_Student::Draw_a_Page(int y, int color, Doubly_Linked_List<Studen
         Outstring(140, 11, 0, 15, "Dia Chi");
     }
     int i;
-
+    Node<Student>* p = Database.Get_Pointer(j);
     for (i = 15; i < 13 + 2 * y; i += 2)
     {
 
-        Outstring(51, i - 1, 0, 6, Database[j].Get_Student_Code());
+        Outstring(51, i - 1, 0, 6, p->Get_Data().Get_Student_Code());
 
-        Outstring(72, i - 1, 0, 6, Database[j].Get_Name());
-        Outstring(111, i - 1, 0, 6, (Database[j].Get_Gender() == 1) ? "Nam" : "Nu");
-        Outstring(128, i - 1, 0, 6, Database[j].Get_Address());
+        Outstring(72, i - 1, 0, 6, p->Get_Data().Get_Name());
+        Outstring(111, i - 1, 0, 6, (p->Get_Data().Get_Gender() == 1) ? "Nam" : "Nu");
+        Outstring(128, i - 1, 0, 6, p->Get_Data().Get_Address());
 
         Line(48, i, 170, i, 6, false);
-        j++;
+        p = p->Get_Next();
     }
-    Outstring(51, i - 1, 0, 6, Database[j].Get_Student_Code());
-    Outstring(72, i - 1, 0, 6, Database[j].Get_Name());
-    Outstring(111, i - 1, 0, 6, (Database[j].Get_Gender() == 1) ? "Nam" : "Nu");
-    Outstring(128, i - 1, 0, 6, Database[j].Get_Address());
+    Outstring(51, i - 1, 0, 6, p->Get_Data().Get_Student_Code());
+    Outstring(72, i - 1, 0, 6, p->Get_Data().Get_Name());
+    Outstring(111, i - 1, 0, 6, (p->Get_Data().Get_Gender() == 1) ? "Nam" : "Nu");
+    Outstring(128, i - 1, 0, 6, p->Get_Data().Get_Address());
 
     Line(68, 13, 68, 13 + 2 * y, 6);
     Line(68, 10, 68, 12, 15);
@@ -744,7 +745,7 @@ void Management_Student::Updata_Info(int i)
     }
     Cursor(false);
 }
-void Management_Student::Doi_Mau(int i,int color)
+void Management_Student::Doi_Mau(int i, int color)
 {
     if (i == 1)
     {
@@ -784,9 +785,4 @@ void Management_Student::Doi_Mau(int i,int color)
     {
         Outstring(140, 22, color, 0, _student_section.Get_Phone_number());
     }
-}
-void Management_Student::Delete(string _Student_Code)
-{
-    Node<Student>* p = Index_off(_Student_Code);
-    this->Database.Delete_indexoff(p);
 }

@@ -18,7 +18,8 @@ Management_Profile::Management_Profile()
 }
 Management_Profile:: ~Management_Profile()
 {
-
+	this->Data_AP.~Doubly_Linked_List();
+	this->Data_RP.~Doubly_Linked_List();
 }
 Doubly_Linked_List<Admission_Profile>& Management_Profile::Get_Data_AP()
 {
@@ -35,6 +36,27 @@ void Management_Profile::Add_Admission_Profile(const Admission_Profile& ap)
 void Management_Profile::Add_Residency_Profile(const Residency_Profile& rp)
 {
 	Data_RP.InsertAtTail(rp);
+}
+void Management_Profile::Set_Room(Management_Student& Data_Student,Mamagement_Room& Data_Room)
+{
+room_full:
+	Xoa_o(46, 8, 170, 36, 0);
+	Outstring(90, 37, 0, 103, "      Vui Long Chon Phong  ");
+	Data_Room.Menu(Data_Student, false);
+	Room _room_section = Data_Room.Get_Room_Section();
+	string rc = _room_section.Get_Room_code();
+	if (_room_section.Get_NS() == 6)
+	{
+		Room_Full();
+		goto room_full;
+	}
+	Data_Room.Add_Student(rc);
+	string st_code = _Profile_add.Get_Student(Data_Student)->Get_Data().Get_Student_Code();
+	Node<Student>* p = Data_Student.Index_off(st_code);
+	p->Get_Data().Set_Room_Code(rc);
+	Xoa_o(46, 8, 170, 36, 0);
+	Outstring(90, 37, 0, 0, "                           ");
+	_Profile_add.Set_ID("NULL");
 }
 void Management_Profile::Extend(string  _profile_code,int i)
 {
@@ -206,18 +228,15 @@ int  Management_Profile::Pay(string _profile_code, Management_Student& Data_Stud
 	Node<Residency_Profile>* p = Indexoff(_profile_code, 1);
 	return p->Get_Data().Pay();
 }
-void Management_Profile::Confirm(string  _profile_code)
+void Management_Profile::Update_Admission_Profile(string _profile_code, const  Admission_Profile& ap)
 {
 	Node<Admission_Profile>* p = Indexoff(_profile_code);
-	p->Get_Data().Set_Confirmation_Status(true);
+	this->Data_AP.replace(p, ap);
 }
-void Management_Profile::Update_Admission_Profile(string _profile_code)
+void Management_Profile::Update_Residency_Profile(string  _profile_code,const  Residency_Profile& rp)
 {
-
-}
-void Management_Profile::Update_Residency_Profile(string  _profile_code)
-{
-
+	Node<Residency_Profile>* p = Indexoff(_profile_code, 1);
+	this->Data_RP.replace(p, rp);
 }
 Node<Residency_Profile> * Management_Profile::Indexoff(string _profile_code, int i)
 {
@@ -244,7 +263,7 @@ void Management_Profile::Delete_RP(string _profile_code, Management_Student& Dat
 	Node<Residency_Profile>* p = Indexoff(_profile_code, 1);
 	Node<Student>* p1 = p->Get_Data().Get_Student(Data_Student);
 	Data_Room.Delete_Student(p1->Get_Data().Get_Room_Code());
-	Data_Student.Delete(p1->Get_Data().Get_Student_Code());
+	Data_Student.Delete_Student(p1->Get_Data());
 	this->Data_RP.Delete_indexoff(p);
 }
 void Management_Profile::Delete_AP(string _profile_code)
@@ -461,7 +480,6 @@ void Management_Profile::Read_File()
 			Residency_Profile r1(Profile_Code, d1, ID, Native_lace, Race, d2);
 			this->Data_RP.InsertAtTail(r1);
 		}
-		this->Data_RP.DeleteAtTail();
 		input.close();
 	}
 
@@ -503,15 +521,59 @@ void Management_Profile::Read_File()
 				Data_TTBS.InsertAtTail(TTBS[index - 1].second);
 			}
 			Admission_Profile r3(Profile_Code, d1, ID, Native_lace, Race, d2,Data_TTBS,cof);
+			if (r3.Get_Profile_Code() != "")
 			this->Data_AP.InsertAtTail(r3);
 		}
-		this->Data_AP.DeleteAtTail();
 		input.close();
 	}
 }
 void Management_Profile::Write_File()
 {
-
+	Node<Residency_Profile>* p = this->Data_RP.Get_P_Head();
+	Node<Admission_Profile>* p1 = this->Data_AP.Get_P_Head();
+	ofstream output;
+	output.open("Residency_Profile.txt", ios::out);
+	while (p != nullptr)
+	{
+		output << p->Get_Data().Get_Profile_Code() << ',' << p->Get_Data().Get_Registration_Date().Get_String() << ','
+			<< p->Get_Data().Get_Expiration_Date().Get_String() << ',' << p->Get_Data().Get_Native_lace() << ','
+			<< p->Get_Data().Get_Race() << ',' << p->Get_Data().Get_ID() << ',' << endl;
+		p = p->Get_Next();
+	}
+	output.close();
+	output.open("Admission_Profile.txt", ios::out);
+	while (p1 != nullptr)
+	{
+		if (p1->Get_Data().Get_Profile_Code() != "")
+		{
+			output << p1->Get_Data().Get_Profile_Code() << ',' << p1->Get_Data().Get_Registration_Date().Get_String() << ','
+				<< p1->Get_Data().Get_Expiration_Date().Get_String() << ',' << p1->Get_Data().Get_Native_lace() << ','
+				<< p1->Get_Data().Get_Race() << ',' << p1->Get_Data().Get_ID() << ',';
+			Node<string>* pp = p1->Get_Data().Get_TTBS().Get_P_Head();
+			if (p1->Get_Data().Get_TTBS().Get_Lenght() == 0)
+			{
+				output << "NULL";
+			}
+			else
+			{
+				while (pp != nullptr)
+				{
+					for (int i = 0; i < 6; i++)
+					{
+						if (pp->Get_Data() == TTBS[i].second)
+						{
+							output << TTBS[i].first.first;
+							break;
+						}
+					}
+					pp = pp->Get_Next();
+				}
+			}
+			output << ',' << p1->Get_Data().Get_Confirmation_Status() << ',' << endl;
+		}
+		p1 = p1->Get_Next();
+	}
+	output.close();
 }
 void Management_Profile::Menu_RP(Management_Student& Data_Student, Mamagement_Room& Data_Room)
 {
@@ -630,21 +692,21 @@ void Management_Profile::Draw_a_Page_RP(int y, Doubly_Linked_List<Residency_Prof
 		Outstring(135, 11, 0, 15, "Ngay Het Han");
 	}
 	int i;
-
+	Node<Residency_Profile>* p = _Data.Get_Pointer(j);
 	for (i = 15; i < 13 + 2 * y; i += 2)
 	{
 
-		Outstring(50, i - 1, 0, 6, _Data[j].Get_Profile_Code());
-		Outstring(69, i - 1, 0, 6, _Data[j].Get_Student(Data_Student)->Get_Data().Get_Name());
-		Outstring(102, i - 1, 0, 6, _Data[j].Get_ID());
-		Outstring(137, i - 1, 0, 6, _Data[j].Get_Expiration_Date().Get_String());
+		Outstring(50, i - 1, 0, 6, p->Get_Data().Get_Profile_Code());
+		Outstring(69, i - 1, 0, 6, p->Get_Data().Get_Student(Data_Student)->Get_Data().Get_Name());
+		Outstring(102, i - 1, 0, 6, p->Get_Data().Get_ID());
+		Outstring(137, i - 1, 0, 6, p->Get_Data().Get_Expiration_Date().Get_String());
 		Line(48, i, 170, i, 6, false);
-		j++;
+		p = p->Get_Next();
 	}
-	Outstring(50, i - 1, 0, 6, _Data[j].Get_Profile_Code());
-	Outstring(69, i - 1, 0, 6, _Data[j].Get_Student(Data_Student)->Get_Data().Get_Name());
-	Outstring(102, i - 1, 0, 6, _Data[j].Get_ID());
-	Outstring(137, i - 1, 0, 6, _Data[j].Get_Expiration_Date().Get_String());
+	Outstring(50, i - 1, 0, 6, p->Get_Data().Get_Profile_Code());
+	Outstring(69, i - 1, 0, 6, p->Get_Data().Get_Student(Data_Student)->Get_Data().Get_Name());
+	Outstring(102, i - 1, 0, 6, p->Get_Data().Get_ID());
+	Outstring(137, i - 1, 0, 6, p->Get_Data().Get_Expiration_Date().Get_String());
 	Line(65, 13, 65, 13 + 2 * y, 6);
 	Line(65, 10, 65, 12, 15);
 	Line(95, 13, 95, 13 + 2 * y, 6);
@@ -664,7 +726,7 @@ int Management_Profile::Move_Page_RP(Doubly_Linked_List<Residency_Profile> _data
 {
 	int lenght = _data.Get_Lenght();
 	int so_lan = (int)(lenght / 10) + 1;
-	int i = 0, j = 1; int z = 0; ; int dem = 0; bool check = false;
+	int i = 0;int  j = 1; int z = 0; ; int dem = 0; bool check = false;
 	Xoa_o(48, 10, 170, 35, 0);
 	bool Firt = false;
 	if (so_lan == 1)
@@ -934,8 +996,7 @@ void Management_Profile::Update_RP(Management_Student& Data, Mamagement_Room& Da
 		}
 		else if (key == 27)
 		{
-			Node<Residency_Profile>* p = Indexoff(_Profile_section.Get_Profile_Code(),1);
-			this->Data_RP.replace(p, _Profile_section);
+			Update_Residency_Profile(_Profile_section.Get_Profile_Code(), _Profile_section);
 			break;
 		}
 		Doi_Mau(i, 4,Data);
@@ -1084,7 +1145,6 @@ void Management_Profile::Draw_Info_Object_AP()
 	}
 	Outstring(x - 2, y, 0 , 0, "  ");
 	Hcn(((y==30)?48:74), y-1, x, y+1);
-	Xoa_o(47, 33, 84, 35);
 }
 void Management_Profile::Menu_AP(Management_Student& Data_Student,Mamagement_Room& Data_Room)
 {
@@ -1179,6 +1239,7 @@ void Management_Profile::Menu_AP(Management_Student& Data_Student,Mamagement_Roo
 void Management_Profile::Update_AP(Management_Student& Data, Mamagement_Room& Data_Room)
 {
 	Draw_Info_Object_RP(Data);
+	Xoa_o(47, 25, 84, 27);
 	Outstring(120, 22, 2, 0, "Xac Nhan");
 	Hcn(118, 21, 130, 23);
 	Outstring(50, 26, 2, 0, "Xep Phong");
@@ -1255,8 +1316,7 @@ void Management_Profile::Update_AP(Management_Student& Data, Mamagement_Room& Da
 		}
 		else if (key == 27)
 		{
-			Node<Admission_Profile>* p = Indexoff(_Profile_add.Get_Profile_Code());
-			this->Data_AP.replace(p, _Profile_add);
+			Update_Admission_Profile(_Profile_add.Get_Profile_Code(), _Profile_add);
 			return;
 		}
 		Doi_Mau_AP(i, 4, Data);
@@ -1345,26 +1405,7 @@ void Management_Profile::Update_Info_AP(int i, Management_Student& Data_Student,
 		}
 		else
 		{
-
-
-		room_full:
-			Xoa_o(46, 8, 170, 36, 0);
-			Outstring(90, 37, 0, 103, "      Vui Long Chon Phong  ");
-			Data_Room.Menu(Data_Student, false);
-			Room _room_section = Data_Room.Get_Room_Section();
-			string rc = _room_section.Get_Room_code();
-			if (_room_section.Get_NS() == 6)
-			{
-				Room_Full();
-				goto room_full;
-			}
-			Data_Room.Add_Student(rc);
-			string st_code = _Profile_add.Get_Student(Data_Student)->Get_Data().Get_Student_Code();
-			Node<Student>* p = Data_Student.Index_off(st_code);
-			p->Get_Data().Set_Room_Code(rc);
-			Xoa_o(46, 8, 170, 36, 0);
-			Outstring(90, 37, 0, 0, "                           ");
-			_Profile_add.Set_ID("NULL");
+			Set_Room(Data_Student, Data_Room);
 		}
 	}
 	else if (i == 6)

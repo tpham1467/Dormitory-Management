@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"Room.h"
 #include"Management_Student.h"
 #include"Doubly_Linked_List.h"
@@ -17,6 +17,7 @@ public:
     ~Mamagement_Room();
     void Read_File();
     void Write_File();
+    // Xuất File Excel
     void Export_File_Excel();
     Doubly_Linked_List<Room>& Get_List_Room();
     Doubly_Linked_List<Room> Find_Room(const string&,Management_Student&);
@@ -30,6 +31,8 @@ public:
     void Delete_Student(string);
     void Add_Student(string);
     Room Get_Room_Section();
+    void Move_Room(Management_Student&);
+    void Add_Room();
 };
 
 

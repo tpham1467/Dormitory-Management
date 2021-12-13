@@ -1,18 +1,7 @@
-﻿  Admission_Profile.cpp
-  console.cpp
-  Khoi_tao.cpp
-  Management.cpp
-  Management_Dormitory.cpp
-  Management_Profile.cpp
-D:\PBL2\Management_Dormitory\Management_Profile.cpp(1081,23): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-  Management_Room.cpp
+﻿  Management_Profile.cpp
+D:\PBL2\Management_Dormitory\Management_Profile.cpp(1142,23): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   Management_Student.cpp
 D:\PBL2\Management_Dormitory\Management_Student.cpp(50,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 D:\PBL2\Management_Dormitory\Management_Student.cpp(51,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Residency_Profile.cpp
-  Room.cpp
-  Student.cpp
-  Thong_Ke.cpp
   Generating Code...
-  LINK : D:\PBL2\x64\Debug\Management_Dormitory.exe not found or not built by the last incremental link; performing full link
   Management_Dormitory.vcxproj -> D:\PBL2\x64\Debug\Management_Dormitory.exe

@@ -8,15 +8,16 @@ Management::Management()
 }
 Management::~Management()
 {
-	//this->Data_Room.~Mamagement_Room();
-	//this->Data_Student.Write_File();
-	//this->Data_Student.~Management_Student();
+	this->Data_Room.~Mamagement_Room();
+	this->Data_Profile.~Management_Profile();
+	this->Data_Student.~Management_Student();
 }
 void Management::Menu_chinh()
 {
 	Khoi_tao();
 	Cursor(false);
-	while (1)
+	bool check = true;
+	while (check)
 	{
 
 		Hien_thi_danh_sach(arr_1, 4);
@@ -53,7 +54,11 @@ void Management::Menu_chinh()
 		case 4:
 		{
 			Xoa_o(0, 0, 175, 40);
-			exit(0);
+			this->Data_Student.Write_File();
+			this->Data_Room.Write_File();
+			this->Data_Profile.Write_File();
+			check = false;
+			break;
 		}
 		default:
 		{

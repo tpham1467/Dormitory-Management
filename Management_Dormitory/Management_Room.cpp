@@ -1,11 +1,10 @@
-#include"Management_Room.h"
+﻿#include"Management_Room.h"
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
 #include <algorithm>
 #include"Khoi_tao.h"
-bool flag = false;
 Room _room_section;
 void Mamagement_Room::Read_File()
 {
@@ -32,10 +31,10 @@ void Mamagement_Room::Read_File()
             CDate _c;
             _c = _c.To_CDate(Han_Dong_Tien_Phi_Sinh_Hoat);
             Room _Room(Room_Code, Number_Student, (COF == 1) ? true : false, _c);
+            if(_Room.Get_Room_code()!="")
             this->DataBase.InsertAtTail(_Room);
             input.ignore();
         }
-        this->DataBase.DeleteAtTail();
         input.close();
     }
  
@@ -59,29 +58,26 @@ Doubly_Linked_List<Room> Mamagement_Room::Find_Room(const string& data,Managemen
     Doubly_Linked_List<string> _data_Token;
     Doubly_Linked_List<Room> data_Room;
     string token;
-    while (_data >> token) {
+    //tách từ 
+    while (_data >> token)
+    {
 
         _data_Token.InsertAtTail(token);
     }
 
-        Node<string>* pp = _data_Token.Get_P_Head();
-        while (pp != nullptr)
+    Node<string>* pp = _data_Token.Get_P_Head();
+    // tìm kiếm theo mã phòng
+    while (pp != nullptr)
+    {
+        token = pp->Get_Data();
+        Node<Room>* _room = this->Get_Room(token);
+        if (_room !=nullptr)
         {
-            token = pp->Get_Data();
-            Node<Room>* _room = this->Get_Room(token);
-            if (flag == false)
-            {
-                data_Room.InsertAtTail(_room->Get_Data());
-            }
-            else
-            {
-                flag = false;
-            }
-            pp = pp->Get_Next();
+            data_Room.InsertAtTail(_room->Get_Data());
         }
-     
-   
-
+        pp = pp->Get_Next();
+    }
+    // Tìm Kiếm Theo Tên Sinh Viên
     if (data_Room.Get_Lenght() == 0)
     {
         Node<string>* pp = _data_Token.Get_P_Head();
@@ -89,25 +85,24 @@ Doubly_Linked_List<Room> Mamagement_Room::Find_Room(const string& data,Managemen
         while (pp != nullptr)
         {
              token = pp->Get_Data();
-             Doubly_Linked_List<Student> _Data_Student= DataBase_Student.Find_Student(token);
-
-            
-         
-                Node<Student>* p = _Data_Student.Get_P_Head();
-                while (p!=nullptr){
-                
-                    List_rCode.push_back(p->Get_Data().Get_Room_Code());
-                    p = p->Get_Next();
-                }
+             Doubly_Linked_List<Student> _Data_Student = DataBase_Student.Find_Student(token);
+             Node<Student>* p = _Data_Student.Get_P_Head();
+             while (p != nullptr)
+             {
+                 List_rCode.push_back(p->Get_Data().Get_Room_Code());
+                 p = p->Get_Next();
+             }
             
             pp = pp->Get_Next();
         }
+        // Lọc Các Mã Phòng Trùng Nhau
         sort(begin(List_rCode), end(List_rCode));
         List_rCode.erase(unique(begin(List_rCode), end(List_rCode)), end(List_rCode));
 
         while (List_rCode.size() != 0)
         {
-            Node<Room>* _r = this->Get_Room(List_rCode.back());;
+            Node<Room>* _r = this->Get_Room(List_rCode.back());
+            if(_r!=nullptr)
             data_Room.InsertAtTail(_r->Get_Data());
             List_rCode.pop_back();
         }
@@ -121,8 +116,8 @@ Doubly_Linked_List<Room> Mamagement_Room::Find_Room(const string& data,Managemen
     }
 }
 Node<Room>* Mamagement_Room::Get_Room(string& _Room_code)
-{   
-    transform(_Room_code.begin(), _Room_code.end(), _Room_code.begin(), toupper);
+{  
+     transform(_Room_code.begin(), _Room_code.end(), _Room_code.begin(), toupper);
      Node<Room>* p = this->DataBase.Get_P_Head();
      while (p != nullptr)
      {
@@ -132,7 +127,6 @@ Node<Room>* Mamagement_Room::Get_Room(string& _Room_code)
          if (_Room_code == Room_Code_2) return p;
          p = p->Get_Next();
      }
-    flag = true;
     return nullptr;
 }
 void Mamagement_Room::Write_File()
@@ -144,8 +138,11 @@ void Mamagement_Room::Write_File()
     Node<Room>* p = this->DataBase.Get_P_Head();
     while (p != nullptr)
     {
-        output << p->Get_Data().Get_Room_code() << ',' << p->Get_Data().Get_NS() << ','
-            << p->Get_Data().Get_COF() << ',' << p->Get_Data().Get_HDTPSH().Get_String() << ',' << endl;
+        if (p->Get_Data().Get_Room_code() != "")
+        {
+            output << p->Get_Data().Get_Room_code() << ',' << p->Get_Data().Get_NS() << ','
+                << p->Get_Data().Get_COF() << ',' << p->Get_Data().Get_HDTPSH().Get_String() << ',' << endl;
+        }
         p = p->Get_Next();
     }
     output.close();
@@ -164,9 +161,52 @@ void Mamagement_Room::Export_File_Excel()
     }
     output.close();
 }
+void Mamagement_Room::Move_Room(Management_Student& data_student)
+{
+    Outstring(90, 37, 0, 103, "Chon Sinh Vien Can Chuyen Phong");
+    Node<Student>* p = data_student.Move_Room();
+room_full:
+    Outstring(90, 37, 0, 103, "      Chon Phong Chuyen Den    ");
+    Menu(data_student, false);
+    string rc = _room_section.Get_Room_code();
+    if (_room_section.Get_NS() == 6 || _room_section.Get_Room_code() == p->Get_Data().Get_Room_Code())
+    {
+        Room_Full();
+        goto room_full;
+    }
+    Delete_Student(p->Get_Data().Get_Room_Code());
+    p->Get_Data().Set_Room_Code(rc);
+    Node<Room>* p1 = Get_Room(rc);
+    p1->Get_Data().Set_NS(p1->Get_Data().Get_NS() + 1);
+    Outstring(90, 37, 0, 0, "Chon Sinh Vien Can Chuyen Phong");
+    Add_Success(0);
+}
+void Mamagement_Room::Add_Room()
+{
+    string room_code;
+    bool check = true;
+    while (check)
+    {
+        int ma_room = rand() % (90 - 65 + 1) + 65;
+        room_code = char(ma_room);
+        ma_room = rand() % (50 - 1 + 1) + 1;
+        if (ma_room < 10) room_code = room_code + '0' + to_string(ma_room);
+        else room_code = room_code + to_string(ma_room);
+        Node<Room>* p = this->DataBase.Get_P_Head();
+        while (p!=nullptr)
+        {
+            if (p->Get_Data().Get_Room_code() == room_code) break;
+            p = p->Get_Next();
+            check = false;
+        }
+    }
+    CDate d;
+    d = d.Get_time();
+    Room _Room(room_code, 0, false, d);
+    this->DataBase.InsertAtTail(_Room);
+}
 void Mamagement_Room::Menu(Management_Student& data_student,bool flag)
 {
-    //bool check_del = true;
     int index = 0;
     while (1)
     {
@@ -256,26 +296,11 @@ void Mamagement_Room::Menu(Management_Student& data_student,bool flag)
             int a = bat_su_kien(arr_Menu_r,1);
             if (a == 0)
             {
-                Outstring(90, 37, 0, 103, "Chon Sinh Vien Can Chuyen Phong");
-                Node<Student>* p = data_student.Move_Room();
-                room_full:
-                Outstring(90, 37, 0, 103, "      Chon Phong Chuyen Den    ");
-                Menu(data_student,false);
-                string rc = _room_section.Get_Room_code();
-                if (_room_section.Get_NS() == 6|| _room_section.Get_Room_code()== p->Get_Data().Get_Room_Code())
-                {
-                    Room_Full();
-                    goto room_full;
-                }
-                Delete_Student(p->Get_Data().Get_Room_Code());
-                p->Get_Data().Set_Room_Code(rc);
-                Node<Room>* p1 = Get_Room(rc);
-                p1->Get_Data().Set_NS(p1->Get_Data().Get_NS() + 1);
-                Outstring(90, 37, 0, 0, "Chon Sinh Vien Can Chuyen Phong");
-                Add_Success(0);
+                Move_Room(data_student);
             }
             else
             {
+                Add_Room();
                 Add_Success(1);
             }
             Xoa_o(48, 10, 170, 36, 0);
@@ -322,22 +347,22 @@ void Mamagement_Room::Draw_a_Page(int y, Doubly_Linked_List<Room>& _Data ,int j)
         Outstring(135, 11, 0, 15, "Han Dong Dong Phi Sinh Hoat");
     }
     int i;
-
+    Node<Room>* p = _Data.Get_Pointer(j);
     for (i = 15; i < 13 + 2 * y; i += 2)
     {
 
-        Outstring(50, i - 1, 0, 6, _Data[j].Get_Room_code());
-        Outint(75, i - 1, 0, 6, _Data[j].Get_NS());
-        Outstring(102, i - 1, 0, 6, (_Data[j].Get_COF() == true) ? "Da Sua Chua" : "Chua Sua Chua");
-        Outstring(137, i - 1, 0, 6, _Data[j].Get_HDTPSH().Get_String());
+        Outstring(50, i - 1, 0, 6, p->Get_Data().Get_Room_code());
+        Outint(75, i - 1, 0, 6, p->Get_Data().Get_NS());
+        Outstring(102, i - 1, 0, 6, (p->Get_Data().Get_COF() == true) ? "Da Sua Chua" : "Chua Sua Chua");
+        Outstring(137, i - 1, 0, 6, p->Get_Data().Get_HDTPSH().Get_String());
 
         Line(48, i, 170, i, 6, false);
-        j++;
+        p = p->Get_Next();
     }
-    Outstring(50, i - 1, 0, 6, _Data[j].Get_Room_code());
-    Outint(75, i - 1, 0, 6, _Data[j].Get_NS());
-    Outstring(102, i - 1, 0, 6, (_Data[j].Get_COF()==true)?"Da Sua Chua":"Chua Sua Chua");
-    Outstring(137, i - 1, 0, 6, _Data[j].Get_HDTPSH().Get_String());
+    Outstring(50, i - 1, 0, 6, p->Get_Data().Get_Room_code());
+    Outint(75, i - 1, 0, 6, p->Get_Data().Get_NS());
+    Outstring(102, i - 1, 0, 6, (p->Get_Data().Get_COF()==true)?"Da Sua Chua":"Chua Sua Chua");
+    Outstring(137, i - 1, 0, 6, p->Get_Data().Get_HDTPSH().Get_String());
     Line(61, 13, 61, 13 + 2 * y, 6);
     Line(61, 10, 61, 12, 15);
     Line(95, 13, 95, 13 + 2 * y, 6);

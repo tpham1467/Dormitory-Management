@@ -33,6 +33,7 @@ public:
     void replace(Node<T>*, const T&);
     void Clear();
     void Contructor();
+    Node<T>* Get_Pointer(int);
 };
 template<class T>
 Doubly_Linked_List<T>::Doubly_Linked_List(const Doubly_Linked_List<T>& db)
@@ -236,7 +237,7 @@ template<class T>
 Doubly_Linked_List<T>& Doubly_Linked_List<T>::operator=(const Doubly_Linked_List<T>& db)
 {
     Node<T>* p1 = db.P_Head;
-    Contructor();
+    Clear();
     while (p1 != nullptr)
     {
         this->InsertAtTail(p1->Get_Data());
@@ -269,7 +270,7 @@ void Doubly_Linked_List<T>::Clear()
         delete p;
         p = this->P_Head;
     }
-
+    Contructor();
 }
 template<class T>
 void Doubly_Linked_List<T>::Contructor()
@@ -277,4 +278,15 @@ void Doubly_Linked_List<T>::Contructor()
     this->P_Head = nullptr;
     this->P_Tail = nullptr;
     this->lenght = 0;
+}
+template<class T>
+Node<T>* Doubly_Linked_List<T>::Get_Pointer(int i)
+{
+    Node<T>* p;
+    p = this->Get_P_Head();
+    for (int j = 0; j < i; j++)
+    {
+        p = p->Get_Next();
+    }
+    return p;
 }

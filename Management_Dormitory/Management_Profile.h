@@ -18,14 +18,13 @@ public:
 	Doubly_Linked_List< Admission_Profile> Find_Admission_Profile(string, Management_Student&);
 	Doubly_Linked_List< Residency_Profile> Find_Residency_Profile(string, Management_Student&);
 	int  Pay(string, Management_Student&);
-	void Confirm(string);
-	void Update_Admission_Profile(string);
-	void Update_Residency_Profile(string);
+	void Update_Admission_Profile(string, const  Admission_Profile&);
+	void Update_Residency_Profile(string, const  Residency_Profile&);
 	Node<Residency_Profile>* Indexoff(string,int);
 	Node<Admission_Profile>* Indexoff(string);
 	void Delete_RP(string, Management_Student&, Mamagement_Room&);
 	void Delete_AP(string);
-	void Set_Room(string);
+	void Set_Room(Management_Student& , Mamagement_Room& );
 	//
 	void Menu(Management_Student&, Mamagement_Room&);
 	void Read_File();
