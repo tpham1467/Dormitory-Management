@@ -1239,7 +1239,6 @@ void Management_Profile::Menu_AP(Management_Student& Data_Student,Mamagement_Roo
 void Management_Profile::Update_AP(Management_Student& Data, Mamagement_Room& Data_Room)
 {
 	Draw_Info_Object_RP(Data);
-	Xoa_o(47, 25, 84, 27);
 	Outstring(120, 22, 2, 0, "Xac Nhan");
 	Hcn(118, 21, 130, 23);
 	Outstring(50, 26, 2, 0, "Xep Phong");
@@ -1249,6 +1248,7 @@ void Management_Profile::Update_AP(Management_Student& Data, Mamagement_Room& Da
 	int i = 1;
 	while (1)
 	{
+		Xoa_o(47, 25, 84, 27);
 		char key = ' ';
 		key = _getch();
 		Doi_Mau_AP(i, 9, Data);

@@ -18,19 +18,13 @@ public:
     Room();
     ~Room();
     Doubly_Linked_List<Student> Get_List_Student(Management_Student&);
-    //condition of facilities
     const bool& Get_COF();
     void Set_COF(const bool&);
-    //Han_Dong_Tien_Phi Sinh Hoat
     CDate Get_HDTPSH();
     void Set_HDTPNSH(const CDate&);
-    //Number Student
     const int& Get_NS();
     void Set_NS(const int&);
-    // Room_code;
     const string& Get_Room_code();
-   /* void Add_Student(Management_Student&,const string&);
-    void Delete_Student(Management_Student&,const string&);*/
 };
 
 

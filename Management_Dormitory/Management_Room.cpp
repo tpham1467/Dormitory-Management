@@ -1,10 +1,4 @@
 ﻿#include"Management_Room.h"
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <vector>
-#include <algorithm>
-#include"Khoi_tao.h"
 Room _room_section;
 void Mamagement_Room::Read_File()
 {
@@ -156,7 +150,7 @@ void Mamagement_Room::Export_File_Excel()
     while (p != nullptr)
     {
         output << p->Get_Data().Get_Room_code() << ',' << p->Get_Data().Get_NS() << ','
-            << p->Get_Data().Get_COF() << ',' << p->Get_Data().Get_HDTPSH().Get_String() << ',' << endl;
+            << ((p->Get_Data().Get_COF()==true)?"Da Sua Chua":" Chua Sua Chua") << ',' << p->Get_Data().Get_HDTPSH().Get_String() << ',' << endl;
         p = p->Get_Next();
     }
     output.close();

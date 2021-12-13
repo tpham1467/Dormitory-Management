@@ -2,6 +2,7 @@
 #include"Room.h"
 #include"Management_Student.h"
 #include"Doubly_Linked_List.h"
+#include"Khoi_tao.h"
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -15,9 +16,9 @@ private:
 public:
     Mamagement_Room();
     ~Mamagement_Room();
+
     void Read_File();
     void Write_File();
-    // Xuất File Excel
     void Export_File_Excel();
     Doubly_Linked_List<Room>& Get_List_Room();
     Doubly_Linked_List<Room> Find_Room(const string&,Management_Student&);

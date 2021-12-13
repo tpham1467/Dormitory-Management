@@ -25,7 +25,6 @@ public:
 	void Delete_RP(string, Management_Student&, Mamagement_Room&);
 	void Delete_AP(string);
 	void Set_Room(Management_Student& , Mamagement_Room& );
-	//
 	void Menu(Management_Student&, Mamagement_Room&);
 	void Read_File();
 	void Write_File();

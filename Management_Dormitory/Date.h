@@ -95,8 +95,8 @@ public:
         tm* ltm = localtime(&now);
         CDate _Date;
         _Date.year = 1900 + ltm->tm_year;
-        _Date.day = 1 + ltm->tm_mday;
-        _Date.month = ltm->tm_mon;
+        _Date.day = ltm->tm_mday;
+        _Date.month = ltm->tm_mon+1;
         return _Date;
     }
     CDate& operator=(const CDate& _cdate)
