@@ -27,6 +27,9 @@ int main()
       Management data;
       data.Menu_chinh();
       data.~Management();
+ /*   Management_Student data;
+    data.Read_File();
+    data.SelectionSort(data.Get_List_Student().Get_P_Head(),Sort_Firts_Name);*/
     return 0;
 }
 

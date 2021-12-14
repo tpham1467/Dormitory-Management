@@ -26,13 +26,26 @@ namespace {
 	};
 	list arr_Profile[6] =
 	{
-		list(ii(13,16),"Quan Ly Ho So Noi Tru"),list(ii(13,19),"Quan Ly Ho So Dang Ki"),list(ii(18,22),"Them Ho So")
+		list(ii(13,16),"Quan Ly Ho So Noi Tru"),list(ii(13,19),"Quan Ly Ho So Dang Ki"),list(ii(18,22),"Them Ho So"),
+		list(ii(16,25),"Xuat File Excel")
 	};
 	list arr_ttbs[6] =
 	{
 		list(ii(103,8),"Ban Photo Chung Minh"),list(ii(105,11),"Ban Photo Ho Khau"),list(ii(101,14),"Giay Chung Nhan Ho Ngheo")
 	   ,list(ii(99,17),"Giay Chung Nhan Ho Can Ngheo"),list(ii(94,20),"Giay Chung Nhan Con Thuong Binh Liet Si"),
 		list(ii(100,23),"Giay Chung Nhan Khuyet Tat")
+	};
+	list list_sort[2] =
+	{
+		list(ii(15,16),"Sap Xep Theo Ten"),list(ii(11,19),"Sap Xep Theo Ma Sinh Vien")
+	};
+	list list_ss[2] =
+	{
+		list(ii(15,16),"Sap Xep Giam Dan"),list(ii(15,19),"Sap Xep Tang Dan")
+	};
+	list list_excel[2] =
+	{
+		list(ii(17,16),"Ho So Noi Tru"),list(ii(17,19),"Ho So Dang Ki")
 	};
 
 };
@@ -62,5 +75,7 @@ void Bo_Sung(int);
 void Chua_Duoc_Xac_Nhan();
 void Chua_Du_Thong_Tin();
 void Them_Giay_To(int);
+void Dang_sap_xep();
+void Sap_Xep_Xong();
 //vector<string> update();
 

@@ -15,6 +15,8 @@ public:
     void    Set_Prev(Node<T>*);
     T&       Get_Data();
     void    Set_Data(T);
+    Node<T>* operator=(Node<T>*);
+    bool operator!=(Node<T>*);
 };
 template<class T>
 Node<T>::Node()
@@ -57,4 +59,18 @@ void Node<T>::Set_Prev(Node<T>* Prev)
 {
     this->Prev = Prev;
 }
+template<class T>
+Node<T>* Node<T>::operator=(Node<T>* p)
+{
+    this->data = p->data;
+    this->Prev = p->Prev;
+    this->Next = p->Next;
+    return *this;
 
+}
+template<class T>
+bool Node<T>::operator!=(Node<T>* p)
+{
+    if (this->Next != p.Next && this->Prev!=p->Prev) return true;
+    return false;
+}

@@ -280,8 +280,8 @@ void Management_Profile::Menu(Management_Student& Data_Student, Mamagement_Room&
 	while (flag)
 	{
 
-		Hien_thi_danh_sach(arr_Profile, 2);
-		int a = bat_su_kien(arr_Profile, 2);
+		Hien_thi_danh_sach(arr_Profile, 3);
+		int a = bat_su_kien(arr_Profile, 3);
 		switch (a)
 		{
 		case 0:
@@ -299,6 +299,22 @@ void Management_Profile::Menu(Management_Student& Data_Student, Mamagement_Room&
 			Xoa_o(46, 9, 170, 36, 0);
 			Add_Profile(Data_Student);
 			Xoa_o(46, 9, 170, 36, 0);
+			break;
+		}
+		case 3:
+		{
+			Xoa_o(4, 14, 39, 35);
+			Hien_thi_danh_sach(list_excel, 1);
+			int a = bat_su_kien(list_excel, 1);
+			if (a == 0)
+			{
+				Export_File_Excel(true);
+			}
+			else 
+			{
+				Export_File_Excel(false);
+			}
+			Xoa_o(4, 14, 39, 35);
 			break;
 		}
 		case 27:
@@ -574,6 +590,63 @@ void Management_Profile::Write_File()
 		p1 = p1->Get_Next();
 	}
 	output.close();
+}
+void Management_Profile::Export_File_Excel(bool flag)
+{
+	ofstream output=Save_File();
+	if (flag == true)
+	{
+		Node<Residency_Profile>* p = this->Data_RP.Get_P_Head();
+		output << "Ma Ho So" << ',' << "Ngay Dang Ki" << ','
+			<< "Ngay Het Han" << ',' << " Qua Quan" << ','
+			<< "Dan Toc" << ',' << "So Chung Minh" << ',' << endl;
+		while (p != nullptr)
+		{
+			output << p->Get_Data().Get_Profile_Code() << ',' << p->Get_Data().Get_Registration_Date().Get_String() << ','
+				<< p->Get_Data().Get_Expiration_Date().Get_String() << ',' << p->Get_Data().Get_Native_lace() << ','
+				<< p->Get_Data().Get_Race() << ',' << p->Get_Data().Get_ID() << ',' << endl;
+			p = p->Get_Next();
+		}
+		output.close();
+	}
+	else
+	{
+		Node<Admission_Profile>* p1 = this->Data_AP.Get_P_Head();
+		output << "Ma Ho So" << ',' << "Ngay Dang Ki" << ','
+			<< "Ngay Het Han" << ',' << " Qua Quan" << ','
+			<< "Dan Toc" << ',' << "So Chung Minh" << ',' <<"Thong Tin Bo Sung" <<',' << "Tinh Trang Phe Duyet" << ',' << endl;
+		while (p1 != nullptr)
+		{
+			if (p1->Get_Data().Get_Profile_Code() != "")
+			{
+				output << p1->Get_Data().Get_Profile_Code() << ',' << p1->Get_Data().Get_Registration_Date().Get_String() << ','
+					<< p1->Get_Data().Get_Expiration_Date().Get_String() << ',' << p1->Get_Data().Get_Native_lace() << ','
+					<< p1->Get_Data().Get_Race() << ',' << p1->Get_Data().Get_ID() << ',';
+				Node<string>* pp = p1->Get_Data().Get_TTBS().Get_P_Head();
+				if (p1->Get_Data().Get_TTBS().Get_Lenght() == 0)
+				{
+					output << "NULL";
+				}
+				else
+				{
+					while (pp != nullptr)
+					{
+						for (int i = 0; i < 6; i++)
+						{
+							if (pp->Get_Data() == TTBS[i].second)
+							{
+								output << TTBS[i].second<<'-';
+								break;
+							}
+						}
+						pp = pp->Get_Next();
+					}
+				}
+				output << ',' << p1->Get_Data().Get_Confirmation_Status() << ',' << endl;
+			}
+			p1 = p1->Get_Next();
+		}
+	}
 }
 void Management_Profile::Menu_RP(Management_Student& Data_Student, Mamagement_Room& Data_Room)
 {

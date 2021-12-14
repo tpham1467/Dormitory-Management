@@ -7,6 +7,36 @@
 #include"Date.h"
 using namespace std;
 Student _student_section;
+bool Sort_Name_ASC(Student s1, Student s2)
+{
+    stringstream _data1(s1.Get_Name());
+    stringstream _data2(s2.Get_Name());
+    string name1, name2;
+    while (_data1 >> name1)
+        while (_data2 >> name2);
+    if (name1 > name2) return false;
+    else return true;
+}
+bool Sort_Name_DES(Student s1, Student s2)
+{
+    stringstream _data1(s1.Get_Name());
+    stringstream _data2(s2.Get_Name());
+    string name1, name2;
+    while (_data1 >> name1)
+        while (_data2 >> name2);
+    if (name1 < name2) return false;
+    else return true;
+}
+bool Sort_MSSV_DES(Student s1, Student s2)
+{
+    if (s1.Get_Student_Code() < s2.Get_Student_Code()) return false;
+    else return true;
+}
+bool Sort_MSSV_ASC(Student s1, Student s2)
+{
+    if (s1.Get_Student_Code() > s2.Get_Student_Code()) return false;
+    else return true;
+}
 Management_Student::Management_Student()
 {
  
@@ -243,6 +273,13 @@ void Management_Student::Menu_Student(bool flag)
         {
             Export_File_Excel();
             _getch();
+        }
+        if (index == -3)
+        {
+            Sort();
+            Sap_Xep_Xong();
+            goto ds;
+            Hien_thi_danh_sach(arr_1, 4);
         }
         else
             _student_section = this->Database.at(index);
@@ -532,6 +569,10 @@ int Management_Student::Move_Page(Doubly_Linked_List<Student>& Database, bool& u
             find = true;
             return dem;
         }
+        case 115:
+        {
+            return -3;
+        }
         case 120:
         {
             return -2;
@@ -785,4 +826,50 @@ void Management_Student::Doi_Mau(int i, int color)
     {
         Outstring(140, 22, color, 0, _student_section.Get_Phone_number());
     }
+}
+void Swap(Node<Student>* p1, Node<Student>* p2)
+{
+    Student temp = p1->Get_Data();
+    p1->Set_Data(p2->Get_Data());
+    p2->Set_Data(temp);
+}
+void Management_Student::SelectionSort(Node<Student> *p,bool Compfunc(Student,Student))
+{
+    Node<Student> * min;
+    while (p->Get_Next()!=nullptr)
+    {
+        min = p;
+        Node<Student> * p1 = p->Get_Next();
+        while (p1 != nullptr)
+        {
+            if (Compfunc(p1->Get_Data(), min->Get_Data()))
+            {
+                min = p1;
+            }
+            p1 = p1->Get_Next();
+        }
+         Swap(min, p);
+        p = p->Get_Next();
+    }
+}
+void Management_Student::Sort()
+{
+        Xoa_o(4, 14, 39, 35);
+        Hien_thi_danh_sach(list_sort, 1);
+        int a = bat_su_kien(list_sort, 1);
+        Xoa_o(4, 14, 39, 35);
+        Hien_thi_danh_sach(list_ss, 1);
+        int b = bat_su_kien(list_ss, 1);
+        Xoa_o(4, 14, 39, 35);
+        Dang_sap_xep();
+        if (a == 0)
+        {
+            if (b == 0) SelectionSort(Database.Get_P_Head(), Sort_Name_DES);
+            else  SelectionSort(Database.Get_P_Head(), Sort_Name_ASC);
+        }
+        else
+        {
+            if (b == 0) SelectionSort(Database.Get_P_Head(), Sort_MSSV_DES);
+            else  SelectionSort(Database.Get_P_Head(), Sort_MSSV_ASC);
+        }
 }

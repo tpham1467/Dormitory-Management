@@ -46,6 +46,6 @@ public:
 	void Update_Info_AP(int, Management_Student&, Mamagement_Room&);
 	//
 	void Add_Profile(Management_Student& );
-
+	void Export_File_Excel(bool);
 };
 

@@ -361,6 +361,18 @@ void Them_Giay_To(int i)
 	Outstring(80, 33, 0, 0, "                                                     ");
 	Outstring(80, 34, 0, 0, "                                                     ");
 }
+void Dang_sap_xep()
+{
+	Xoa_o(48, 10, 170, 35, 0);
+	Outstring(102, 24, 0, 4, "     Dang Sap Xep     ");
+}
+void Sap_Xep_Xong()
+{
+	Xoa_o(48, 10, 170, 35, 0);
+	Outstring(102, 24, 0, 4, "     Da Sap Xep Xong     ");
+	Outstring(102, 25, 0, 4, " Nhan Bat Ki De Tiep Tuc ");
+	_getch();
+}
 ofstream Save_File()
 {
 	OPENFILENAME ofn;
