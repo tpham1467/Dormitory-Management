@@ -69,8 +69,8 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
         {
             string name = p->Get_Data().Get_Name();
             transform(name.begin(), name.end(), name.begin(), toupper);
-            string Phone_Number = p->Get_Data().Get_Phone_number();
-            transform(Phone_Number.begin(), Phone_Number.end(), Phone_Number.begin(), toupper);
+            string Profile_Code = p->Get_Data().Get_Profile_Code();
+            transform(Profile_Code.begin(), Profile_Code.end(), Profile_Code.begin(), toupper);
             string Email = p->Get_Data().Get_Email();
             transform(Email.begin(), Email.end(), Email.begin(), toupper);
             string Student_code = p->Get_Data().Get_Student_Code();
@@ -118,7 +118,7 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
                 }
             }
             // Find By PhoneNumber
-            if (check == false && Phone_Number.find(token) >= 0 && Phone_Number.find(token) <= Phone_Number.length()&& Phone_Number.length()==token.size())
+            if (check == false && Profile_Code.find(token) >= 0 && Profile_Code.find(token) <= Profile_Code.length()&& Profile_Code.length()==token.size())
             {
                 data_Student.InsertAtTail(p->Get_Data());
                 check = true;
@@ -130,7 +130,7 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
                 check = true;
             }
            // Find By Student_Code
-            if (check == false && Student_code.find(token) >= 0 && Student_code.find(token) <= Student_code.length())
+            if (check == false && Student_code.find(token) >= 0 && Student_code.find(token) <= Student_code.length()&& token.size() == Email.length())
             {
                 data_Student.InsertAtTail(p->Get_Data());
                 check = true;

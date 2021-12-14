@@ -642,7 +642,7 @@ void Management_Profile::Export_File_Excel(bool flag)
 						pp = pp->Get_Next();
 					}
 				}
-				output << ',' << p1->Get_Data().Get_Confirmation_Status() << ',' << endl;
+				output << ',' << ((p1->Get_Data().Get_Confirmation_Status()==0)?"Chua Duoc Phe Duyet":"Da Duoc Phe Duyet") << ',' << endl;
 			}
 			p1 = p1->Get_Next();
 		}
