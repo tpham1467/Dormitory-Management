@@ -34,6 +34,8 @@ public:
     Room Get_Room_Section();
     void Move_Room(Management_Student&);
     void Add_Room();
+    void SelectionSort(Node<Room>*, bool Compfunc(Room, Room));
+    void Sort(Node<Room>*);
 };
 
 

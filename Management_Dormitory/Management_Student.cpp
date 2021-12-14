@@ -276,10 +276,10 @@ void Management_Student::Menu_Student(bool flag)
         }
         if (index == -3)
         {
-            Sort();
+            Sort(Database.Get_P_Head());
             Sap_Xep_Xong();
-            goto ds;
             Hien_thi_danh_sach(arr_1, 4);
+            goto ds;
         }
         else
             _student_section = this->Database.at(index);
@@ -312,6 +312,7 @@ void Management_Student::Menu_Student(bool flag)
             }
             else
             {
+                sort:
                 find = false;
                 update = false;
                 index = Move_Page(_data_find, update, find);
@@ -319,7 +320,13 @@ void Management_Student::Menu_Student(bool flag)
                 {
                     goto ds;
                 }
-
+                else if (index == -3)
+                {
+                    Sort(_data_find.Get_P_Head());
+                    Sap_Xep_Xong();
+                    Hien_thi_danh_sach(arr_1, 4);
+                    goto sort;
+                }
                 else
                 {
 
@@ -852,7 +859,7 @@ void Management_Student::SelectionSort(Node<Student> *p,bool Compfunc(Student,St
         p = p->Get_Next();
     }
 }
-void Management_Student::Sort()
+void Management_Student::Sort(Node<Student>* p)
 {
         Xoa_o(4, 14, 39, 35);
         Hien_thi_danh_sach(list_sort, 1);
@@ -864,12 +871,12 @@ void Management_Student::Sort()
         Dang_sap_xep();
         if (a == 0)
         {
-            if (b == 0) SelectionSort(Database.Get_P_Head(), Sort_Name_DES);
-            else  SelectionSort(Database.Get_P_Head(), Sort_Name_ASC);
+            if (b == 0) SelectionSort(p, Sort_Name_DES);
+            else  SelectionSort(p, Sort_Name_ASC);
         }
         else
         {
-            if (b == 0) SelectionSort(Database.Get_P_Head(), Sort_MSSV_DES);
-            else  SelectionSort(Database.Get_P_Head(), Sort_MSSV_ASC);
+            if (b == 0) SelectionSort(p, Sort_MSSV_DES);
+            else  SelectionSort(p, Sort_MSSV_ASC);
         }
 }

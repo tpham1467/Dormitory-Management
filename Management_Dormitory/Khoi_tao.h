@@ -47,6 +47,10 @@ namespace {
 	{
 		list(ii(17,16),"Ho So Noi Tru"),list(ii(17,19),"Ho So Dang Ki")
 	};
+	list list_sort_r[3] =
+	{
+		list(ii(13,16),"Sap Xep Theo Ma Phong"),list(ii(8,19),"Sap Xep Theo So Luong Sinh Vien")
+	};
 
 };
 int bat_su_kien(list arr[], int n);
@@ -77,5 +81,6 @@ void Chua_Du_Thong_Tin();
 void Them_Giay_To(int);
 void Dang_sap_xep();
 void Sap_Xep_Xong();
+void Sinh_Vien_chua_Phong();
 //vector<string> update();
 

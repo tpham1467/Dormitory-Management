@@ -1,5 +1,25 @@
 ﻿#include"Management_Room.h"
 Room _room_section;
+bool Sort_RC_DES(Room r1, Room r2)
+{
+    if (r1.Get_Room_code() < r2.Get_Room_code()) return true;
+    else return false;
+}
+bool Sort_RC_ASC(Room r1, Room r2)
+{
+    if (r1.Get_Room_code() > r2.Get_Room_code()) return false;
+    else return true;
+}
+bool Sort_NS_DES(Room r1, Room r2)
+{
+    if (r1.Get_NS() < r2.Get_NS()) return true;
+    else return false;
+}
+bool Sort_NS_ASC(Room r1, Room r2)
+{
+    if (r1.Get_NS() > r2.Get_NS()) return false;
+    else return true;
+}
 void Mamagement_Room::Read_File()
 {
     ifstream input;
@@ -157,8 +177,14 @@ void Mamagement_Room::Export_File_Excel()
 }
 void Mamagement_Room::Move_Room(Management_Student& data_student)
 {
+ Sinh_Vien_Chua_co_phong:
     Outstring(90, 37, 0, 103, "Chon Sinh Vien Can Chuyen Phong");
     Node<Student>* p = data_student.Move_Room();
+    if (p->Get_Data().Get_Room_Code() == "NULL")
+    {
+        Sinh_Vien_chua_Phong();
+        goto Sinh_Vien_Chua_co_phong;
+    }
 room_full:
     Outstring(90, 37, 0, 103, "      Chon Phong Chuyen Den    ");
     Menu(data_student, false);
@@ -220,6 +246,13 @@ void Mamagement_Room::Menu(Management_Student& data_student,bool flag)
             Export_File_Excel();
              _getch();
         }
+        if (index == -3)
+        {
+            Sort(DataBase.Get_P_Head());
+            Sap_Xep_Xong();
+            Hien_thi_danh_sach(arr_1, 4);
+            goto ds;
+        }
         else
             _room_section = this->DataBase.at(index);
         if (update == true)
@@ -254,13 +287,20 @@ void Mamagement_Room::Menu(Management_Student& data_student,bool flag)
             }
             else
             {
+                Sort:
                 update = false; find = false; change = false;
                 index = Move_Page(_data_find, update, find,change);
                 if (index == -1)
                 {
                     goto ds;
                 }
-
+                if (index == -3)
+                {
+                    Sort(_data_find.Get_P_Head());
+                    Sap_Xep_Xong();
+                    Hien_thi_danh_sach(arr_1, 4);
+                    goto Sort;
+                }
                 else
                 {
 
@@ -482,6 +522,10 @@ int Mamagement_Room::Move_Page(Doubly_Linked_List<Room>& _data, bool& update, bo
             find = true;
             return dem;
         }
+        case 115:
+        {
+            return -3;
+        }
         case 120:
         {
             return -2;
@@ -677,4 +721,50 @@ void Mamagement_Room::Add_Student(string Room_Code)
 Room Mamagement_Room::Get_Room_Section()
 {
     return _room_section;
+}
+void Swap(Node<Room>* p1, Node<Room>* p2)
+{
+    Room temp = p1->Get_Data();
+    p1->Set_Data(p2->Get_Data());
+    p2->Set_Data(temp);
+}
+void Mamagement_Room::SelectionSort(Node<Room>* p, bool Compfunc(Room, Room))
+{
+    Node<Room>* min;
+    while (p->Get_Next() != nullptr)
+    {
+        min = p;
+        Node<Room>* p1 = p->Get_Next();
+        while (p1 != nullptr)
+        {
+            if (Compfunc(p1->Get_Data(), min->Get_Data()))
+            {
+                min = p1;
+            }
+            p1 = p1->Get_Next();
+        }
+        Swap(min, p);
+        p = p->Get_Next();
+    }
+}
+void Mamagement_Room::Sort(Node<Room> *p)
+{
+    Xoa_o(4, 14, 39, 35);
+    Hien_thi_danh_sach(list_sort_r, 1);
+    int a = bat_su_kien(list_sort_r, 1);
+    Xoa_o(4, 14, 39, 35);
+    Hien_thi_danh_sach(list_ss, 1);
+    int b = bat_su_kien(list_ss, 1);
+    Xoa_o(4, 14, 39, 35);
+    Dang_sap_xep();
+    if (a == 0)
+    {
+        if (b == 0) SelectionSort(p, Sort_RC_DES);
+        else  SelectionSort(p ,Sort_RC_ASC);
+    }
+    else
+    {
+        if (b == 0) SelectionSort(p,Sort_NS_DES);
+        else  SelectionSort(p, Sort_NS_ASC);
+    }
 }

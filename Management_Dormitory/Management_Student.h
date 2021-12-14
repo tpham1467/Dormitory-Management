@@ -28,7 +28,7 @@ public:
 	void Updata_Info(int);
 	void Doi_Mau(int,int);
 	void SelectionSort(Node<Student>* ,bool Compfunc(Student, Student));
-	void Sort();
+	void Sort(Node<Student>*);
 };
 
 

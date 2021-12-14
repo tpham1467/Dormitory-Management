@@ -373,6 +373,13 @@ void Sap_Xep_Xong()
 	Outstring(102, 25, 0, 4, " Nhan Bat Ki De Tiep Tuc ");
 	_getch();
 }
+void Sinh_Vien_chua_Phong()
+{
+	Xoa_o(48, 10, 170, 35, 0);
+	Outstring(102, 24, 0, 4, "     Sinh Vien Chua Co Phong     ");
+	Outstring(102, 25, 0, 4, "     Nhan Bat Ki De Tiep Tuc     ");
+	_getch();
+}
 ofstream Save_File()
 {
 	OPENFILENAME ofn;
