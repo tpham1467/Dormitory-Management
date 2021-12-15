@@ -87,8 +87,6 @@ Doubly_Linked_List< Admission_Profile> Management_Profile::Find_Admission_Profil
     Node<Admission_Profile>* p = this->Data_AP.Get_P_Head();
     while (p != nullptr)
     {
-		while (p != nullptr)
-		{
 			check = false;
 			Node<string>* pp = _data_Token.Get_P_Head();
 			while (pp != nullptr && check == false)
@@ -105,7 +103,6 @@ Doubly_Linked_List< Admission_Profile> Management_Profile::Find_Admission_Profil
 			}
 
 			p = p->Get_Next();
-		}
     }
 	if (check == false)
 	{

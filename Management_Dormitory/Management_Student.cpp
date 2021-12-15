@@ -117,7 +117,7 @@ Doubly_Linked_List<Student> Management_Student::Find_Student(string data)
                     check = true;
                 }
             }
-            // Find By PhoneNumber
+            // Find By ProFile_Code
             if (check == false && Profile_Code.find(token) >= 0 && Profile_Code.find(token) <= Profile_Code.length()&& Profile_Code.length()==token.size())
             {
                 data_Student.InsertAtTail(p->Get_Data());
