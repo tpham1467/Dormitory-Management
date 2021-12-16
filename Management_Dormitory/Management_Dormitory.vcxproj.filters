@@ -9,108 +9,112 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{8e6c541d-5c1a-41b5-b62b-f0fe08d68e22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Management_Dormitory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Management_Student.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Student.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="console.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Management_Room.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Management.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Admission_Profile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Residency_Profile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Khoi_tao.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Management_Profile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Thong_Ke.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Doubly_Linked_List.h">
+    <ClInclude Include="Date\Date.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Management_Student.h">
+    <ClInclude Include="Doubly_Linked_List\Doubly_Linked_List.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="Doubly_Linked_List\Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Room.h">
+    <ClInclude Include="Graphics\Khoi_tao.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Student.h">
+    <ClInclude Include="Graphics\console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="console.h">
+    <ClInclude Include="Management\Management.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Management_Room.h">
+    <ClInclude Include="Profile_Management\Management_Profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Management.h">
+    <ClInclude Include="Profile_Management\Admission_Profile\Admission_Profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Date.h">
+    <ClInclude Include="Profile_Management\Residency_Profile\Residency_Profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Admission_Profile.h">
+    <ClInclude Include="Room_Management\Management_Room.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Khoi_tao.h">
+    <ClInclude Include="Room_Management\Room\Room.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Residency_Profile.h">
+    <ClInclude Include="Student_Management\Management_Student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Management_Profile.h">
+    <ClInclude Include="Student_Management\Student\Student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Thong_Ke.h">
+    <ClInclude Include="Thong_Ke\Thong_Ke.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Resource\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Student.txt">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="Thong_Ke\Thong_Ke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Student_Management\Management_Student.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Student_Management\Student\Student.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Room_Management\Management_Room.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Room_Management\Room\Room.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Profile_Management\Management_Profile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Profile_Management\Residency_Profile\Residency_Profile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Profile_Management\Admission_Profile\Admission_Profile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Management\Management.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Management\Management_Dormitory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Khoi_tao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Data\Txt\Admission_Profile.txt">
+      <Filter>Resources</Filter>
     </Text>
-    <Text Include="Room.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Data\Txt\introduction.txt">
+      <Filter>Resources</Filter>
     </Text>
-    <Text Include="Residency_Profile.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Data\Txt\Room.txt">
+      <Filter>Resources</Filter>
     </Text>
-    <Text Include="Admission_Profile.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Data\Txt\Student.txt">
+      <Filter>Resources</Filter>
     </Text>
-    <Text Include="introduction.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Data\Resource\Resource.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
